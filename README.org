@@ -1,0 +1,16 @@
+* Constructive Design
+
+*This repository is not really ready for others to read yet!*
+- /Come back later!/
+
+I'm in the process of collecting my diverse notes on the design of various
+entities, services, systems, etc. here.
+
+These notes will include
+- Constructive Criticism of existing designs
+- Ideas for improving existing systems
+- Ideas for new systems
+
+These notes are intended to be *constructive* in two senses:
+- Intended to be used to *improve* things
+- Intended to be used to *build* things
