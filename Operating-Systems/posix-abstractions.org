@@ -1,0 +1,502 @@
+* Posix System Abstractions
+
+** System Call
+
+A System Call is a request from a User Space Program to the Operating System
+Kernel requesting that the Kernel perform a service on behalf of that Program.
+In source code it looks like a regular function call. In actuality, it is a
+special library function which (traditionally with a =trap= instruction)
+suspends the execution of that process until the Operating System can perform
+that Service and then resume the Process. This can be as simple an operation as
+requesting the time of day. System Calls are extremely expensive operations and
+must be carefully avoided in any performance-critical parts of a program!
+Because, for example, all Stream IO must be done with System Calls, this IO is
+typically buffered to reduce the frequency of System Calls. If, for example, a
+program terminates without flushing all of its output buffers, output can be
+lost.
+
+** Background Process Group
+
+Any process group that is not the foreground process group of a session that has
+established a connection with a controlling terminal.
+
+** Controlling Process
+
+A session leader that established a connection to a controlling terminal.
+
+** Controlling Terminal
+
+A terminal that is associated with a session. Each session may have, at most,
+one controlling terminal associated with it and a control- ling terminal may be
+associated with only one session. Certain input sequences from the controlling
+terminal cause signals to be sent to process groups in the session associated
+with the controlling terminal; see termio(7I).
+
+** Directory aka Folder
+
+Directories organize files into a hierarchical system where directories are the
+nodes in the hierarchy. Directories are files containing records called links,
+also sometimes just called Directory Entries. A link is simply a filename paired
+with the index-number of a file. Index numbers are unique on a given Storage
+Device aka Storage Volume. A file's metadata, e.g. permissions, size, access
+times and the location of the file's data (but not the file's name) is stored in
+the Index Node Table of each Storage Device under its index number. Index
+numbers are normally not shown to users.  Rather, the directory allows the
+operating system to transparently translate a filename to the desired file data
+or meta-data.
+
+A directory always contains at least two links, . (dot) and .. (dot-dot). The
+filenames . and .. are reserved for this purpose. The link called dot refers to
+the directory itself while dot-dot refers to its parent directory. The root
+directory, which is the top-most node of the hierarchy, has itself as its parent
+directory. The pathname of the root directory is / and the parent directory of
+the root directory is /.
+
+The /link count/ of a file is part of its metadata and counts the number of
+directory entries on that device which reference its index number. A
+non-directory file can be linked to by an number of directory entries in any
+number of directories on the same Storage Device, either with the same filename
+(if in different directories) or with different filenames (in the same
+directory). Thus it is easy to cross-reference non-directory files. We often
+thinking of a file as being "in a given directory" but in reality files and
+directories exist in Storage Volumes under their index numbers and the notion of
+them being "in a directory" only really makes sense if there's only one link to
+that file.
+
+Unlike other files, Directories are only allowed to have one link with a regular
+filename (not . or ..) from a unique parent directory. Thus Directories, unlike
+other files, have a unique Parent Directory. But they will have an additional
+link (.) from themselves and a back-link (..) from each child. Therefore a
+simple way to count the number of direct subdirectories of a given parent
+directory is to subtract 2 from a directory's link count. Without this
+restriction (which comes from the Third Edition of Unix), the Posix Filesystem
+would form an arbitrary graph of directories with no unique parents, rather than
+a hierarchy. It would be (and was) easy to lose things in such an arbitrary
+graph!
+
+/Symbolic Links/ were invented, in
+part, to provide a way to provide a mechanism for cross-referencing directories.
+
+** Downstream
+In a stream, the direction from stream head to driver.
+
+** Driver
+In  a stream, the driver provides the interface between peripheral hardware and the stream. A driver can also be a pseudo-driver, such as a
+multiplexor or log driver (see log(7D)), which is not associated with a hardware device.
+
+** Effective User ID and Effective Group ID
+An active process has an effective user ID and an effective group ID that are used to determine file access permissions	(see  below).  The
+effective user ID and effective group ID are equal to the process's real user ID and real group ID, respectively, unless the process or one
+of its ancestors evolved from a file that had the  set-user-ID bit or set-group-ID bit set  (see exec(2)).
+
+** File Access Permissions
+Read, write, and execute/search permissions for a file are granted to a process if one or more of the following are true:
+
+o  The effective user ID of the process matches the user ID of the owner of the file and the appropriate access bit of the  "owner"  por-
+tion(0700) of the file mode is set.
+
+o  The effective user	ID of the process does not match the user ID of the owner of the file, but either the effective group ID or one of
+the supplementary group  IDs of the process match the group  ID of the file and the appropriate access  bit  of  the  "group"  portion(0070) of the file mode is set.
+
+o  The  effective  user ID of the process does not match the user ID of the owner of the file, and neither the effective group ID nor any
+of the supplementary group IDs of the process match the group ID of the file, but the appropriate access bit of  the  "other"  portion(0007) of the file mode is set.
+
+o  The  read,	write,	or execute mode bit is not set but the process has the discretionary file access override privilege for the corre-
+sponding mode bit: {PRIV_FILE_DAC_READ} for the read bit {PRIV_FILE_DAC_WRITE} for the write bit, {PRIV_FILE_DAC_SEARCH} for the  exe-
+cute bit on directories, and {PRIV_FILE_DAC_EXECUTE} for the executable bit on plain files.
+
+Otherwise, the corresponding permissions are denied.
+
+** File Descriptor
+A  file descriptor is a small integer used to perform I/O on a file. The value of a file descriptor is from 0 to (NOFILES-1). A process may
+have no more than  NOFILES file descriptors
+open simultaneously. A file descriptor is returned by calls such as open(2) or pipe(2).  The file descriptor is used  as  an  argument	by
+calls such as read(2), write(2), ioctl(2), and close(2).
+
+Each  file descriptor has a corresponding offset maximum. For regular files that were opened without setting the O_LARGEFILE flag, the off-
+set maximum is 2 Gbyte - 1 byte (2**31 -1 bytes). For regular files that were opened with the O_LARGEFILE flag set, the offset maximum is 2
+**63 -1 bytes.
+
+** File Name
+Names consisting of 1 to  NAME_MAX characters may be used to name an ordinary file, special file or directory.
+
+These characters may be selected from the set of all character values excluding  (null) and the ASCII code for / (slash).
+
+Note  that it is generally unwise to use *, ?, [, or ] as part of file names because of the special meaning attached to these characters by
+the shell (see sh(1), csh(1), and ksh(1)). Although permitted, the use of unprintable characters in file names should be avoided.
+
+A file name is sometimes referred to as a pathname component.  The interpretation of a pathname component is dependent  on  the	values	of
+NAME_MAX  and   _POSIX_NO_TRUNC	associated  with the path prefix of that component.  If any pathname component is longer than NAME_MAX and
+_POSIX_NO_TRUNC is in effect for the path prefix of that component (see fpathconf(2) and limits.h(3HEAD)), it shall be considered an  error
+condition in  that implementation. Otherwise, the implementation shall use the first NAME_MAX bytes of the pathname component.
+
+** Foreground Process Group
+Each  session  that has established a connection with a controlling terminal will distinguish one process group of the session as the fore-
+ground process group of the controlling terminal.  This group has certain privileges when  accessing  its  controlling  terminal  that  are
+denied to background process groups.
+
+{IOV_MAX}
+Maximum number of entries in a struct iovec array.
+
+{LIMIT}
+The  braces  notation, {LIMIT}, is used to denote a magnitude limitation imposed by the implementation. This indicates a value which may be
+defined by a header file (without the braces), or the actual value may be obtained at runtime  by a call to the configuration inquiry path-
+conf(2) with the name argument  _PC_LIMIT.
+
+** Masks
+The file mode creation mask of the process used during any create function calls to turn off permission bits in the mode argument supplied.
+Bit positions that are set in umask(cmask) are cleared in the mode of the created file.
+
+** Message
+In a stream, one or more blocks of data or information, with associated STREAMS control structures. Messages  can  be  of  several  defined
+types, which identify the message contents. Messages are the only means of transferring data and communicating within a stream.
+
+** Message Queue
+In a stream, a linked list of messages awaiting processing by a module or driver.
+
+** Message Queue Identifier
+A  message  queue  identifier  (msqid)  is a unique positive integer created by a msgget(2) call. Each msqid has a message queue and a data
+structure associated with it. The data structure is referred to as msqid_ds and contains the following members:
+
+struct	 ipc_perm msg_perm;
+struct	 msg *msg_first;
+struct	 msg *msg_last;
+ulong_t	 msg_cbytes;
+ulong_t	 msg_qnum;
+ulong_t	 msg_qbytes;
+pid_t	 msg_lspid;
+pid_t	 msg_lrpid;
+time_t	 msg_stime;
+time_t	 msg_rtime;
+time_t	 msg_ctime;
+
+The following are descriptions of the msqid_ds structure members:
+
+The msg_perm member is an ipc_perm structure that specifies the message operation permission (see below). This structure includes the  fol-
+lowing members:
+
+uid_t	cuid;	/* creator user id */
+gid_t	cgid;	/* creator group id */
+uid_t	uid;	/* user id */
+gid_t	gid;	/* group id */
+mode_t	mode;	/* r/w permission */
+ulong_t	seq;	/* slot usage sequence # */
+key_t	key;	/* key */
+
+The *msg_first member is a pointer to the first message on the queue.
+
+The *msg_last member is a pointer to the last message on the queue.
+
+The msg_cbytes member is the current number of bytes on the queue.
+
+The msg_qnum member is the number of messages currently on the queue.
+
+The msg_qbytes member is the maximum number of bytes allowed on the queue.
+
+The msg_lspid member is the process ID of the last process that performed a msgsnd() operation.
+
+The msg_lrpid member is the process id of the last process that performed a msgrcv() operation.
+
+The msg_stime member is the time of the last msgsnd() operation.
+
+The msg_rtime member is the time of the last msgrcv() operation.
+
+The msg_ctime member is the time of the last msgctl() operation that changed a member of the above structure.
+
+** Message Operation Permissions
+In  the msgctl(2), msgget(2), msgrcv(2), and msgsnd(2) function descriptions, the permission required for an operation is given as {token},
+where token is the type of permission needed, interpreted as follows:
+
+00400   READ by user
+00200   WRITE by user
+00040   READ by group
+00020   WRITE by group
+00004   READ by others
+00002   WRITE by others
+
+Read and write permissions for a msqid are granted to a process if one or more of the following are true:
+
+o  The {PRIV_IPC_DAC_READ} or {PRIV_IPC_DAC_WRITE} privilege is present in the effective set.
+
+o  The effective user ID of the process matches msg_perm.cuid or msg_perm.uid in the data structure associated with msqid and the  appro-
+priate bit of the "user" portion(0600) of msg_perm.mode is set.
+
+o  Any group ID in the process credentials from the set (cr_gid, cr_groups) matches msg_perm.cgid or msg_perm.gid and the appropriate bit
+of the "group" portion(060) of msg_perm.mode is set.
+
+o  The appropriate bit of the "other" portion(006) of msg_perm.mode is set."
+
+Otherwise, the corresponding permissions are denied.
+
+** Module
+A module is an entity containing processing routines for input and output data. It always exists in the middle of  a  stream,  between  the
+stream's head and a driver. A module is the STREAMS counterpart to the commands in a shell pipeline except that a module contains a pair of
+functions which allow independent bidirectional (downstream and upstream) data flow and processing.
+
+** Multiplexor
+A multiplexor is a driver that allows streams associated with several user processes to be connected to a single driver, or several drivers
+to  be connected to a single user process. STREAMS does not provide a general multiplexing driver, but does provide the facilities for con-
+structing them and for connecting multiplexed configurations of streams.
+
+** Offset Maximum
+An offset maximum is an attribute of an open file description representing the largest value that can be used as a file offset.
+
+** Orphaned Process Group
+A process group in which the parent of every member in the group is either itself a member of the group, or is not a member of the  process
+group's session.
+
+** Path Name
+A  path	name is a null-terminated character string starting with an optional slash (/), followed by zero or more directory names separated
+by slashes, optionally followed by a file name.
+
+If a path name begins with a slash, the path search begins at the root directory. Otherwise, the search begins  from  the  current  working
+directory.
+
+A slash by itself names the root directory.
+
+Unless specifically stated otherwise, the null path name is treated as if it named a non-existent file.
+
+** Privileged User
+Solaris	software  implements  a  set of privileges that provide fine-grained control over the actions of processes. The possession of of a
+certain privilege allows a process to perform a specific set of restricted operations. Prior to the Solaris 10 release, a  process  running
+with  uid  0  was granted all privileges. See privileges(5) for the semantics and the degree of backward compatibility awarded to processes
+with an effective uid of 0.
+
+** Process ID
+Each process in the system is uniquely identified during its lifetime by a positive integer called a process ID. A  process  ID	cannot	be
+reused  by  the	system until the process lifetime, process group lifetime, and session lifetime ends for any process ID, process group ID,
+and session ID equal to that process ID. There are threads within a process with thread IDs thread_t and LWPID_t.  These  threads  are  not
+visible to the outside process.
+
+** Parent Process ID
+A new process is created by a currently active process (see fork(2)). The parent process ID of a process is the process ID of its creator.
+
+** Privilege
+Having appropriate privilege means having the capability to override system restrictions.
+
+** Process Group
+Each  process  in  the  system  is a member of a process group that is identified by a process group ID.  Any process that is not a process
+group leader may create a new process group and become its leader. Any process that is not a process group  leader  may	join  an  existing
+process group that shares the same session as the process.  A newly created process joins the process group of its parent.
+
+** Process Group Leader
+A process group leader is a process whose process ID is the same as its process group ID.
+
+** Process Group ID
+Each  active  process  is  a  member of a process group and is identified by a positive integer called the process group ID. This ID is the
+process ID of the group leader. This grouping permits the signaling of related processes (see kill(2)).
+
+** Process Lifetime
+A process lifetime begins when the process is forked and ends after it exits, when its termination has  been  acknowledged  by  its  parent
+process. See wait(3C).
+
+** Process Group Lifetime
+A  process  group  lifetime  begins  when  the process group is created by its process group leader, and ends when the lifetime of the last
+process in the group ends or when the last process in the group leaves the group.
+
+** Processor Set ID
+The processors in a system may be divided into subsets, known as processor sets. A process bound to one of these sets will run only on pro-
+cessors	in that set, and the processors in the set will normally run only processes that have been bound to the set. Each active processor
+set is identified by a positive integer. See pset_create(2).
+
+** Read Queue
+In a stream, the message queue in a module or driver containing messages moving upstream.
+
+** Real User ID and Real Group ID
+Each user allowed on the system is  identified by a positive integer (0 to  MAXUID) called a real user ID.
+
+Each user is also a member of a group. The group is identified by a positive integer called the real group ID.
+
+An active process has a real user ID and real group ID that are set to the real user ID and  real  group  ID,  respectively,  of  the  user
+responsible for the creation of the process.
+
+** Root Directory and Current Working Directory
+Each  process  has  associated with it a concept of a root directory and a current working directory for the purpose of resolving path name
+searches. The root directory of a process need not be the root directory of the root file system.
+
+** Saved Resource Limits
+Saved resource limits is an attribute of a process that provides some flexibility in the handling of unrepresentable  resource  limits,	as
+described in the exec family of functions and setrlimit(2).
+
+** Saved User ID and Saved Group ID
+The saved user ID and saved group ID are the values of the  effective user ID and effective group ID just after an exec of a file whose set
+user or set group file mode bit has been set (see exec(2)).
+
+** Semaphore Identifier
+A semaphore identifier (semid) is a unique positive  integer created by a semget(2) call. Each semid has a set of  semaphores  and  a  data
+structure associated with it. The data structure is referred to as semid_ds and contains the following members:
+
+struct ipc_perm	 sem_perm;    /* operation permission struct */
+struct sem	 *sem_base;   /* ptr to first semaphore in set */
+ushort_t 	 sem_nsems;   /* number of sems in set */
+time_t		 sem_otime;   /* last operation time */
+time_t		 sem_ctime;   /* last change time */
+      /* Times measured in secs since */
+      /* 00:00:00 GMT, Jan. 1, 1970 */
+
+The following are descriptions of the semid_ds structure members:
+
+The  sem_perm  member  is  an ipc_perm structure that specifies the semaphore operation permission (see below). This structure includes the
+following members:
+
+uid_t	 uid;	 /* user id */
+gid_t	 gid;	 /* group id */
+uid_t	 cuid;	 /* creator user id */
+gid_t	 cgid;	 /* creator group id */
+mode_t	 mode;	 /* r/a permission */
+ulong_t	 seq;	 /* slot usage sequence number */
+key_t	 key;	 /* key */
+
+The sem_nsems member is equal to the number of semaphores in the set. Each semaphore in the set is  referenced  by  a  nonnegative  integer
+referred to as a sem_num. sem_num values run sequentially from 0 to the value of sem_nsems minus 1.
+
+The sem_otime member is the time of the last semop(2) operation.
+
+The sem_ctime member is the time of the last semctl(2) operation that changed a member of the above structure.
+
+A semaphore is a data structure called sem that contains the following members:
+
+ushort_t   semval;    /* semaphore value */
+pid_t	  sempid;    /* pid of last operation  */
+ushort_t   semncnt;   /* # awaiting semval > cval */
+ushort_t   semzcnt;   /* # awaiting semval = 0 */
+
+The following are descriptions of the sem structure members:
+
+The semval member is a non-negative integer that is the actual value of the semaphore.
+The sempid member is equal to the process ID of the last process that performed a semaphore operation on this semaphore.
+The  semncnt  member  is	a count of the number of processes that are currently suspended awaiting this semaphore's semval to become
+greater than its current value.
+The semzcnt member is a count of the number of processes that are currently suspended awaiting this semaphore's semval to become 0.
+
+Semaphore Operation Permissions
+In the semop(2) and semctl(2) function descriptions, the permission required for an operation is given as {token}, where token is the  type
+of permission needed interpreted as follows:
+
+00400	   READ by user
+00200   ALTER by user
+00040   READ by group
+00020   ALTER by group
+00004   READ by others
+00002   ALTER by others
+
+Read and alter permissions for a semid are granted to a process if one or more of the following are true:
+
+o  The {PRIV_IPC_DAC_READ} or {PRIV_IPC_DAC_WRITE} privilege is present in the effective set.
+
+o  The  effective user ID of the process matches sem_perm.cuid or sem_perm.uid in the data structure associated with semid and the appro-
+priate bit of the "user" portion(0600) of sem_perm.mode is set.
+
+o  The effective group ID of the process matches sem_perm.cgid or sem_perm.gid and the appropriate bit of the "group"	portion(060)	of
+sem_perm.mode is set.
+
+o  The appropriate bit of the "other" portion(06) of sem_perm.mode is set.
+
+Otherwise, the corresponding permissions are denied.
+
+** Session
+A  session  is a group of processes identified by a common ID called a session  ID, capable of establishing a connection with a controlling
+terminal.   Any process that is not a process group leader may create a new session  and process group, becoming the session leader of  the
+session and process group leader of the process group.  A newly created process joins the session of its creator.
+
+** Session ID
+Each  session  in  the  system is uniquely identified during its lifetime by  a positive integer called a session ID, the process ID of its
+session leader.
+
+** Session Leader
+A session leader is a process whose session ID is the same as its  process and process group ID.
+
+** Session Lifetime
+A session lifetime begins when the session is created by its session leader, and ends when the lifetime of the last process that is a  mem-
+ber  of the session ends, or when the last process that is a member in the session leaves the session.
+
+** Shared Memory Identifier
+A  shared  memory identifier (shmid) is a unique positive integer created by a shmget(2) call. Each shmid has a segment of memory (referred
+to as a shared memory segment) and a data structure associated with it. (Note that these shared memory segments must be explicitly  removed
+by the user after the last reference to them is removed.) The data structure is referred to as shmid_ds and contains the following members:
+
+struct ipc_perm	 shm_perm;     /* operation permission struct */
+size_t		 shm_segsz;    /* size of segment */
+struct anon_map	 *shm_amp;     /* ptr to region structure */
+char		 pad[4];       /* for swap compatibility */
+pid_t		 shm_lpid;     /* pid of last operation */
+pid_t		 shm_cpid;     /* creator pid */
+shmatt_t 	 shm_nattch;   /* number of current attaches */
+ulong_t		 shm_cnattch;  /* used only for shminfo */
+time_t		 shm_atime;    /* last attach time */
+time_t		 shm_dtime;    /* last detach time */
+time_t		 shm_ctime;    /* last change time */
+        /* Times measured in secs since */
+        /* 00:00:00 GMT, Jan. 1, 1970 */
+
+The following are descriptions of the shmid_ds structure members:
+
+The  shm_perm  member  is  an  ipc_perm  structure that specifies the shared memory operation permission (see below). This structure
+includes the following members:
+
+uid_t	cuid;	/* creator user id */
+gid_t	cgid;	/* creator group id */
+uid_t	uid;	/* user id */
+gid_t	gid;	/* group id */
+mode_t	mode;	/* r/w permission */
+ulong_t	seq;	/* slot usage sequence # */
+key_t	key;	/* key */
+
+The shm_segsz member specifies the size of the shared memory segment in bytes.
+The shm_cpid member is the process ID of the process that created the shared memory identifier.
+The shm_lpid member is the process ID of the last process that performed a shmat() or shmdt() operation (see shmop(2)).
+The shm_nattch member is the number of processes that currently have this segment attached.
+The shm_atime member is the time of the last shmat() operation (see shmop(2)).
+The shm_dtime member is the time of the last shmdt() operation (see shmop(2)).
+The shm_ctime member is the time of the last shmctl(2) operation that changed one of the members of the above structure.
+
+Shared Memory Operation Permissions
+In the shmctl(2), shmat(), and shmdt() (see shmop(2)) function descriptions, the permission required for an operation is given as  {token},
+where token is the type of permission needed interpreted as follows:
+
+00400   READ by user
+00200   WRITE by user
+00040   READ by group
+00020   WRITE by group
+00004   READ by others
+00002   WRITE by others
+
+Read and write permissions for a shmid are granted to a process if one or more of the following are true:
+
+o  The {PRIV_IPC_DAC_READ} or {PRIV_IPC_DAC_WRITE} privilege is present in the effective set.
+
+o  The  effective user ID of the process matches shm_perm.cuid or shm_perm.uid in the data structure associated with shmid and the appro-
+priate bit of the "user" portion(0600) of shm_perm.mode is set.
+
+o  The effective group ID of the process matches shm_perm.cgid or shm_perm.gid and the appropriate bit of the "group"	portion(060)	of
+shm_perm.mode is set.
+
+o  The appropriate bit of the "other" portion(06) of shm_perm.mode is set.
+
+Otherwise, the corresponding permissions are denied.
+
+** Special Processes
+The  process  with  ID  0 and the process with ID 1 are special processes referred to as proc0 and proc1; see kill(2). proc0 is the process
+scheduler. proc1 is the initialization process (init); proc1 is the ancestor of every other process in the system and is  used  to  control
+the process structure.
+
+** STREAMS
+A  set of kernel mechanisms that support the development of network services and data communication drivers. It defines interface standards
+for character input/output within the kernel and between the kernel and user level processes. The STREAMS mechanism is composed of  utility
+routines, kernel facilities and a set of data structures.
+
+** Stream
+A  stream  is  a  full-duplex  data path within the kernel  between a user process and driver routines. The primary components are a stream
+head, a driver, and zero or more modules between the stream head and driver. A stream is analogous to a shell pipeline,	except	that  data
+flow and processing are bidirectional.
+
+** Stream Head
+In  a  stream,  the  stream  head is the end of the stream that provides the interface between the stream and a user process. The principal
+functions of the stream head are processing STREAMS-related system calls and passing data and information between a user  process  and  the
+stream.
+
+** Upstream
+In a stream, the direction from driver to stream head.
+
+** Write Queue
+In a stream, the message queue in a module or driver containing messages moving downstream.

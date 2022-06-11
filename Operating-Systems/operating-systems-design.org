@@ -1,0 +1,262 @@
+# +TITLE: Operating Systems Design
+# +SUBTITLE: Some Overlap With Platforms
+# #+AUTHOR: _
+# #+DATE: _
+# +OPTIONS: toc:nil 
+# +OPTIONS: num:nil
+# +OPTIONS: date:nil 
+# +OPTIONS: author:nil 
+# (insert (expand-file-name (buffer-file-name)))
+
+* Operating Systems
+
+** Distinguishing the Operating System from Other Software
+
+By /Operating System/ we mean the /System Software/ which creates a fully
+featured /Virtual Computer/ on top of modern general-purpose /Computer
+Hardware/. While /User Programs/ compiled to /Machine Code/ are directly
+executed by the machine's CPU, they are unable to perform any Input or Output
+operations without using /Operating System Services/. /Operating Systems/
+restrict access to the actual machine's /Devices/.
+
+We distinguish the /Operating System/ from /Application Software/ which provides
+a /user interface/ with a /look and feel/. While the /distinction/ is clear, it
+is not always possible to make a /full separation/ between these two worlds,
+especially where essential system services build in a /look and feel/ or
+strongly influence the /look and feel/ of applications using them.
+
+User visible features of /Graphic User Interfaces/, i.e. /Graphical Utilities
+and Applications/ are /outside/ the scope of this document, while the underlying
+mechanisms and services provided by the /Operating System/ for the
+implementation of /Graphical Utilities and Applications/ are /within/ the scope
+of this document.
+
+We are especially concerned here with the 
+- Design and Architecture of the Operating System
+- Security, Stability and Usability of the Features
+
+We are primarily addressing /General Purpose Operating Systems/ which provide a
+rich set of services. Low-level and specialized operating systems which do
+not include all of these services will be referenced very little if at all.
+
+*** Operating System Components
+
+Software on a modern computer system is either
+- part of a kernel
+      - with special access to system hardware features and devices
+      - provided by a special hardware execution mode
+- part of a /system process/
+      - system processes are /user processes/ aka /tasks/ aka /heavyweight processes/
+            - associated with a /system user account/ for security
+            - /not/ associated with a human user's /user account/
+
+Software can be packaged as a
+- monolithic executable program
+- library or module
+      - library :: a collection of individual procedures generally usable by any
+        program
+      - module :: like a library but requiring a special plug-in architecture
+- libraries and modules have an /API/ - an /Application Programming Interface/
+      - usually as a /procedural interface/
+            - The library or module provides a collection of procedures
+                  - aka /functions/, /methods/, /subroutines/
+            - The API specifies how each procedure should be /called/
+     - library procedures tend to have a very simple interface
+     - module procedures tend to have a more complex interface
+
+**** Details of Procedural Interfaces
+
+***** Short Version of procedure =foo= calls =bar=
+
+1. =foo= may provide some data, i.e. /arguments/ for =bar= to use
+2. the computer pauses executing the code of procedure =foo=
+3. the computer starts executing the code of procedure =bar=
+4. =bar= may provide some data, i.e. /return values/ for its caller
+5. execution of procedure =bar= finishes
+6. =foo= resumes execution where it left off
+7. =foo= may utilize or ignore any /return values/ from =bar=
+         
+Very important: Procedure calls can be arbitrarily nested!
+
+***** Example of procedure interface: Drawing a Square on the Screen
+
+Within some application, a procedure named =foo= needs a square drawn at a
+particular location on the screen in a particular style
+- The Graphics Library API specifies procedure =draw_rectangle=
+- The Graphics Library API specifies procedure =fill_area=
+- The Graphics Library API specifies procedure =draw_line=
+
+****** All the Caveats
+
+A machine specific API, e.g. for drawing something would be specific to a
+particular model of CPU (general purpose Central Processing Unit) and a
+particular model of GPU (Graphics Processing Unit). It would describe how the
+programmer had to use the right CPU instructions to pass data describing the
+drawing to be done in the required format of bits and bytes to the GPU and
+invoke the appropriate GPU instruction. A procedure using such an API would be
+very hard for a human to read. It would look like a long series of numbers, or
+perhaps a mixture of numbers and semi-mnemonic Assembly-Language codes. And the
+whole procedure would need to be rewritten if you wanted to do the operation
+with a different model of CPU or a different model of GPU!
+
+A modern Systems Programming API for a library could be much easier for a
+programmer to use. First, it would be written for a programmer using a specific
+/Higher-Level Systems-Programming Language/, e.g. the /C Programming Language/
+or /Rust/. A program called a /Compiler/ would translate the /High-Level
+Language Code/ to the low level /Machine Code/ which the hardware knows how to
+execute. In this way your program (1) would be easier for an experienced
+programmer to understand and (2) would run on any CPU.
+
+Second, a modern Graphics Library would describe the graphics operations more
+generically, in a way that could be performed by any model of GPU. A library,
+written in your /Higher-Level Systems-Programming Language/, would translate the
+generic graphics operations described in that language to a simpler but still
+generic format specified in bits and bytes which would then be passed to the
+operating system which would then pass them to a device driver which would then
+translate them to the required bit and byte format for your actual GPU, pass
+that data to that device in the appropriate way and then activate the desired
+function of that device. At each stage, the generic instructions would be
+transformed, first to a simpler and lower level format which your device driver
+can understand and then to the specific format required by your particular GPU.
+
+In order for all of this to work you need to have installed (1) an suitable
+/Compiler/ to translate your preferred Higher-Level Programming Language to the
+machine code of your CPU, (2) libraries compatible with the Higher-Level API
+which you're using in your application and (3) device drivers for your kernel to
+call which understand your GPU. In some cases you can use a Compiler or a
+Library or a Device Driver designed for a compatible CPU or GPU family rather
+than the specific CPU or GPU model which you actually have, albeit sometimes
+with less performance or the loss of some features.
+
+****** Ignoring the Details, What Happens?
+
+Ignoring the details of specific languages and machines, here's basically what
+happens:
+
+1. =foo= provides arguments for
+       - the location of the square's upper-left corner
+       - the (identical for a square) width and height in pixels
+       - the desired fill style
+             - the special address NULL for none
+             - otherwise the address of a data structure
+             - the API specifies the exact format of that data structure
+       - any desired border width, style and color
+             - the special address NULL for none
+             - otherwise the address of a data structure
+             - the API specifies the exact format of that data structure
+2. =foo= calls =draw_rectangle= using an appropriate machine code instruction
+3. execution of procedure =foo= pauses
+4. execution of =draw_rectangle= begins
+       - temporary resources needed by =draw_rectangle= may be allocated as needed
+       - the code in =draw_rectangle= examines the /argument data/
+       - if a border is required
+             - =draw_rectangle= calls =draw_line= four times
+             - with appropriate argument values according to the API
+       - if the rectangle is to be filled
+             - =draw_rectangle= calls =fill_area=
+             - with appropriate argument values according to the API
+       - =draw_rectangle= has to
+             - access argument data
+             - compute coordinates of the borders and interior area as required
+             - call on other procedures appropriately
+       - if we were to examine the code of =draw_line= and =fill_area=
+             - they will delegate work to other, lower level procedures
+             - each procedure pauses while a procedure it calls runs
+             - this delegation process can continue to any level of nesting
+             - each procedure needs to get the data into the form needed by each procedure it calls
+             - eventually the appropriate functions of the GPU hardware will be invoked
+             - then the GPU hardware draws the images
+5. execution of =draw_rectangle= finishes
+6. any temporary resources needed by =draw_rectangle= are released
+       - how the procedure accesses those arguments
+7. execution of procedure =foo= resumes with its next action
+8. in this case there is no /return value/
+9. the drawn image is the /side effect/ calling =draw_rectangle=
+
+10. defined as a set of /procedures/ (aka /functions/)
+11. how a /procedural interface/ works
+12. procedure are /called/ by other procedure
+ 
+13. More Detailed Descriptions
+14. /the calling procedure/ specifies any data which it has access to
+     which may be accessed by /the called procedure/
+15. execution of the /calling procedure/ is suspended
+16. additional memory needed by the /called procedure/ is allocated
+17. the /called procedure/ starts executing
+18. the /called procedure/ may provide some of the data which
+19. any data  /called procedure/ stops executing
+20. the API standardizes, for each procedure
+21. how it can be called by another procedure
+22. the procedure name
+23. any arguments that can be provided when it is called
+        - arguments are data values
+        - the API specifies
+              - the data format of any such arguments
+24. any return values
+        - i.e. data values returned when the procedure is finished
+25. any /side effects/
+        - any external data it accesses other than its arguments
+        - any effect on any other part of the system other than return values
+
+*** Kernels
+
+Two kinds of kernels
+- traditional large kernels
+      - directly incorporating many important services
+      - Examples: Unix, Linux and the BSDs
+- micro kernels
+      - delegating almost all services to /system processes/
+      - Examples: Minix, QNX, L4, Gnu/Hurd, MIT Trix
+- modular kernels
+      - large like traditional kernels
+      - provide different services to different /client processes/
+      - Examples: VMS, Microsoft Windows
+- other kernels worth noting
+
+*** Device Drivers
+
+Device drivers requiring special hardware access 
+- usually are incorporated in system kernels
+- sometimes can be incorporated in user processes
+      - this requires special hardware support
+      - newer processors provide this support
+      - this is a future trend
+
+            - e.g. MIT Trix
+            - device drivers requiring special hardware privileges
+                  - usually incorporated in a kernel process
+                  - sometimes incorporated in heavyweight processes
+                        - this requires special hardware and software support!
+
+*** System Services
+
+- low-level services for operating systems using microkernels
+      - memory management, process management, network protocols, filesystems
+      - potentially provide better modularity and security
+      - provide flexibility: different services for different client processes
+      - Example: the GNU/Hurd
+- general services
+      - high level network services
+            - web servers, mail transfer agents, secure shell
+      - security services
+            - authentication, e.g. login, PAM
+ 
+*** System Libraries
+
+Provide programming interfaces
+
+
+** Large Kernel based Operating Systems
+*** Operating System Abstractions and Services
+**** Program
+
+A /Machine Code/ /Program/ is a /File/ (sequence of bytes) which describes data
+and machine code instructions for a particular model of computer. In order to
+run, the operating system has to create a /Heavyweight Process/, =load= or =map=
+the program into the virtual memory of that Process and then begin the execution
+of the program using the main Thread of the Process.
+
+** Purposes of 
+
+** Virtualization
+
