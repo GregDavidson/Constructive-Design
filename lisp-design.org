@@ -1,0 +1,225 @@
+* Lisp Design Without Compromise
+
+** Lisp Is Not A Language
+
+Lisp is a large family of languages which share a few superficial
+characteristics and differ radically in vision, design and semantics.
+
+*** Similarities Among Lisps
+
+- Homoiconic Syntax of Symbolic Expressions
+      - Symbolic Expressions describe both programs and data
+- First-Class Functions (as Closures) created by Lambda Expressions
+- Syntax changeable by changing =read= and =print= functions
+- Special Macro Forms can rewrite code at compile time
+- Interactive computing with REPLs
+      - Read, Evaluate, Print Loop
+- The idea of a "programmable programming language"
+      - Maximum flexibility at almost any cost
+
+*** Lisp Is A Compromise
+
+Lisp began as a compromise between the elegant mathematical theory of
+computation (the /Lambda Calculus/) and 1950s imperative programming practices.
+The creators of Lisp didn't realize that the compromises were unnecessary and
+undesirable because the techniques to compile abstract high level code to
+efficient machine code had not yet been developed and there had been little
+experience with functional programming. Later Lisps are largely distinguished by
+which of these horrible compromises they've discarded. We now know how to design
+an efficient elegant Lisp without any of these compromises, but none of the
+popular Lisps have thrown them all away yet, primarily because the influencers
+in the Lisp community are used to the old ways of doing things.
+
+** A Critical Look at the Family
+
+My opinions of the merits of the features of current lisps appear [inside of
+square brackets].
+
+*** Bad ideas in early Lisps [all bad here]
+
+- Lots of Special Forms without any syntactic marking
+- Special Forms required for efficient Control Flow
+- Dynamic Binding
+- Confusion between Symbols, Binding, Functions and Associations
+- Non-Monotonically Mutable Data Structures
+- Lack of Abstract Types, e.g. Sequences
+- Lack of Manifest Types or Type Inference
+- Lack of Tail Call Optimization
+- Interpreting Lisp Code rather than Compiling it to efficient Native Code
+- Lack of Namespaces or Modules
+- NIL Symbol used as both /Empty List/ and /Boolean False/
+- Everything not False is True
+- Symbols as Enumeration Types
+- Overuse of Linked Lists
+- Orientation towards low-level coding
+      - Explicitly iterating or recursing over structure
+- Lack of Linear or Affine Types (as in /Rust/ or /Clean/)
+      - Over-use of Garbage Collection
+      - No general resource management
+
+*** Radical Differences among Current Lisps
+
+- Imperative vs. Functional Programming
+      - Common Lisp code is highly imperative [bad!]
+      - Scheme code is a mixture of both styles [mediocre!]
+      - Clojure code is highly functional [good!]
+- Dynamic vs. Lexical Variable Binding
+      - Dynamic in early Lisps and many of today's Lisps [bad!]
+      - Lexical in Scheme, Common Lisp and Clojure [good!]
+- Types determined at Run Time vs. Compile Time
+      - In most Lisps compilers (and human readers) can't infer datatypes [bad!]
+      - A few Lisps, e.g. Typed Racket, allow type inference by inspection [good!]
+- Whether Function Calls can provide efficient Control Structures
+      - Scheme-derived dialects provide
+            - Tail-Call Optimization [good!]
+            - Continuations [ambitious but inefficient]
+      - Most other Lisps require special built-in control structures [bad!]
+- Collection Types other than Linked Lists [it's a jungle!]
+
+Two Lisps need special mention right from the start: Scheme and Common Lisp.
+
+*** Scheme Fixed Several Of These Flaws
+
+Scheme was one of many attempts to create a modern Lisp free of historical cruft.
+It invented many of the best features of modern Lisps and has spawned an important sub-family 
+
+- All Functions created by Lambda
+- Function Bindings same as any other Binding (a minor issue, actually)
+- Functions provide efficient iteration (Tail-Call Optimization)
+- Function provide exotic control flow (Continuations)
+- Separate /Empty List Value/ and /Boolean False Value/
+- Rich (but rigid) numeric types
+- Much complexity was dropped - Scheme was refreshingly elegant
+- But many bad traditional compromises were retained
+
+The original Scheme specification was the /shortest/ ISO specification of any
+computer language at the time it was adopted, including its radical inclusion of
+an appendix with a complete denotational semantics of the language.
+
+Scheme has gone through six revised standards, attempting to add on the
+practical features to enable efficient general-purpose programming. In the
+process, the language has grown much larger. And none of the fundamental
+compromises have been fixed, as that would break existing code.
+
+The Latest Scheme Standard, R7RS still has 
+- Non-Monotonically Mutable Data Structures
+- Poor data abstraction
+      - Sequences and Streams are a clumsy extension
+- Lack of manifest types or type inference
+- Everything not False is True
+- Clumsy Abstract Sequences
+- Poor support for functional programming
+- Poor support for pattern matching
+- Rich (but rigid) numeric types
+- No way to tell if something is a special form
+
+Scheme has spawned a sub-family of languages which are free to deviate from the
+Scheme standard (and break existing Scheme code) in the spirit of further
+cleaning up the language. Many of these languages are excellent. None of them
+are as elegant as Scheme.
+
+Some of the implementations of Scheme and Scheme-derived Lisps are efficient
+enough for performance-critical computing.
+
+**** Racket Attempts to be a Modern Scheme
+
+Racket have added
+- Immutable Cons-Cells and Lists [good]
+- Delimited Continuations - more flexible and efficient [good]
+- Flexible Namespaces and Modules [complicated]
+- Sequence and Stream Types [clumsily]
+- Typed Racket provides Manifest types and type inference [clumsily]
+- A structured way to create new sub-languages [should be avoided!]
+
+Racket is an efficient, practical and feature-rich programming language. It also
+has a lot of complex and seemingly redundant features. It lacks the coherence
+and elegance of Scheme.
+
+*** Common Lisp
+
+Common Lisp was an attempt to pull together the best features and ideas of the
+major Lisps at the time, including Scheme. This led to a very large language.
+CL's specification was the /longest/ ISO specification of any computer language
+at the time it was adopted.
+
+The Common Lisp community should be called out for the practice of speaking and
+writing about CL as if it is /the/ Lisp or the only Lisp which should be taken
+seriously. If you need to abbreviate the name, call it /CL/, not /Lisp/!
+
+Some of Common Lisp's added features
+- Namespaces [complicated]
+- General sequence support [through duck typing]
+- Very general object-oriented programming support [very complicated]
+- Only a few of the great ideas of Scheme [no Tail Call optimization!]
+
+One advantage to Common Lisp's huge monolithic standard is that the language
+evolves very slowly, rarely breaking existing code.
+
+Some of the implementations of Common Lisp are efficient enough for
+performance-critical computing.
+
+*** Clojure
+
+Clojure is a fresh modern Lisp, adopting Functional Programming practices
+at the expense of breaking with Lisp tradition.
+
+There are really multiple Clojures. The original and dominant Clojure compiles
+to the JVM and is designed to allow very efficient interoperation with other JVM
+languages, especially Java. The downside of the JVM Clojure being the defining
+implementation is that it suffers from many design flaws of the JVM, including
+the lack of efficient Tail Calls and large memory overhead.
+
+Other implementations of Clojure include
+- ClojureScript -- compiles to JavaScript
+- ClojureCLR -- for Microsoft's .net CLI environment
+
+Clojure provides
+- Namespaces
+- General sequence support
+- Functional Programming support
+      - Programming with Lazy sequences
+      - Immutable data structures
+- Flexible Pattern Matching syntax
+  
+Clojure lacks
+- Continuations
+- Tail-Call Optimization
+- Manifest Types or Type Inference
+- Sum or Product Types
+- Enumeration Types
+
+** A Modern No-Compromise Lisp
+
+A truly clean modern Lisp would have  
+
+- Sum, Product and Enumeration Types
+- An extensible Numeric Type system
+      - With Compile-Time Dimensions and Units
+      - With runtime Error Propagation Tracking
+- Purely declarative code
+      - Manifest or inferred Abstract Types
+      - Functional and Monotonic Semantics
+      - General efficient pattern matching for code and data
+      - Principle of Least Power providing choice of computation models
+            - Regular, Functional, Relational Programming
+            - Datalog, Logic and Declarative Constraint Programming
+            - Staged Metaprogramming
+- Provably safe non-intrusive optimizations and specializations
+      - Programs specified abstractly
+            - Operations on Streams and Collections
+            - Parentheses in Symbolic Expressions would not imply Linked Lists
+      - Concrete Implementations Inferred or Recommended
+            - Reasonable initial automatic inferences
+            - Updated automatically based on profiling
+            - Human suggestions checked and applied where safe and useful
+            - like how indexes and query planning work in relational databases
+- Syntactically distinct special forms (reserved forms and macro forms)
+      - Either a naming convention for the symbol beginning the form
+      - or perhaps special braces for the form
+- Macros able to expand conditionally based on argument types
+- Great programming tools
+      - Store code in Relational Database
+      - Browse code with unwanted details suppressed
+      - Provably correct refactoring
+      - Logical debugging
+- And all of this through elegant generality rather than complexity! 
