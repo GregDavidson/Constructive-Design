@@ -10,7 +10,108 @@
 
 * Operating Systems
 
-** Distinguishing the Operating System from Other Software
+** What and Why of Operating Systems
+
+A bare computer, lacking any helpful software, is extremely difficult
+to use and extremely difficult to program.
+
+Systems Software is software designed to complement a computer's
+hardware to create what we call a Computer System: A synergistic
+combination of hardware and software.
+
+Most computers are designed so that when you turn them on they
+/Bootstrap/ themselves by loading an Operating System, a collection of
+essential systems software designed to make the computer easier to
+use, including making it more reliable and more secure.
+
+The Operating System also creates a Platform, a Software-Defined
+Computer which is easier to write programs for, so even if a user is
+not a programmer, the Application Programs which they run require the
+abstractions and services of their Operating System's platform and are
+largely unaware of the actual hardware underneath the platform.
+
+A programmer pays almost no attention to what kind of computer their
+program is going to run on.  Therefore the user can run most programs
+on a diverse variety of machines.  Apple Macintoshes, for example,
+have used three different completely incompatible CPU architectures
+and an even larger variety of GPUs.  Linux systems run on everything
+from phones to supercomputers.  Microsoft Windows is still mostly tied
+to the 8086 CPU architecture, but all other PC hardware can vary
+wildly.
+
+It's really easy to write programs to run correctly despite radically
+different CPUs, GPUs, storage systems, networking hardware, etc.  It's
+much harder to write programs that are portable across operating
+systems - doable, just harder.
+
+Similarly, it's easy for users to adapt to changes in hardware.  Users
+don't notice most hardware diversity at all.  Users even adjust fairly
+easily to chanages in intimate things like screens, keyboards and
+pointing devices.  Users have a lot more trouble adapting to the look
+and feel conventions associated with unfamiliar operating systems.
+
+The term Operating System refers to multiple levels of our computer
+systems.  There's what's visible to users, what's visible to software
+developers and what's visible to administrators, including security
+professionals.  The features of Operating Systems which are not
+immediately visible to users have a profound impact on a user's
+experience of the system because the effect the variety and quality of
+software available for the platform - and quality includes reliability
+and security as well as productivity.
+
+Users, programmmers and administrators are also not three neatly
+separated categories of people.  Most people these days have to
+install updates, set configuration options, backup their data
+(hopefully!) and handle many other tasks traditionally thought of as
+computer administration.  We own most of our computers and we don't
+have a staff to manage them for us!
+
+Users who aren't trained programmers may still write spreadsheet
+formulas, word processor templates, visual programs and other less
+formal kinds of "programs".
+
+Power users are people who like to automate anything routine and
+boring. Power Users want to make their devices adapt to their needs
+and preferences.  Power Users mostly accomplish these goals by writing
+"scripts" - simple programs in simplified programming languages.
+(Apple, btw, has a policy that on their consumemr devices, the iPhone
+and iPads, software can only be installed from the Apply Store and no
+software which is scriptable or programmable is allowed!)
+
+*** Can Operating Systems be Improved?  Is it worth it?
+
+The parts of modern Operating Systems which are not directly visible
+have a huge impact on every aspect of the quality of the user
+experience.  Whether your data gets lost or stolen.  Whether you can
+figure out how to do what you need to do.  How cumbersome it is to
+carry out tasks.  And more!
+
+Like most computer professionals, I am appalled at the low quality of
+the architecture, design and implementation of the "invisible" parts
+of modern Operating Systems.  Solutions to most of the flaws and
+limitations of current systems were discovered decades ago - and have
+been ignored ever since!
+
+Where are there problems and weaknesses with the invisible parts of
+popular Operating Systems?  Are any alternative Operating Systems
+better?  How can systems be configured or extended to make them
+better?  How can ambitious developers design and implement
+significantly better systems?
+
+Originally this document was only going to address the invisible
+aspects of Operating Systems.  Alas, most modern operating systems do
+not make a clean separation between the invisible and visble parts.
+And the parts of Operating Systems which are visible to Users also
+have serious weaknesses and flaws and can also be vastly improved!
+
+We will even need to discuss some of the weaknesses and serious flaws
+in most Application Software where it emerges from weaknesses in the
+the architecture and design of the underlying Systems Software.
+
+** SCAVENGE & DELETE: Distinguishing the Operating System from Other Software
+
+Operating Systems are like Icebergs, 90% of the code is not visible to
+users.
 
 By /Operating System/ we mean the /System Software/ which creates a fully
 featured /Virtual Computer/ on top of modern general-purpose /Computer
