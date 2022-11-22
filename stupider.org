@@ -1,0 +1,65 @@
+* Our Tools Are Often Getting Stupider!
+
+By Tools we include
+- Our phones and other end-user computer devices
+      - sometimes their hardware
+      - usually their software
+            - especially apps (Application Programs)
+- Increasingly our other tools
+      - Cars
+      - Domestic appliances
+      - Domestic appliances
+
+In general, knowledge of how to make everything better is increasing rapidly!
+We are much better able to make all products with
+- improved functionality
+- increased reliability
+- lower cost
+- less negative environmental impact
+
+Yet at the same time
+1. A lot of knowledge and understanding is being lost
+       - because of the retirement and death of scholars practitioners
+       - because of the loss or obscurity of key information
+             - technical reports and documentation
+             - source code repositories
+             - etc.
+2. A lot of things are getting stupider
+       - mostly driven by win-lose decisions
+             - encouraging mindshare lock-in
+             - minimizing end-user customization and extension capability
+       - sometimes because of the loss of knowledge and understanding
+ 
+- regressions :: functionality removed and not available in other ways.
+
+There are diverse motivations for /regressions/
+- making systems more predictable and centrally controllable
+      - despite the loss of user freedom and power user productivity
+- making customers more dependent
+      - features exclusively available from a sole proprietary provider
+      - customization is available for a large fee for major customers
+- popular movements which reduce functionality
+      - Restyling everything with, e.g. /material design/
+      - Requirement of Graphical or Menu-Driven Interfaces
+            - No command language or scriptability
+      - Downloading all presentations as bitmaps
+            - Fonts, contrast, placement all fixed
+            - No local rendering
+
+*** Apple Devices
+
+All Apple devices with the exception of their Macintosh general-purpose
+computers, i.e. iPads and iPhones are designed to be stupid. They can only run
+programs "apps" from the Apple App Store. Those apps must be approved by Apple
+and Apple prohibits any apps which are user programmable or significantly user
+extensible.
+
+*** Content Management Systems
+
+*** Software Platforms
+
+*** Application Programs
+
+*** Graphical User Interfaces
+
+*** Home Appliances
