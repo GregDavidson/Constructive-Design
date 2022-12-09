@@ -1,0 +1,53 @@
+* Computing and Creative Vision
+
+Computing systems have the possibility of
+- eliminating all tedious work
+- vastly extending our creative powers
+- massively increasing human productivity
+
+We don't know how to automate creativity - by definition! But anything which is
+tedious is probably (1) well understood and (2) not creative so is therefore (3)
+a great opportunity for automation!
+
+Some visions which have been mapped out and sometimes partially implemented:
+
+** Mirror Worlds and the Relational View
+
+In order to operate powerfully and reliably in the world, computing systems need
+to have a good map of the territory, i.e. a faithful representation of the
+aspects of the world in which they operate.
+
+In most of computing practice this is achieved by storing data in ad hoc formats
+in files organized in file systems. In specific domains, e.g. finance,
+manufacturing, data management, etc. it is common to use specialized database
+systems to organize the information and data for convenient access. These
+methods are often complex, fragile and difficult to evolve. Those based on
+relational databases are generally the best, yet they often suffer from
+unnecessary limitations.
+
+**** The Vision of Mirror Worlds
+
+[[https://en.wikipedia.org/wiki/David_Gelernter][David Gelernter]] is a great visionary. It's important to distinguish his vision
+from his efforts to realize it in practical systems. His vision can guide all of
+us.
+
+I recommend his book
+- [[https://www.amazon.com/Mirror-Worlds-Software-Universe-Shoebox-ebook/dp/B00VRJ394W][Mirror Worlds: or the Day Software Puts the Universe in a Shoebox]]
+
+His efforts to implement his vision can be read as a cautionary tale:
+- Translating Vision into Reality is Non-Trivial!!!
+
+
+**** PostgreSQL and the Relation View
+
+Relational Databases rule Enterprise Computing and with good reason. I won't
+bother to list their advantages here, but take them as a given. My focus is on
+how they can be evolved and better leveraged.
+
+**** Constraint-Based Computing
+
+- Ivan Sutherland's SketchPad
+- Alan Borning's ???
+- TeX, Tk, Motif, Constraint-Based Computing
+
+**** Computer Dreams and Ted Nelson

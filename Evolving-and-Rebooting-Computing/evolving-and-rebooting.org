@@ -1,0 +1,97 @@
+* Evolving and Rebooting Computing
+
+** What this is about
+
+Computing is a synergy between hardware, software, mathematics and imagination -
+in order of increasing importance! Our ability to leverage each of these
+accounts for the extraordinary power and the extensive unnecessary limitations
+of today's computing systems.
+
+As soon as people's labor results in any offering, e.g. any product or service,
+critics will start finding fault with it. Most such criticisms fail to provide
+effective feedback which improves the existing offering and/or enables the
+development of better offerings. In many cases fans will praise the offering and
+"defend" it against criticism. This also usually fails to help.
+
+Criticism is easy. What is more helpful is a vision of what would be better
+along with practical steps towards that end, whether it be towards evolving the
+existing offerings or creating better ones.
+
+Currently these notes are raw drafts of what I can see of paths forwards. If
+you're interested, you can help by (1) improving these ideas and (2)
+implementing some of these ideas in real systems. If you join me in a
+collaborative manner, we might grow the community of insightful practitioners
+and have some real impact!
+
+Hardware, software, mathematics and imagination are all key. Imagination guides
+and inspires our advances in Hardware, Software and Mathematics. Mathematics
+takes imagination and provides generality and rigor. Now that hardware has
+advanced to the point that software is not /primarily/ constrained by hardware
+limitations, it's malleability allows it to lead in practical and visible
+advances. Therefore, most of these sections are about opportunities for evolving
+and rebooting our /Software/ practice, informed by the other key elements. And
+even when it's not explicitly mentioned, imagination and vision are always
+involved!
+
+** Computing and Creative Vision
+
+Computing systems have the possibility of
+- eliminating all tedious work
+- vastly extending our creative powers
+- massively increasing human productivity
+
+Some visions which have been mapped out or successfully implemented:
+- [[file:earc-creative-examples.org][Creative Examples]]
+
+** Software and Mathematics
+
+Some visions which have been mapped out or successfully implemented:
+- [[file:earc-sw-and-maths-examples.org][Software and Mathematics Examples]]
+- Lambda Calculus
+- Relational Algebra
+- Combinatory Logic
+- Tower of Types for Metaprogramming
+
+** Software Complementing Human Intelligence
+
+Some visions which have been mapped out or successfully implemented:
+- [[file:earc-sw-augment-examples.org][Human Augmentation Examples]]
+- Englebart's Augment System
+- Hybrid Expert Systems
+      - DWIM
+      - Mycin, Emycin, Tiresias
+      - How would we do such now?
+- Combining Multiple Sources of Knowledge
+      - Blackboard Architectures and Hearsay II
+      - How would we do such now?
+
+** Software Managing Complex Systems
+
+- Should this be combined with the previous section?
+
+** Software and Hardware Co-Evolution
+
+Some visions which have been mapped out or successfully implemented:
+- [[file:earc-hardware.org][Amazing Hardware]]
+- Transaction Support
+      - in Parallel Processing
+      - in Serialization to/from external systems
+- Better support for data structures
+      - bucky bits
+      - pointer migration for GC and data migration
+- Massive Parallelism for Functional Programs
+      - reduction machines
+      - SQL, Datalog, Logic, Constraint Programming support
+- Security
+      - Owned References
+            - Separate memory spaces obsolete
+- dataflow on network packets
+- much faster subroutines
+- Co-Processors
+      - Systolic Array Processors
+
+** Roadmap
+
+Mine the work I've done on these subject in other repositories and in the TikiWiki!
+
+- TikiWiki :: Create a project to index what's there and get it /all/ moved out!

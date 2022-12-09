@@ -3,6 +3,12 @@
 *This repository is not really ready for others to read yet!*
 - /Come back later!/
 
+** Sub-Projects
+
+- [[file:Evolving-and-Rebooting-Computing/README.org][Evolving and Rebooting Computing]]
+
+** Intentions for this Repository
+
 I'm in the process of collecting my diverse notes on the design of various
 entities, services, systems, etc. here.
 

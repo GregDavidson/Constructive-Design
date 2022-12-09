@@ -1,0 +1,9 @@
+* Evolving and Rebooting Computing
+
+TL;DR:
+
+Criticism is easy. What is more helpful is a vision of what would be better
+along with practical steps towards that end, whether it be towards evolving the
+existing offerings or creating better ones.
+
+- [[file:evolving-and-rebooting.org][Longer Exposition]]
