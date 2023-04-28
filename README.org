@@ -1,0 +1,90 @@
+* Design, Computing and Opportunities
+
+** TL;DR
+
+*** Opportunities to create Better Software Systems
+
+*** Constructive Criticism of Existing Software System Design
+
+*** Design Issues in Computing Hardware and Software/Hardware Systems
+
+*** Design Issues in Non-Computing Systems
+
+** The Importance of Design
+
+I look at the world through the lens of /Design/ rather than the lens of
+/Styling/. Of course, many people use the term /Design/ as a fancy word for
+/Styling/, as in /Hair Design/. What I mean by /Design/ is creation of structure
+which fulfills a purpose excellently, including being affordable and
+sustainable. Design has been a passion of mine as long as I can remember. I look
+at everything through the lens of design.
+
+Most (but not all) of the Design Notes in this Repository relate to Computing,
+and especially to fairly high-level Computing Abstractions. This is only natural
+because computing has fascinated me since childhood and has been my profession
+for most of my adult life.
+
+Even modest computers have the ability to magnify results a billion-fold, so the
+quality of the design of computing systems is especially consequential. I've
+been following developments in computing since childhood and I noticed some
+recurring themes which have stifled good design
+
+*** 20th Century Hardware Was Severely Limited
+
+Common Computing Equipment was severely limited in capacity, especially memory
+capacity, throughout the 20th Century. These limitations didn't start clearing
+up with common computing equipment until the AMD64 architecture arrived in 1999.
+Up until then nearly all computer systems were limited to a 32-bit address
+space. The arrival of solid state disk drives and Gigabit (and better) Internet
+Connections has also opened up possibilities, but easing memory constraints has
+been a complete game changer.
+
+The best systems of the 20th Century provide many examples of extraordinary
+creative genius. Yet their full possibilities were often not followed up on
+because they were /ahead of their time/. With the ending of these severe
+constraints, we should be in a period of rapid progress in the power and quality
+of systems. I don't see this as happening yet - so let's make it happen!
+
+A common pattern over the last 50 years of computing has been
+
+1. Some brilliant folks would develop a concept for making computers more
+   powerful and more useful.
+2. The idea would fail to achieve anywhere near its full potential, partly
+   because of the severe limitations of computer systems of those early days -
+   especially memory limitations.
+3. Inferior designs would win out and become familiar and often standardized.
+4. Newer systems would be build on top of such systems with their own potential
+   limited or extinguished by the designs of the older parts.
+5. Few would notice the missed opportunities because the systems behaved as
+   expected.
+
+Good news: Visionary projects which didn't get a chance to fulfill their
+potential are now /valuable low-hanging fruit/.
+
+*** Complexity in Computing is Deadly!
+
+Even late 20th century 32-bit computer systems were capable of storing programs
+of a size and complexity completely beyond any reasonable ability of competent
+computer professionals to understand them. Indeed, many of the best modern
+designs came about from more constrained 16-bit systems, e.g. Unix which set the
+standard for most modern Operating Systems.
+
+Ironically a lot of the unfortunate complexity of earlier systems was caused by
+strategies for dealing with a lack of system capacities. For example, complex
+data structures and intrinsic links were used rather than using a simple
+relational model with indexes. We could have used increasing memory capacities
+and increases in computational speed to /simplify/ and /generalize/ our software
+systems, leading to software which was /easier to understand/ and /easier to
+improve/. Instead, we simply wrote large amounts of code of often less quality
+because we could get away with it in the short term. Older institutions are
+burdened with vast amounts of unmaintainable code which they rely on for their
+immediate operations.
+
+As an example of a major missed opportunity: When the Y2K problem come along,
+the ideal way forward would have been to replace the majority of huge old Cobol
+programs with simple small programs interfacing with modern relational
+databases. SQL is much more maintainable than procedural language code. Instead
+armies of programmers were recruited - and hastily trained - to patch those old
+systems, rendering them even less comprehensible. And deploying this army of
+programmers to patch old code robbed the rest of our enterprises of essential
+resources to create new software to fulfill their missions.
