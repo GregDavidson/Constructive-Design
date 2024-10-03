@@ -1,6 +1,6 @@
 * Lisp Design Without Compromise
 
-** Lisp Is Not A Language
+** Lisp Is A Family Not A Language
 
 Lisp is a large family of languages which share a few superficial
 characteristics and differ radically in vision, design and semantics.
@@ -16,19 +16,31 @@ characteristics and differ radically in vision, design and semantics.
       - Read, Evaluate, Print Loop
 - The idea of a "programmable programming language"
       - Maximum flexibility at almost any cost
+- Some influence from the [[https://en.wikipedia.org/wiki/Lambda_calculus][Lambda Calculus]]
+      - Procedures are created by the lambda /Special Form/
+      - The /Lambda Calculus/ only supports [[https://en.wikipedia.org/wiki/Purely_functional_programming][Purely Functional Programming]]
+            - See also [[https://en.wikipedia.org/wiki/Functional_programming][Functional Programming]] for deviations from purity
+      - Lisps traditionally add lots of [[https://en.wikipedia.org/wiki/Imperative_programming][Imperative Programming]] features
 
 *** Lisp Is A Compromise
 
-Lisp began as a compromise between the elegant mathematical theory of
-computation (the /Lambda Calculus/) and 1950s imperative programming practices.
+Lisp began as a compromise between
+- [[https://en.wikipedia.org/wiki/Purely_functional_programming][Purely Functional Programming]]
+- in the style of the [[https://en.wikipedia.org/wiki/Lambda_calculus][Lambda Calculus]]
+and
+- [[https://en.wikipedia.org/wiki/Imperative_programming][Imperative Programming]]
+- in the style of early [[https://en.wikipedia.org/wiki/Fortran][FORTRAN]] and [[https://en.wikipedia.org/wiki/ALGOL][ALGOL]]
+
 The creators of Lisp didn't realize that the compromises were unnecessary and
 undesirable because the techniques to compile abstract high level code to
 efficient machine code had not yet been developed and there had been little
-experience with functional programming. Later Lisps are largely distinguished by
-which of these horrible compromises they've discarded. We now know how to design
-an efficient elegant Lisp without any of these compromises, but none of the
-popular Lisps have thrown them all away yet, primarily because the influencers
-in the Lisp community are used to the old ways of doing things.
+experience with Functional Programming. Later Lisps are largely distinguished by
+which of these compromises they've discarded.
+
+We now know how to design an efficient elegant Lisp without any of these
+compromises, but none of the popular Lisps have thrown them all away yet,
+primarily because the influencers in the Lisp community are used to the old ways
+of doing things.
 
 ** A Critical Look at the Family
 
@@ -62,10 +74,11 @@ square brackets].
 - Imperative vs. Functional Programming
       - Common Lisp code is highly imperative [bad!]
       - Scheme code is a mixture of both styles [mediocre!]
-      - Clojure code is highly functional [good!]
+      - Clojure code is mostly functional [good!]
 - Dynamic vs. Lexical Variable Binding
       - Dynamic in early Lisps and many of today's Lisps [bad!]
       - Lexical in Scheme, Common Lisp and Clojure [good!]
+      - Dynamic by default but optionally lexical in Emacs-Lisp [weird!]
 - Types determined at Run Time vs. Compile Time
       - In most Lisps compilers (and human readers) can't infer datatypes [bad!]
       - A few Lisps, e.g. Typed Racket, allow type inference by inspection [good!]
@@ -92,16 +105,17 @@ It invented many of the best features of modern Lisps and has spawned an importa
 - Much complexity was dropped - Scheme was refreshingly elegant
 - But many bad traditional compromises were retained
 
-The original Scheme specification was the /shortest/ ISO specification of any
-computer language at the time it was adopted, including its radical inclusion of
-an appendix with a complete denotational semantics of the language.
+The original Scheme specification was the /shortest/ specification of any
+general-purpose computer language at the time it was adopted, including its
+radical innovation of an appendix with a complete denotational semantics of the
+language.
 
 Scheme has gone through six revised standards, attempting to add on the
 practical features to enable efficient general-purpose programming. In the
 process, the language has grown much larger. And none of the fundamental
 compromises have been fixed, as that would break existing code.
 
-The Latest Scheme Standard, R7RS still has 
+The Latest Scheme Standard, R7RS still has
 - Non-Monotonically Mutable Data Structures
 - Poor data abstraction
       - Sequences and Streams are a clumsy extension
@@ -134,6 +148,18 @@ Racket have added
 Racket is an efficient, practical and feature-rich programming language. It also
 has a lot of complex and seemingly redundant features. It lacks the coherence
 and elegance of Scheme.
+
+Racket Issues
+- Any binding can be modified
+- Inflexible struct form (all fields mutable or all fields immutable)
+- Contract system is very complex!
+
+**** Typed/Racket Alternative
+
+The Racket System underlying the Racket Language provides alternative languages.
+
+The [[https://docs.racket-lang.org/ts-guide][Typed Racket]] language adds modern manifest types to a language otherwise
+similar to regular dynamically typed Racket.
 
 *** Common Lisp
 

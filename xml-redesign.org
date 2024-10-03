@@ -1,7 +1,31 @@
-* XML Improvement Notes
+* XML and HTML Improvement Notes
+
+[[https://en.wikipedia.org/wiki/XML][XML]], the eXtensible Markup Language and its famous variant [[https://en.wikipedia.org/wiki/HTML][HTML]] are widely used
+yet they fall short of what would be possible with a refresh of their designs.
+
+XML is a metalanguage which allows users to define domain-specific variants.
+
+XML
+- Used for Microsoft Office document storage.
+- Used by [[https://en.wikipedia.org/wiki/LibreOffice][LibreOffice]] and other [[https://en.wikipedia.org/wiki/OpenDocument][OpenDocument]] tools.
+- Was once very popular for web services and configuration files.
+      - Now largely avoided for this purpose.
+
+HTML, XHTML, HTML5 for Web Pages
+- HTML was originally a somewhat nonstandard variant of XML
+- XHTML format was a proper XML language
+      - XML tools could help write, verify and process XHTML content.
+- HTML5 has replaced XHTML with another nonstandard variant of XML
+      - HTML5 is a suite of technologies going well beyond HTML.
+      - All of these technologies lack standards.
+      - They are simply defined by what popular browsers do.
+
+It is possible to
+- Make XML both simpler and better.
+- Make HTML a properly defined, standard XML language.
 
 **  Namespace URIs --> URLs of modular specs
-  
+
 ** Tag Properties by Namespace & Class
 
 A namespace qualifying a Tag would extend over the attributes unless those
@@ -16,10 +40,10 @@ Classes and Attributes would use something like CSS Selector Notation:
 =<span#id[x=10].special[x=foo]>=
 - The first =x= is associated with the tag =span=.
 - The second =x= is associated with the class =special=.
-   
+
    Attributes would be associated with the tag, but usually would be
    associated with a class name.
- 
+
 ** Elements are /always/ closed
-  
-** Character entities are replaced by 
+
+** Character entities are replaced by
