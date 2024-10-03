@@ -1,0 +1,166 @@
+* Files vs. Database Rant
+
+** TL;dr
+
+When a computer is turned off, all data in its electronic memory is lost. Only
+data which has been written to persistent storage, e.g. flash memory or hard
+disk drives is retained.
+
+All modern operating systems have adopted the [[https://en.wikipedia.org/wiki/Unix_filesystem][dumbed-down persistent filesystem
+design]] used by the [[https://en.wikipedia.org/wiki/Unix][Unix]] operating system because of the limitations of the
+[[https://en.wikipedia.org/wiki/PDP-11][PDP-11 minicomputers]] in the early 1070s.
+
+These early minicomputer systems were much less powerful than the "mainframe"
+computers of that day but they were much cheaper, so the more primitive
+filesystem was tolerated. When minicomputers were replaced by microcomputers
+this dumbed-down filesystem was retained. Now that our popular and even less
+expensive computers are more than a million times more powerful, we still use
+the dumbed-down Unix filesystem design.
+
+The dumped-down filesystems built in to all of today's computers as the only
+form of persistent storage is awkward to use and easily corrupted.
+
+A much better alternative to filesystems was created by the UC Berkeley POSTGRES
+project in 1986. Over the years since then, POSTGRES has evolved into
+[[https://www.postgresql.org][PostgreSQL]], an extraordinarily powerful and general Object-Relational Database
+System.
+
+Our modern computer systems would be vastly more convenient and reliable if
+software developers invested a fraction of the effort of using Unix-style
+filesystems into using PostgreSQL instead.
+
+PostgreSQL, like BSD and Gnu/Linux is /Open-Source Software/ and runs on all
+popular computer systems. There would be no financial cost in using it. The
+barriers to using are lack of awareness and developer attention.
+
+** PostgreSQL and Alternative RDBMSs
+
+Most [[https://en.wikipedia.org/wiki/Database#Database_management_system][Database Management Systems]] today are designed for
+- very limited kinds of data
+      - originally just Financial Datatypes
+            - Numbers, including currency types
+            - Dates and Time
+            - Fixed-length strings
+- centralized organizational data centers
+      - with expert highly-trained staff, including
+            - [[https://en.wikipedia.org/wiki/System_administrator][System Administrators]]
+            - [[https://en.wikipedia.org/wiki/Database_administrator][Database Administrators]]
+
+PostgreSQL is unique in being
+- Highly extensible
+      - New datatypes are easy to add
+      - Many datatypes unavailable to other RDBMSs are
+- Extremely efficient
+- Increasingly general-purpose
+- Free /Open Source Software/
+- Easy to install on small or large modern computer systems
+
+**** Alternatives to PostgreSQL
+
+[[https://en.wikipedia.org/wiki/Relational_database][Relational Database Management Systems]] (RDBMSs) using the [[https://en.wikipedia.org/wiki/SQL][Structured Query
+Language]] standard (SQL) are the dominant modern [[https://en.wikipedia.org/wiki/Database#Database_management_system][Database Management Systems]]
+although a few other kinds of Database Management Systems are used in some
+specialized application domains.
+
+[[https://en.wikipedia.org/wiki/Comparison_of_relational_database_management_systems][Comparison of relational database management systems]]
+
+**** [[https://en.wikipedia.org/wiki/MySQL][MySQL]] and [[https://en.wikipedia.org/wiki/MariaDB][MariaDB]]
+
+[[https://en.wikipedia.org/wiki/MySQL][MySQL]] was created by [[https://en.wikipedia.org/wiki/Michael_Widenius][Michael Widenius]] in 1995, just in time to serve the need
+for a simple database server for early Websites. Many such websites were based
+on the [[https://en.wikipedia.org/wiki/LAMP_(software_bundle)][LAMP]] (Linux, Apache, MySQL, Perl/PHP/Python) Open Source Software Bundle.
+
+Although the early MySQL was much more primitive than the Postgres95
+alternative, most developers unfamiliar with how to take advantage of the
+superior features of Postgres. MySQL became wildly popular and it was also
+improved by its developers.
+
+MySQL was purchased by Sun Microsystems which was acquired in 2009 after by
+[[https://en.wikipedia.org/wiki/Oracle_Corporation][Oracle Corporation]] whose flagship product, the [[https://en.wikipedia.org/wiki/Oracle_Database][Oracle Database]] is a very
+powerful, expensive, proprietary and not very extensible or general-purpose
+"Enterprise Database".
+
+A few years after Oracle acquired MySQL, the MySQL community of developers found
+that Oracle was not meeting their needs for the evolution of MySQL. Shortly
+after the Oracle Acquisition of Sun and MySQL, some of the original developers
+of MySQL, including Michael Widenius, created MariaDB as a fork of MySQL.
+MariaDB has now advanced significantly beyond the capabilities of MySQL. MariaDB
+has largly replaced MySQL in the BSD, Gnu/Linux and sophisticated Open Source
+community. In 2024 Oracle sold MySQL to the K1 private equity group.
+
+*Fun fact*: MySQL is named after Michael Widenius's first daughter My and MariaDB
+is named after his younger daughter!
+
+*Bottom Line*: MariaDB has greatly expanded in capabilities and is suitable for many
+specialized tasks. It does not have the generality of PostgreSQL and would not
+therefore be suitable as the basis for largely replacing a Unix-like filesystem.
+
+
+*** [[https://en.wikipedia.org/wiki/SQLite][SQLite]]
+
+SQLite is used widely across operating systems as well as web servers and other
+applications. It is invisible to users and requires no special installation or
+administration.
+
+SQLite is the easiest database system to deploy because it doesn't require a
+separate server process. It's just a software library which can be linked into
+any application which wants to use it. All SQLite data resides in a single
+ordinary file which can be easily moved among systems.
+
+SQLite is lacks most of the features of more general RDBMSs
+- a few built-in datatypes
+- no extensibility
+- very little integrity checking
+It cannot be used
+- concurrently by multiple applications
+- or over a network
+
+SQLite is a dumbed-down RDBMS just as the Unix-model filesystem is a dumbed down
+filesystem. It only exists because modern operating systems lack a built-in,
+standard full-featured SQL RDBMS.
+
+** How the /Unix/ file and filesystem design became universal
+
+In the early 1970s, the /Unix Operating System/ was invented for computers with
+- only 56 K bytes of volatile main memory
+- only a few megabytes of persistent disk storage
+
+In order to make this work, Unix made drastic simplifications to traditional
+operating system storage systems to fit on these limited minicomputer systems.
+
+The minicomputer era was followed by the much bigger microcomputer era.
+Microcomputers were based on inexpensive single-chip microprocessors. Initially
+microcomputers were less powerful than the earlier minicomputers but they were
+much less expensive. Microcomputer systems quickly became more powerful and were
+soon equiped with Hard disk drives which rapidly became cheaper. Microcomputers
+were suddenly as powerful as minicomputers running Unix! Microcomputer
+filesystems quickly followed the Unix Design, sometimes fully (BSD, Sun,
+Gnu/Linux) and sometimes with some changes (Microsoft).
+
+As microcomputer systems came to dominate computing, more sophisticated
+filesystem concepts were largely forgotten.
+
+** Limitations of the Unix Filesystem Design
+
+All persistent storage consisted of
+- files :: unstructured sequences of bytes
+stored in
+- filesystem Volumes :: fixed partitions on storage devices
+      - still called "devices", despite now usually being partitions
+named by
+- directories :: special files consisting of links
+      - links can only reference files on the same partition
+      - error "Cross-Device Link"
+
+- All file operations are undoable, including deletes.
+- Write operations are not checked for validity.
+
+This creates endless problems including
+- Easy Corruption
+      - Application file output mistakes or failures
+      - Multiple applications accessing a file simultaneously
+- No general version or transaction support
+      - No general way to upgrade files with old version formats
+      - No transaction support - if one operation fails, the file is corrupt
+- No backup or undo capability
+- No safe sharing across a network

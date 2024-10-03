@@ -1,0 +1,315 @@
+* Database Rant
+
+The best modern [[https://en.wikipedia.org/wiki/Relational_database][Relational Database Systems]] (RDBMSs) are
+- Extremely Powerful
+- Theoretically ideal for managing all data and information
+
+The best RDBMSs also
+- Are extremely Complicated
+- Require specialized knowledge to install and maintain
+      - System administration skills + Database administration skills
+- Require specialized knowledge to use
+      - Database administration skills + SQL design and programming skills
+
+All modern database systems are
+- Clumsy compared to the theory they're based on
+- Lacking in functionality compared to the best computer languages
+
+One database system, [[https://www.postgresql.org][PostgreSQL]] is
+- much better than most others for most purposes
+- still way more complex than it should be!
+
+** RDBMSs are Fundamentally Fairly Simple!
+
+An RDBMS has a small number of fundamental concepts
+
+An *RDBMS* is
+- a collection of
+      - /relations/
+      - /tables/
+      - /relational operators/
+      - /datatypes/
+      - /functions/
+- a *Query Language* which
+      - allows expressing what we want from the database
+- a *Query Engine* which does the work
+      - processing /relational operators/
+      - calling /functions/
+      - storing values (data) in a /persistent storage system/
+      - retrieving values (data) from a /persistent storage system/
+
+Let's define two tables in PostgreSQL using SQL:
+
+#+begin_src SQL
+  CREATE TABLE weather (
+    city            text,
+    temp_lo         int,           -- low temperature
+    temp_hi         int,           -- high temperature
+    prcp            real,          -- precipitation
+    date            date
+  );
+  CREATE TABLE cities (
+    name            text,
+    location        point
+  );
+#+end_src
+
+A *relation* is a set of /records/, also called /tuples/ or /rows/
+- /table/ :: a stored /relation/ with a /name/
+- /record/ :: a fixed collection of /fields/
+      - Each /field/ can have a name unique within its /record/
+      - /fields/ can also be referenced by their /ordinal number/
+- /field/ :: a /value/
+
+Do you see some of these things in the example?
+
+Let's add some records (rows) to our tables:
+
+#+begin_src sql
+  INSERT INTO cities VALUES ('San Francisco', '(-194.0, 53.0)');
+
+  INSERT INTO weather (city, temp_lo, temp_hi, prcp, date)
+    VALUES ('San Francisco', 46, 50, 0.25, '1994-11-27'),
+           ('San Francisco', 43, 57, 0.0, '1994-11-29');
+  INSERT INTO weather (city, temp_lo, temp_hi, date)
+    VALUES ('Hayward', 37, 54, '1994-11-29');
+#+end_src
+
+Note that 'Hayward' isn't getting a value for its precipitation!
+
+And here's a query
+
+#+begin_src sql
+  SELECT city, prcp, date from weather;
+#+end_src
+
+Which should produce
+
+| city          | prcp |       date |
+|---------------+------+------------|
+| San Francisco | 0.25 | 1994-11-27 |
+| San Francisco |    0 | 1994-11-29 |
+| Hayward       |      | 1994-11-29 |
+
+And here's a fancier query:
+
+#+begin_src sql
+  SELECT city, (temp_hi+temp_lo)/2 AS temp_avg, date FROM weather;
+#+end_src
+
+Which should produce
+
+| city          | temp_avg |       date |
+|---------------+----------+------------|
+| San Francisco |       48 | 1994-11-27 |
+| San Francisco |       50 | 1994-11-29 |
+| Hayward       |       45 | 1994-11-29 |
+
+A *value* can be
+- an /atomic value/
+      - i.e. not a /record/ or /set/ or /collection of sets/
+      - e.g. a /number/, /date/, /string/ or other /object/
+- a nested /record/
+- an /array/ of /values/
+      - basically an /ordered set/
+      - referenced by consecutive integer values
+      - can also be multi-dimensional!
+
+/Values/ have *types*
+- Atomic values are of specific /types/
+      - /int/ (integer), /text/ (string), /date/, etc.
+- The /type/ of a /record/ is
+      - the ordered /types/ of its /fields/
+      - along with any names for those fields
+- All of the /types/ of the /record/S in a /relation/ must be identical
+      - therefore the names and types of the /fields/ of the /records/ in a
+        /relation/ align in /columns/
+
+Looking at the output in the examples, you can see that all of the /records/ in
+each /tables/ and in the output /relations/ of the queries are of the same
+/type/.
+
+Do you see why /records/ are also called /rows/? And how fields form /columns/
+when a /relation/ is displayed?
+
+The [[https://en.wikipedia.org/wiki/Relational_algebra][relational operators]] are based on five set operations
+- [[https://en.wikipedia.org/wiki/Selection_(relational_algebra)][Selection]]
+- [[https://en.wikipedia.org/wiki/Projection_(relational_algebra)][Projection]]
+- [[https://en.wikipedia.org/wiki/Cartesian_product][Cartesian product]] aka joins
+- [[https://en.wikipedia.org/wiki/Union_(set_theory)][Set Union]]
+- [[https://en.wikipedia.org/wiki/Complement_(set_theory)][Set Difference (Complement)]]
+
+Here's one more example query showing a join:
+
+#+begin_src sql
+  SELECT city, temp_lo, temp_hi, prcp, date, location
+    FROM weather LEFT OUTER JOIN cities ON weather.city = cities.name;
+#+end_src
+
+Which should produce
+
+| city          | temp_lo | temp_hi | prcp |       date | location  |
+|---------------+---------+---------+------+------------+-----------|
+| Hayward       |      37 |      54 |      | 1994-11-29 |           |
+| San Francisco |      46 |      50 | 0.25 | 1994-11-27 | (-194,53) |
+| San Francisco |      43 |      57 |    0 | 1994-11-29 | (-194,53) |
+
+
+Note the missing data for Hayward's ~prcp~ and ~location~. The involves the
+infamous concept of ~NULL~ in /SQL/.
+- [[https://www.infoq.com/presentations/Null-References-The-Billion-Dollar-Mistake-Tony-Hoare][Null References: The Billion Dollar Mistake]]
+
+/Objects/ are /values/ of specific /types/ which can be
+- passed to a function
+- returned as a result from a function
+- stored in a /field/ of a /record/ or as an /element/ of an /array/
+The RDBMS doesn't know much about an /object/ except
+- It's type
+
+A /function/ is a procedure which
+- takes 1 or more /values/ as arguments
+- returns 1 or more /values/ as /results/
+- can also return a /relation/
+- The arguments and return values of a /function/ have fixed /types/
+- The type of a function is
+      - a function of
+            - its sequence of argument types
+            - its sequence of result types
+
+The RDBMS doesn't need to know much about /functions/ except
+- How to call them
+      - Passing them /values/ as /input arguments/
+      - Receiving their /result values/
+
+Traditional RDBMSs
+- Have a fixed set of built-in /Object Types/
+- along with a fixed set of built-in /associated functions/
+      - only the /associated functions/ know how the type works
+
+Extensible object-relational RDBMSs like PostgreSQL
+- Allow database designers to
+      - Define /new object types/
+      - by defining their /associated functions/
+- /object types/ and their /associated functions/ are stored in /system tables/
+- Any type of data which can be imagined can be added!
+      - Geographic Data :: locations, routes, etc.
+      - 3D Models :: Shapes and Functions for 3D Printing, etc.
+      - Structured Text :: XML, JSON, etc.
+
+In PostgreSQL, [[https://www.postgresql.org/docs/current/datatype.html][all object types]] are simply entries in a table. PostgreSQL has
+many types, e.g. [[https://www.postgresql.org/docs/current/datatype-geometric.html][geometric types]] such as ~point~ used in our examples above,
+which most databases do not provide or have a way to add. An impressive example
+of this is [[https://postgis.net][PostGIS]] which adds geospatial datatypes.
+
+** SQL Makes Things Complicated
+
+The biggest source of complexity of modern RDBMSs is
+- the [[https://en.wikipedia.org/wiki/SQL][Structured Query Language]] standard, SQL
+
+The original idea of Relational Databases was based on a small number of simple
+set operations which could be composed (combined, nested, etc.) to get any
+desired /result relation/ given one or more /input relations/. /Query languages/
+directly based on this /Relational Algebra/ are very simple, but somewhat
+abstract. And since the original /Relational Algebra/ didn't provide a way to
+define new /functions/, composition could build up very complex and unwieldy
+queries.
+
+In the process of turning RDBMSs into a product, software engineers at IBM were
+asked to create a query language which would be less abstract and which would
+use English words rather than symbols so it would be easier for
+(English-speaking) non-technical users to understand.
+
+This is analogous the design of the COBOL programming language in which symbolic
+language such as
+- new_count = count + new_item_count
+instead became
+- ADD new_item_count TO count PRODUCING new_count
+which got really hard to follow as soon as expressions got more complex.
+
+Experience has shown that these kinds of goals are a bad idea
+- making computer languages closer to English
+      - English is bulky, ambiguous and not everyone knows it well.
+- making computer languages easier for inexperienced and non-technical people to
+  understand
+      - Inexperienced and non-technical people fail to understand the complex
+        "friendly" languages and can make horrible mistakes as a result.
+- providing built-in features for common situations
+      - This leads to a never-ending accumulation of features which become
+        impossible to remember and often interact in confusing ways.
+
+SQL was designed by a committee process at IBM and has continued to be evolved
+by a standards committee dominated by IBM and other major enterprise RDBMS
+vendors. The SQL standard has grown to have more than 500 built-in keywords
+requiring tens of thousands of pages of documentation to explain what they all
+mean!
+
+How an we make this better?
+
+** [[https://en.wikipedia.org/wiki/NoSQL][NoSQL]] Databases are Worse!
+
+There have been a number of attempts to get rid of a general relational query
+language. And to get rid of the need to specify types. May ideas have been tried.
+
+An example NoSQL alternative is to use a flexible data representation like [[https://en.wikipedia.org/wiki/JSON][JSON]]
+for both the data and for templates which express the query. This can work very
+well for small, simple casual databases. Unfortunately it doesn't scale well
+over time as requirements are added, the database gets larger and more complex
+and data validation becomes essential.
+
+A few years ago many companies were touting their NoSQL databases as superior to
+RDBMSs with SQL. Many companies attempted to use these products. Many of these
+attempts failed and have given NoSQL databases a bad reputation.
+
+** Use a clean abstract notation
+
+There are a number of alternatives which go in the opposite direction to both
+standard SQL and NoSQL by using a better mathematical notation.
+
+Two approaches which have had some success are
+ - Datalog-Oriented Query Languages
+       - Example: [[https://www.datomic.com][Datomic]]
+       - Datalog allows the database to support simple logical deductions!
+ - Set-Oriented Query Languages
+       - Example: [[https://www.edgedb.com/blog/we-can-do-better-than-sql][EdgeDb]]
+       - EdgeDb treats all values as sets, considerably simplifying queries.
+             - In particular, ~NULL~ simply becomes the empty set.
+
+** Use SQL Elegantly
+
+Modern SQL allows users to define /Views/, /Functions/ and /Procedures/ to
+simplify and clarify otherwise complex and bulky expressions.
+
+PostreSQL makes it straightforward to define /new datatypes/ which directly
+address the needs of specific domains.
+
+These are the approaches which good programmers have used for decades to
+simplify and clarify computer programs written in high-level languages.
+
+The same approach can work for SQL and it requires a significant commitment to
+maintainability. If the first solution to a problem is hard to follow, it's
+necessary to spend more time and possibly consult with some experts to produce
+an improved solution which is easy to understand and will be easy to evolve as
+requirements change.
+
+While using RDBMSs and SQL effectively require training and experience, they
+significantly reduce the complexity and improve the quality and capabilities of
+application programs. In particular, complex and unreliable code (including
+scripts) managing data in complex file formats goes away. The effort and time
+learning how to leverage RDBMSs and SQL should simply be considered a normal
+part of the skillset of all computer programmers and power users.
+
+** Resources
+
+- [[https://en.wikipedia.org/wiki/Relational_model]]
+- [[https://en.wikipedia.org/wiki/Datalog]]
+- [[https://mathesar.org][Mathesar]] :: spreadsheet interface for PostgreSQL
+- [[https://www.edgedb.com/blog/we-can-do-better-than-sql][We Can Do Better Than SQL]]
+      - [[https://www.edgedb.com][edgedb.com]]
+      - [[https://github.com/edgedb/edgedb][edgedb github]] - Apache license
+- [[https://www.infoq.com/presentations/Null-References-The-Billion-Dollar-Mistake-Tony-Hoare][Null References: The Billion Dollar Mistake]]
+- [[https://www.postgresql.org][PostgreSQL]]
+      - [[https://www.postgresql.org/docs/current][PostgreSQL Documentation]]
+      - [[https://www.postgresql.org/docs/current/tutorial.html][PostgreSQL Tutorial]]
+      - https://www.postgresqltutorial.com/
+      - [[https://www.postgis.net/workshops/postgis-intro/geometries.html][Introduction to PostGIS]]
+      - [[https://medium.com/symphonyis/postgis-a-real-world-example-f99eaedf146][PostGIS — A Real-World Example]]
