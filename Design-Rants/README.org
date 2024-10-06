@@ -20,15 +20,7 @@ The rants in this collection are an intended to release some of the frustration
 of these challenges. The intention is that they will be followed up with
 strategic action.
 
-Alas, this doesn't seem to work:
-#+begin_src ex
-.,$g/^- .* Rant/!tr 'A-Z ' 'a-z-' | sed 's/^--\(.*-rant\)/[[[[file:\1.org][\1.org]][\1]]/'
-#+end_src
-
-So we bring out the big gun:
-#+begin_src awk
-.,$!awk '!/^- [^[].* Rant/{print}/^- [^[].* Rant/{sub(/^- /, "");printf("- [[file:\%s.org][\%s]]\n", tolower(gensub(/ /,"-","g",$0)), $0);}'
-#+end_src
+: .,$!awk '!/^- [^[].* Rant/{print}/^- [^[].* Rant/{sub(/^- /, "");printf("- [[file:\%s.org][\%s]]\n", tolower(gensub(/ /,"-","g",$0)), $0);}'
 
 Computer Languages
 - [[file:files-vs-database-rant.org][Files vs Database Rant]]
