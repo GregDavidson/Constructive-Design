@@ -22,12 +22,23 @@ strategic action.
 
 : .,$!awk '!/^- [^[].* Rant/{print}/^- [^[].* Rant/{sub(/^- /, "");printf("- [[file:\%s.org][\%s]]\n", tolower(gensub(/ /,"-","g",$0)), $0);}'
 
-Computer Languages
+** Computer Systems & Tools Rants
+
 - [[file:files-vs-database-rant.org][Files vs Database Rant]]
 - [[file:database-rant.org][Database Rant]]
 - Monotonicity Rant
-- Scheme Rant
-- Racket Rant
+- PostgreSQL Rant
 - Spreadsheet Rant
 - Word Processor Rant
+
+** Computer Languages Rants
+
+- Lisp Rant
+- Scheme Rant
+- Racket Rant
+
+** Computer User-Interface Rants
+
+- GUI Rant
 - Shell Rant
+- Augmentation of Intellect Rant
