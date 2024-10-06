@@ -33,10 +33,9 @@ So we bring out the big gun:
 Computer Languages
 - [[file:files-vs-database-rant.org][Files vs Database Rant]]
 - [[file:database-rant.org][Database Rant]]
-- [[file:monotonicity-rant.org][Monotonicity Rant]]
-- [[file:lisp-rant.org][Lisp Rant]]
-- [[file:scheme-rant.org][Scheme Rant]]
-- [[file:racket-rant.org][Racket Rant]]
+- Monotonicity Rant
+- Scheme Rant
+- Racket Rant
 - Spreadsheet Rant
 - Word Processor Rant
 - Shell Rant
