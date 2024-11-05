@@ -1,0 +1,65 @@
+* Constructive Criticism of Current Systems
+
+We live in a world filled with flawed design. The consequences of flawed design
+is that the quality (and length) of every one of our lives is significantly
+diminished.
+
+A design can be flawed because
+- It poorly implements its design concept
+      - Unreliable
+      - Hard to use
+      - Exhibiting poor performance
+      - Burdened with unnecessary complexity
+      - Difficult to adapt, evolve or build on
+- It only implements part of its design concept
+      - Full implementation was postponed until later
+      - "Later" never came
+      - Awkward workarounds replaced original vision.
+- It's design concept is flawed
+- It's design concept is unnecessarily limited
+
+All flawed designs offer an opportunity for good creative designers to correct
+or supply what's missing. Unfortunately, there is usually
+- great difficulty in getting partnership in these enterprises
+- significant friction in the acceptance of these solutions
+In other words, poor design and missing design is usually not an accident!
+
+None of these obstacles should be used as an excuse to not move ahead. They just
+mean that these opportunities must be approached with skill and resources. Skill
+and resources which good creative designers might not have. This can be
+frustrating!
+
+The Issues in this collection are an intended to identify design flaws which can
+potentially be followed up with corrective action.
+
+: .,$!awk '!/^- [^[].* Issue/{print}/^- [^[].* Issue/{sub(/^- /, "");printf("- [[file:\%s.org][\%s]]\n", tolower(gensub(/ /,"-","g",$0)), $0);}'
+
+Although these systems are all intended 
+
+** Issues With Computer Systems & Tools
+
+- [[file: -issue.org][[[file:database-issue.org][Database Issue]]
+- [[file:postgresql-issue.org][PostgreSQL Issue
+- [[file:spreadsheet-issue.org][Spreadsheet Issue
+- [[file:world-processor-issue.org][Word Processor Issue
+- [file:markup-languages-issue.org][[[file:orgmode-and-alternatives-issue.org][orgmode-and-markup-languages-issue]]
+- [[file: -issue.org][[[file:emacs-issue.org][emacs-and-text-editing-issue]]
+
+** Computer Languages Issues
+
+- [[file: -issue.org][Lisp Issue
+- [[file: -issue.org][Scheme Issue
+- [[file: -issue.org][Racket Issue
+
+** Computer User-Interface Issues
+
+- [[file: -issue.org][GUI Issue
+- [[file: -issue.org][Shell Issue
+
+** Fundamental Criticism
+
+These issues underlie the more visible flaws of the above "issues".
+
+- [[file: -issue.org][[[file:files-vs-database-issue.org][Files vs Database Issue]]
+- [[file: -issue.org][[[file:monotonicity-issue.org][Monotonicity Issue]]
+- [[file: -issue.org][Augmentation of Intellect Issue
