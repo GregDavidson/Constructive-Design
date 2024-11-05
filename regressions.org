@@ -1,0 +1,200 @@
+* A Survey of Low Hanging Fruit in Technology
+
+We can make today's technologies better by making use of innovation from the
+past and by making better use of marginalized technologies which exist today.
+
+This is a survey of
+- Regressions :: important features which have been lost from today's systems
+- Lost Arts :: powerful developments not in any current systems
+- Neglected Gold :: excellent systems which are poorly known and underutilized
+
+This survey is currently weighted towards computer software technology, with
+other technologies pushed to the bottom.
+
+** Ancient software technologies better than current
+
+- 1963 SketchPad by Ivan Sutherland
+- 1968 Augment by Doug Englebart
+- late 1960s designs by Ted Nelson
+      - Inspired by Englebart's Augment
+      - Hypertext, Hypermedia, Fantics
+- [[https://www.cs.uni.edu/~wallingf/teaching/162/readings/hearsay-ii.pdf][1972 - Hearsay II Speech Understanding System]]
+- 1973 ThingLab by Alan Bornings
+      - a generalization of SketchPad
+      - implemented in Smalltalk 1978
+  
+** Display Technology
+
+*** X11
+
+- Font Servers
+- Color Servers
+- [[https://en.wikipedia.org/wiki/X_Toolkit_Intrinsics][Xt X Toolkit Intrinsics]]
+      - XResource-based Architecture
+      - Extreme User Configurability
+      - Resource Browser
+      - Resource Database
+      - Class, Object, Path specifications
+- Motif
+      - Constraint-based Layout
+      - Multi-Text
+
+*** Display PostScript
+
+- Superb Quality of rendered text and graphics
+- Extreme Customization
+      - Pie Menus
+
+** Advanced Operating Systems
+
+- Radical Operating Systems
+      - [[https://en.wikipedia.org/wiki/Plan_9_from_Bell_Labs][Plan 9]]
+      - [[https://en.wikipedia.org/wiki/Inferno_(operating_system)][Inferno]]
+      - [[https://en.wikipedia.org/wiki/TRIX_(operating_system)][MIT Trix]]
+- [[https://en.wikipedia.org/wiki/Microkernel][Microkernel Operating Systems]]
+      - [[https://en.wikipedia.org/wiki/QNX][QNX]]
+      - [[https://en.wikipedia.org/wiki/Minix][Minix]]
+      - [[https://en.wikipedia.org/wiki/GNU_Hurd][GNU/Hurd]]
+      - [[https://en.wikipedia.org/wiki/L4_microkernel_family][L4 Microkernels]]
+
+** Computer Security
+
+- [[http://plash.beasts.org/contents.html][Plash: Practical Least Privilege]]
+      - [[http://www.plash.beasts.org/environment.html][Plash Sandbox Environment]]
+- L4 Microkernels
+- Qubes
+- Tails
+
+** Safe Lightweight Processes
+- All resources provably bounded
+- No need for heavyweight process overhead
+- No overhead on sharing
+
+*** Concurrent Pascal
+
+** Graphical Environments
+
+Seamless interoperability between scripting and gesturing
+- LOOPS
+- Smaltalk
+
+Menu Button (or single touch) allows
+- Access to object's Class
+- Customization of gestures and menu
+
+- Croquet, Cobalt, etc.
+
+- [[http://www.tcl.tk][Tcl/Tk/Tile]]
+
+** AI Systems
+
+- Mycin
+      - EMycin
+      - Teresias
+- Roger Shank's System
+
+Hybrid AI
+- Watson Jeopardy System
+- 
+
+** Advanced Programming Languages
+
+*** Awesome Languages of the Past
+
+**** Lisps and Lisp Tech
+
+- [[https://en.wikipedia.org/wiki/Interlisp][Interlisp]]
+      - Original Loops
+      - Note UCSD project to port to B6700!
+
+- [[https://en.wikipedia.org/wiki/Flavors_(programming_language)][Flavors]]
+      - Franz Lisp + Flavors + Prolog + C++ in the 1980s
+
+*** Underutilized Languages
+
+**** [[https://en.wikipedia.org/wiki/Smalltalk][Smalltalk]]
+
+***** Stalled Futures for Smalltalk
+
+- [[https://en.wikipedia.org/wiki/Strongtalk][Strongtalk]]
+- [[https://en.wikipedia.org/wiki/Self_(programming_language)][Self]]
+
+***** Current Smalltalk Systems
+
+- [[https://squeak.org][Squeak]]
+- [[https://pharo.org][Pharo]]
+
+**** Linear Languages
+
+- Linear Lisps
+- [[https://wiki.clean.cs.ru.nl/Clean][Clean]]
+
+**** Multidimensional-Array-Oriented Functional Languages
+ 
+- APL, J, K
+- [[https://mlochbaum.github.io/BQN][BQN]]
+
+**** Logic and Constraint-Logic Languages
+
+**** Relational Languages
+ 
+- Datalog
+- System D
+- PostgreSQL
+
+**** Shells
+
+- Scsh
+
+- rc - the Plan 9 Shell
+      - [[http://doc.cat-v.org/plan_9/4th_edition/papers/rc][RC at Cat-V]]
+- [[https://wryun.github.io/es-shell/][es Functional Shell]]
+  
+**** Editors
+
+- Sam
+      - [[https://en.wikipedia.org/wiki/Sam_(text_editor)][Sam at Wikipedia]]
+      - [[http://sam.cat-v.org][Sam at Cat-V]]
+      - [[https://github.com/martanne/vis][Vis: like Sam but with Vi bindings]]
+
+** Regressions in Hardware Technology
+
+*** Analog and Digital/Analog Hybrid Technology
+*** Non-Volatile RAM
+
+- SRAM :: Static Random Access Memory
+      - Volatile: goes away when power is removed
+      - Expensive
+      - Used for CPU Registers and Cache
+- DRAM :: Dynamic Random Access Memory
+      - Volatile: goes away when power is removed
+      - Used for Main Memory
+- HDDs :: Spinning Magnetic Disk Drives
+      - around 1 million times slower than DRAM
+      - mechanical, will eventually fail
+- Flash Memory
+      - around 1 thousand times slower than DRAM
+      - around 100 times more expensive than HDD storage
+      - degrades with each write, will eventually fail
+      - Used for
+            - Solid State Drives (SSDs)
+                  - gradually replacing HDDs
+            - USB Thumb drives and Memory Cards
+
+Non-Volatile storage is essential for
+- Essential for reliable database storage
+Faster Non-Volatile Storage
+- Would enable faster databases!
+ 
+Technologies for faster and more reliable Non-Volatile storage
+- [[https://en.wikipedia.org/wiki/3D_XPoint#Production][3D XPoint, Intel Optane]]
+      - Unclear if subject to wear
+      - Not quite as fast as DRAM
+      - Intel is sole source
+            - they control the patents and production expertise
+      - Intel is not making it widely available
+            - they may be allowing it to die
+https://en.wikipedia.org/wiki/Non-volatile_random-access_memory
+https://en.wikipedia.org/wiki/Ferroelectric_RAM
+https://en.wikipedia.org/wiki/Magnetoresistive_RAM
+https://en.wikipedia.org/wiki/Phase-change_memory

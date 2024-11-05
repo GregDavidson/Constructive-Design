@@ -1,0 +1,77 @@
+* Emacs Rant
+
+** What's an Emacs?
+
+[[https://en.wikipedia.org/wiki/Emacs][Emacs]] began at the seminal [[https://en.wikipedia.org/wiki/MIT_Computer_Science_and_Artificial_Intelligence_Laboratory#Project_MAC][MIT Project MAC]] as a simple (but extensible)
+collection of macros to make editing text files easier.
+
+Emacs inspired many later text editors which were even
+- more powerful
+- more customizable
+- more extensible
+
+Eventually one Emacs rose above the rest
+- [[https://www.gnu.org/software/emacs][GNU/Emacs]]
+primarily because of
+- the thousands powerful extensions for it created by
+- its vibrant, creative user community
+
+Gnu/Emacs became much more than just a tool for editing text
+
+Gnu/Emacs is a
+- Front end for hundreds of powerful applications
+- Personal and Project Manager
+- Information hub for communication
+- Smart assistant for programming in hundreds of computer languages
+- /and much more/
+
+** Text vs. Datbases as the Master Medium
+
+-- Move this to the Files vs Database RANT!!!
+
+One of Alan Perlis' [[https://en.wikipedia.org/wiki/Epigrams_on_Programming][Epigrams]] says that
+- "It is better to have 100 functions operate on one data structure than 10
+  functions on 10 data structures."
+
+Data exists both inside and outside computer programs.
+- Data inside of programs is usually in a very specialized form
+      - Hard to get at except through the custom code of that program
+- Data outside of programs can be in general or specialized formats
+
+There are two general and flexible formats for representing data outside of
+programs
+- Human readable text
+      - Containing expressions in natural and/or artificial languages
+      - Often with additional markups
+- General-Purpose Databases
+      - Usually Relational Databases
+      - Usually supporting the SQL standard
+
+Text is the
+- easiest to set up on any computer system
+- easiest to get started using
+- can gradually support extremely sophisticated
+
+data structures which can store nearly all forms
+of information outside of programs.
+
+Text files turn out to be one of the easiest representations for
+- documents of all kinds
+      - books, articles, calendars, planning documents, etc.
+- representing data and information
+- control scripts for operating systems
+- code in multiple programming languages
+- /and much more!/
+
+Many people place text files at the center of their creative work and use tools
+like ~git~ to share and collaborate with partners.
+
+** Emacs Advantages
+
+Emacs is
+- the most powerful
+extensible, customizable, free/libre text editor 
+
+** Emacs Infelicities
+
+** Missed Opportunities

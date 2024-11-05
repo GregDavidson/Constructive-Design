@@ -1,0 +1,171 @@
+* Issues Inherited From The History Of Computing
+
+The world "computer" originally referred to human beings who solved problems by
+performing calculations. Automatic computers only gained the ability to put
+"human computers" out of business towards the second half of the 20th century.
+
+** The First General-Purpose Electronic Computer?
+
+[[https://en.wikipedia.org/wiki/ENIAC][ENIAC]] (Electronic Numerical Integrator and Computer), the first programmable,
+electronic, general-purpose digital computer, was completed in 1945.
+
+- cost :: $487,000 (equivalent to $6,900,000 in 2023)
+- memory capacity :: 20 10-digit decimal numbers (registers)
+- weight :: 27,215 kg (60,000 pounds)
+- power consumption :: 150 kW
+- processing speed :: any of
+      - 5,000 addition or subtraction operations per second between any 2 registers
+      - 385 multiplication operations per second
+      - 40 division operations per second
+      - 3 division operations per second
+      - some operations could be done in parallel using different registers
+
+But despite being "programmable", ENIAC lacked electronic storage for its programs!
+
+You had to change its wiring to change its program!
+
+The ability (and often necessity) to change the wiring of the early computers
+delayed the understanding of how to design a good and complete set of built-in
+operations. Early computers often had very poorly thought-out "instruction sets"
+because of the early casual adding of new instructions (primitive operations)
+through rewiring.
+
+** The First General-Purpose Stored-Program Electronic Computers
+
+From the Victoria University of Manchester, England emerged
+- [[https://en.wikipedia.org/wiki/Manchester_Baby][Manchester Baby]] 1948 :: the first computer which could store its program in electronic memory.
+      - Considered a clumsy prototype.
+- [[https://en.wikipedia.org/wiki/Manchester_Mark_1][Manchester Mark 1]] 1949 :: the successor to the Manchester Baby.
+      - A better prototype.  Used for almost 2 years as a practical tool.
+- [[https://en.wikipedia.org/wiki/Ferranti_Mark_1][Manchester Farranti Mark 1]] :: the world's first commercially available
+  electronic general-purpose stored program digital computer.
+      - "the tidied up and commercialised version of the Manchester Mark I"
+      - produced by British electrical engineering firm Ferranti Ltd.
+
+** Change the Scale and your Change the Nature
+
+Over the next few decades digital electronic computers went through a rapid
+evolution.  Each new generation had
+- great increases in the generality of operations
+- massive increases in computational speed
+- vast increases in memory capacity
+- extraordinary decreases in cost and bulk
+
+When the scale of something changes, the nature of that thing changes.
+- an elephant is not a scaled-up ant.
+- a car is not a scaled-up bicycle
+- a modern computer /shouldn't be/ a scaled-up ENIAC
+
+But (partially because of how fast things changed) each computer generation
+inherited a number of design features from earlier generations which should
+instead have been discarded.
+
+*** Digital Computers: Before the First Generation
+
+Mechanical computing devices go back thousands of years before ENIAC. But the
+idea of programmable digital devices is more recent.
+
+Before ENIAC we had
+
+- [[https://en.wikipedia.org/wiki/Lambda_calculus][Lambda Calculus]] :: an elegant and complete theory of computation
+      - invented by [[https://en.wikipedia.org/wiki/Alonzo_Church][Alonzo Church]] during the 1930s, published in 1940
+- the electro-mechanical computers designed by [[https://en.wikipedia.org/wiki/Konrad_Zuse][Konrad Zuse]]
+      - the [[https://en.wikipedia.org/wiki/Z1_(computer)][Z1]] (1935) and [[https://en.wikipedia.org/wiki/Z2_(computer)][Z2]] (1945)
+      - Zuse also invented the first high-level computer programming language!
+- the extraordinary work of [[https://en.wikipedia.org/wiki/Alan_Turing][Alan Turing]], a student of Alonzo Churge
+      - invented the [[https://en.wikipedia.org/wiki/Turing_machine][Turing Machine]] (and so much more) in 1936
+      - contributed to the secret /British Collossus computers/ in 1943-1945
+      - designed the ACE (Automatic Computing Engine) in 1945
+
+There were obstacles preventing this early work from going forward:
+- The early electronic computers seemed too limited to follow the Lambda
+  Calculus model.
+- Germany's role in World War II and the subsequent chaos prevented Zuze's work
+  from being known to the world until it was largely obsolete.
+- Britain lost their early lead in electronic computing by keeping much of the
+  technology a military secret and by persecuting Alan Turing for his
+  homosexuality.
+
+*** Digital Computers: The First Generation
+
+Despite being guided by many extraordinary mathematicians, especially including
+[[https://en.wikipedia.org/wiki/John_von_Neumann][John von Neumann,]] the design of the first generation of Programmable
+General-Purpose Electronic Digital Computers was an inelegant, ad hoc hack.
+
+- A small set of unique and often strange operations
+- A few electronic /registers/ which could each hold a single number
+- A modest amount of magnetic core memory which could hold 
+
+These early computers were given
+
+*** 20th Century Hardware Limitations Have Warped Our Perspectives
+
+Common Computing Equipment was severely limited in capacity, especially memory
+capacity, throughout the 20th Century. This greatly affected the design of the
+/C Programming Language/ and the /Unix Operating System/ which have been the
+primary models for computer architectures and operating systems to this day.
+
+Late 20th Century Minicomputers
+- DEC PDP-11 Minicomputer
+      - Primary hardware influencing the development of Unix
+      - Produced from 1970 to 1990
+      - Cost: $20,000 with 4K (4,096) bytes of memory
+            - approximately $140,000 in 2024 dollars
+            - Used [[https://en.wikipedia.org/wiki/Magnetic-core_memory][Magnetic-core memory]]
+                  - Magnetic-Core Memory was more than 100,000 times as costly
+                    as today's semiconductor RAM
+                  - Semiconductor RAM was even more expensive then!
+      - 16-bit words
+      - Maximum addressable memory: 64Ki - 8Ki (57,344) bytes
+            - 8Ki bytes reserved for I/O
+            - Some later PDP-11 models allowed for 18-bit physical memory
+                  - 253,952 bytes total
+                  - only 57,344 addressable at once
+                  - these models were much more expensive!
+      - A large hard drive might have 10 MiB (megabytes)
+      - With [[https://en.wikipedia.org/wiki/Time-sharing][timesharing]], a high-end PDP-11 could support dozens of simultaneous
+        users, depending on what they were doing
+      - No networking!
+- DEC VAX model 780
+      - Successor to DEC PDP-11
+      - Cost: around $1,000,000 1980 dollars
+      - Influenced evolution of Unix and BSD Operating Systems
+            - Virtual Memory (BSD Design)
+            - Networking (BSD Design)
+                  - 3 Mbps Ethernet
+                  - Socket Networking Model
+                  - Original prototype of TCP/IP, the modern Internet Protocol, etc.
+            - BSD = Berkeley Software Distribution
+            - Berkeley = the University of California's Berkeley Campus
+      - 32-bit words
+            - Maximum addressable memory: 64Ki - 8Ki (57,344) bytes
+            - Typically equipped with 2-8 Mi bytes of main memory
+                  - Semiconductor RAM was more than 10,000 times as costly as
+                    today's Semiconductor RAM.
+      - A large hard drive might have 40 MiB (megabytes)
+      - With [[https://en.wikipedia.org/wiki/Time-sharing][timesharing]], a single VAX 70 could support 50 or more simultaneous
+        users, depending on what they were doing
+
+Late 20th Century Microprocessor-Based Computers
+- Sun Workstation
+      - The Sun-2 (1983) had similar specs to a DEC Vax/780 minicomputer
+            - Typically provisioned with 1-2 MiB of RAM
+      - Used the BSD Operating System
+      - Had a graphics display of 1 million pixels!
+      - Cost: US$29,300 (equivalent to $69,000 in 2023
+      - Helped define the original concept of a workstation as
+            - 1 million instructions per second
+            - 1 million pixels of bitmapped graphics display
+            - 1 megabit per second networking
+            - 10 or more megabytes of disk
+      - With [[https://en.wikipedia.org/wiki/Time-sharing][timesharing]] could support multiple users not using graphics
+      - Intended to support only one user using a Graphical Desktop
+- Most contemporary microcomputer systems were much less powerful!
+      - The IBM PC and Apple 3 were less than 1/10th as powerful
+      - but they were even cheaper!
+
+Links
+- [[https://history-computer.com/technology/dec-pdp-11-computer][PDP-11]]
+      - [[https://gunkies.org/wiki/PDP-11/45][PDP-11 Model 45]]
+
+

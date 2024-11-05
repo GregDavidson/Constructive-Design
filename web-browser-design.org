@@ -1,0 +1,124 @@
+* Web-Browser Design
+
+Web-Browsers could be much easier to use and much more
+powerful.  Below you will find a number of ideas.
+
+It may seem like the amount of overhead (code size &
+complexity, runtime, storage size, etc.) to implement these
+ideas might be prohibitive, except: several systems in the
+past, e.g. Smalltalk, Loops, Augment, the MIT Lisp Machines,
+etc. have had most or all of these features yet required far
+less resources than our modern browsers use despite
+providing much less power.  One of the keys to making
+systems powerful is abstraction and generalization.  Modern
+browsers are complicated and hard to use because they have
+proliferated the number of features rather than making their
+existing mechanisms more general and more powerful.
+
+** General, Hideable Sub-Windows (Panes)
+
+All windows should be able to function as top-level windows
+on the desktop or as Panes (sub-windows) that are children
+of any other Window.  They should continue to work even as
+they are dragged and dropped to reparent or free them.  When
+they are sub-windows, they should be dockable, hideable and
+auto-hidable as in Smalltalk.  Multiple panes can be docked
+or hidden along the same edge of the same parent, again as
+in Smalltalk.  Visibility of collapsed/hidden panes should
+be a controllable style, e.g. always show a nub of settable
+minimum size for each one (a good default for beginners),
+auto-hidden until pointer is near, etc.  Only transient
+(popup) panes should ever cover siblings, and even they
+should be able to be "torn off" and turned into regular
+panes.  Configurations of windows and their children can be
+bookmarked, which means they can be saved and restored.
+
+(Note that a well-designed desktop should provide all of the
+same metaphors with the same visual cues.  Consider spooling
+off a window-manager and set of desktop-accessories from the
+improved browser as its code becomes stable!)
+
+** Organizing Bookmarks, Tabs, Sessions, etc.
+
+Bookmarks, Tabs, Sessions, History, Browser Settings, Data
+or Metadata associated with a url, etc. should all use the
+same mechanism for hierarchical organization.  Think of them
+all as bookmarks, just on diverse entities.
+
+All kinds of bookmarks should allow tagging (heterarchical
+context-tags) and notes.
+
+All kinds of bookmarks should be sharable on-line, with
+sharing controlled via tags.
+
+In addition to being able to organize Context-Tags like they
+were any other kind of hierarchical bookmarks, they should
+also support a visual set metaphor.  They are like folders,
+which allow other entities to be draggable onto them and
+then a popup asks Add|Require|Exclude as appropriate to
+support all set operations.  Drilling down with a
+right-click should allow arbitrary constraints as well.
+
+Tag organization windows support multiple Bookmark Views,
+e.g. by time (time-added, time-content-last-updated,
+time-metadata-last-updated, etc.), by url, by title, by tags
+& searches, etc. AND selecting such a view for a given
+window should NOT disturbing any other views being displayed
+in other windows or which have been bookmarked.  Yes,
+Bookmark Views should be bookmarkable like anything else!
+
+*** Tabs
+
+- Tree-Style-Tabs should work as well as they used to.
+- Plus benefiting from everything mentioned above!
+
+*** Bookmark (Re-)Organization Awkward
+
+Support drag and drop across multiple windows or panes
+showing multiple views on tabs, bookmarks, sessions,
+history - anything else, maybe archive files, filesystem
+entities, entities showing as links in pages being viewed?
+
+Should be able to selectively save, move, archive, dedup or
+perform any other operation on groups of links.  Everything
+undoable as everything is being spooled to (continuously
+appended to) a session archive.
+
+Rarely need to ask "are you sure?" questions, especially on
+deletion of items which have just been saved somewhere!  For
+newbiew an occasional reminder of where undo is available
+should suffice.
+
+** Customization
+
+*** Levels of Expertise
+
+**** Non-Expert Features
+
+Traditional visual cues (gutters around elements) with
+hierarchical menus and toolbars.  Everything has tool-tips
+available by hovering or long-pressing with tear-off,
+i.e. hover can easily be made to persist.
+
+All user customizations can be revisited by a visual "tour"
+where the nature of the customization is made clear and
+where each change can be removed or made differently.
+
+Since customizations can be bookmarked, they can also be
+saved and shared!
+
+**** Customizability
+
+Can edit menus, panels and buttons.  Menus are a kind of
+panel which are a kind of pane.  This used to be obvious!
+So they can be torn off, reparented, attached to different
+buttons, etc.
+
+**** Expert Features
+
+All features available from a command language which
+includes general functions and constraints.  Everything is
+scriptable!
+
+All features available from another head, such as a remote
+(related or unrelated) browser, an Emacs session, etc.

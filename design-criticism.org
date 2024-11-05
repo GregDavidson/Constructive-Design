@@ -1,0 +1,126 @@
+* Constructive Design Criticism
+
+This is a collection of short constructive critical evaluations of a number of
+modern technical systems, epecially software systems, with the intent towards
+their improvement and/or what might be next in their problem space.
+
+** Representing Information as Text
+
+The idea of representing information as text is ancient, powerful and limited.
+
+*** Pros:
+- Allows representing a vast amount of information
+- Resistant to problems of variation and rigidity of more structured formats
+- Structured text allows for even more
+  - Unicode
+  - XML and other markup languages
+  - Programming Languages
+  - Other well-defined textually-expressed languages
+  - Textual encodings of non-text data
+- Works with revision-management systems
+
+*** Cons: 
+- Document structure is unclear, e.g. blocks and other figures
+- Line-structure interrupts flow and frustrates revision-management
+- Parsing is often ambiguous or impossible leaving meaning unclear.
+- Unfamiliar unicode characters are awkward to interpret
+
+*** What's Next:
+
+
+** Text Editors
+*** Pros:
+- The advantages of text 
+*** Cons:
+- Arbitrary mutation makes many of the Cons of Text worse
+*** What's next:
+- Represent Documents in the Wicci
+  - edit and browse them with a Web Browser
+  - manage them with SQL
+
+** Relational Databases
+*** Pros:
+- Clean and powerful model
+- Solves ad-hoc text and binary file format problems
+- Avoids Turing Tarpit
+*** Cons:
+- Undisciplined mutation
+- No sum-types 
+- SQL is awkward
+- Poor support for large objects
+*** What's Next:
++ Modern typing model
+  - Typed references
+  - All types and objects first class
++ Generics
++ Multiple query languages
+  - Genrealized SQL
+    - foo->bar where bar is field of table foo references
+  - Datalog
++ Default of Monotonicity
++ Versions for Non-Monotonicity
++ Time Travel
++ Embedding within managed application virtual machines
++ Replacing ad hoc code in all other languages and systems
+
+** Emacs 
+*** Pros:
+- Advantages of Text
+- Advantages of Lisp
+- Great prototyping platform 
+*** Cons:
+- Cons of Text
+- Cons of Text Editors
+- Elisp is a poor Lisp
+- Emacs crashes
+*** What's Next:
+- Generalize its good ideas
+- Put them into the Wicci
+- Especially including an even better extensibility model
+
+** Lisp
+*** Pros:
+- Elegant mathematical foundation
+  - Universal
+- Elegant homoiconic syntax
+*** Cons:
+- Baggage from Imperative model
+- Weak typing 
+- Ad hoc support for important other paradigms
+  - Logic/relational/constraing
+*** What's Next:
+- Linear and affine Lisp for resource-oriented programming
+- Functional and Monotonic bias
+- Modern typing
+- Embedding within managed application virtual machines
+
+** Virtual Machines
+*** Pros:
+- Machine Portability
+- Possibility of gracefully combining multiple-languages
+- Security guarantees
+*** Cons:
+- Poor support for multiple languages and paradigms
+- Leaky, leading to needing multiple VMs on same base machine
+*** What's Next:
+- Capability References
+- Interlingual modern typing
+- Support for all important paradims
+- Persistence, especially relational
+
+** Smalltalk, Self, et al
+*** Pros:
+- Elegance
+- Generality 
+- Intuitive computational model 
+- Gentle, inviting learning curve
+- Persistent virtual machine
+*** Cons:
+- Weak typing
+- Procedural rather than declarative
+*** What's Next:
+- Live in shared advanced persistent virtual machine 
+- Modern typing 
+- Biasing towards
+  - Declarative, including Functional
+  - Monotonicity

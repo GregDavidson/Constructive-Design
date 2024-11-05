@@ -1,0 +1,173 @@
+* Who Controls the Software You Use and How?
+
+Bias alert: We have a strong preference for any software installed on any system
+we own to be fully under our control, including it being easy to
+- inspect what any such software is doing or can do
+- restrict what such software can do
+- change how any such software behaves as we see fit!
+
+** Who's Trying To Control The Software We Use?
+
+- The Developers of the software
+- The Distributors of the Software
+      - e.g. Apple, Google, Samsung, etc.
+- Owners of the Copyright, Patents or Trademarks of the Software
+      - e.g. Microsoft, Oracle, etc.
+- The Purchaser or Licensee of the Software
+      - You often don't own software you may think you've purchased!
+- Entities named in Software Licenses
+      - There's lots of fine print in typical software licenses!
+- Owners of the computing system on which the software is installed
+      - Software can make your system do things you don't want it to do!
+- Manufacturers of the Operating System on which the software is installed
+      - Proprietary OS features restrict and control you in many ways
+      - Microsoft monitors what you do and sends it to Microsoft Servers
+      - Microsoft is not alone in doing this!
+- Manufacturers of the hardware on which the software is installed
+      - Intel and AMD add systems on their chips you can't control, but which
+        they can control, including remotely, without your permission!
+      - /Digital Rights Management/ hardware may restrict what you can do with
+        data on your system. It may be illegal as well as difficult to override
+        such control.
+- Distributors of the system on which the software is installed
+      - Samsung replaces many Android components with their own versions and
+        adds additional components and restricts you from removing such
+      - Some other Android phone distributors also do this.
+- Administrators of the system on which the software is installed
+      - Especially Administrators who installed the Software
+      - On PCs the Administrator may be the owner of the device
+- End Users
+      - Including those who executed (launched) the software
+      - Who make use of the software through a User Interface
+      - Whose full account permissions the software typically inherits
+      - All of whose data the software can freely access and modify
+- Data Owners
+      - The owners of any data the software accesses
+- Governments
+      - According to laws they have passed
+
+** What Are These Entities Trying To Control?
+
+In today's world, many entities (and their agents) contend for the ability to
+control the software you use, including its
+- Presentation
+      - Choice of fonts, colors, icons
+      - Layout of information including padding and edges
+      - Appearance of controls, e.g. menus, buttons, scrollbars, etc.
+- Behavior
+      - What the software does
+      - What you have to do to control it
+            - e.g. what the mouse does how and where you click it
+- Security
+      - Passwords and other authentication systems
+      - Encryption of transmitted data
+- Access to private data
+      - Typically applications can access any and all of a user's data
+      - A few operating systems (Android) provide /some/ control
+            - Applications often require more permissions than they should
+
+** How Does This Effect Users?
+
+Software running on a personal computer you own typically
+- Has the ability to access /any/ data you own on that system
+- Has the ability to leak any information anywhere on the Internet
+- Can imitate other applications
+      - And ask for passwords for such other applications
+- Has the ability to install backdoors which persist
+      - Allowing your system to be remote-controlled
+- Has control over all presentation aspects of your software
+
+** Who Controls Proprietary Software?
+
+The developers of Proprietary Software work with the software using /Source
+Code/ which is designed to be understood by humans. That /Source Code/ is
+generally translated (by programs called /compilers/) to the /Binary Machine
+Code/ which runs fast on compatible computer systems but which is difficult for
+human beings to understand or modify.
+
+When a person or institution
+- purchases Proprietary Software
+- or purchases the rights to use Proprietary Software on their computer systems
+- or uses Proprietary Software running on someone else's Proprietary Servers
+The purchasers and users of such software
+- Have little or no ability to inspect what the software actually does
+- Have little or no ability to change what the software actually does
+
+** Who Controls Free Software?
+
+The copyright of /Free Software/ is typically /not/ owned
+- by the user of the software
+- or by their employer
+
+By /Free Software/ we primarily mean
+- Software using a FSF License
+A /Free Software License/
+- Transfers control to the Users of the software
+- And/or the owners of the system the software is installed on
+
+/Free Software/ generally prioritizes control, in increasing order as
+- Developers establish the default features of the software
+- Administrators can override the default features of the software
+- Users can override any otherwise established features of the software
+
+Traditionally /Free Software/ is designed so that significant customization is
+possible through specially designed configuration features
+
+Any Free Software features which can't be easily changed through configuration
+features can be changed by changing the source code.
+
+** Who Controls /Open Source/ Software?
+
+/Open Source Software/ which is not /Free Software/ often introduces barriers to
+end users changing the appearance and behavior of the software.
+
+When the software is installed on, or interacts with a remote proprietary server
+there is little to no possibility of control.
+
+Many companies, e.g. Apple, prefer /Open Source/ licensed software because it
+makes it easier for them to control the software.
+
+While it may technically be possible for Organizations, Administrators and Users
+to control /Open Source Software/ it can be quite difficult in practice.
+
+An example is the software which runs on Apple Phones, Tablets or Watches. Some
+of such software is covered by an Open Source License, yet Apple devices will
+only allow device owners to install such software from Apple's App Store, giving
+Apple total control over all features of such software.
+
+** What are the Trends in Who Has Control?
+
+A lot of software which used to be highly controllable by administrators and
+users is now difficult or impossible to control.
+
+An example is graphical software on Unix, BSD and Gnu (e.g. Gnu/Linux or
+"Linux") systems. Originally almost all such software used the /X Window System/
+which was highly administrator and user configurable. Over time the X Window
+System has been made much less configurable and there is a move to replace the
+whole system with Wayland which is architecturally less administrator and user
+configurable.
+
+Ways in which the X Window System has become less configurable
+- Abandonment of the Font Server
+      - Administrators and users could control all the fonts used by
+        applications
+- Abandonment of the X Toolkit Intrinsic Library
+      - Administrators and users could control major aspects of the appearance,
+        and even behavior of applications with simple X Resource Settings.
+- Newer X Applications increasingly download pre-rendered bitmaps to be
+  displayed on a user's system rather than using the facilities of the user's X
+  Server (the part of X installed on the User's system).
+- Graphical Login systems increasingly don't use the User's specified Shell
+
+Another example is the major Web Browsers
+- Google Chrome, Mozilla Firefox, Apple Safari, etc.
+It's increasingly difficult for users to control
+- fonts and colors
+      - very important for the visually impaired
+- layout
+- intrusive advertisements and automatic media playing
+- bandwidth consumption
+- security
+Increasingly, websites download pre-rendered bitmaps or stream content instead
+of using the browser to render content (which would allow the possibility of
+user control).

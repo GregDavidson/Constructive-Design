@@ -1,0 +1,38 @@
+* Tagging, Categorization, Referencing
+
+** Mixin Classes
+
+Tags are symbols associated with Vocabularies, Modules and Semantic Contexts
+
+Vocabularies here just means mappings to representations in natural or artificial languages for notational convenience.
+
+Modules group/categorize Tags. Semantic Contexts give meaning and may be the
+same thing as Modules. Within Modules Tags may acquire associated Attriburtes
+and Declarative Constraints. Also multimedia explanations.
+
+Perhaps we can re-use the basic elements within the system, e.g.
+Perhaps Modules/Contexts consist in part of Tag structures?
+
+*** Factorization ideas
+
+Entities can be categorized with multiple Tags.
+
+Tags can act like Mixin Classes by introducing Attributes
+- maybe also declarative constraints?
+- 
+
+Categorization = [tag+Context]*
+Context = Namespace+Categorization
+
+Consider earlier idea of better xml tags
+- Namespaces are modular schemas
+- Classes belong to namespaces
+- Attributes belong to classes
+- id is unique in document
+- name is unique inside of larger structure
+  - perhaps indicated by having its own name or id 
+  - perhaps indicated more explicitly 
+
+Using CSS Selector notation
+- brackets optional when content uses simple identifier syntax
+#(id).(class:foo=bar

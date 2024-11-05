@@ -1,0 +1,51 @@
+* Monotonicity Rant
+
+There are two main models for managing data in computing
+- Mutable imperative - modern and increasingly advocated
+- Immutable functional - old and increasingly deprecated
+
+Then there's a third approach
+- Monotonic transactional relational
+
+** Mutational Imperative Issues
+
+All of today's computers and most of our programming technology is based on the
+[[https://en.wikipedia.org/wiki/Von_Neumann_architecture][von Neumann Architecture]]
+- Data is stored in modifiable memory locations
+      - Data locations are assigned numeric addresses
+- Instructions modify memory
+      - Instructions take input from specified memory areas
+      - The results of instructions overwrite specified memory areas
+- Frequently the instructions overwrite memory that they also read!
+
+** Imperative Programming
+
+Data representing values are allocated a storage area in memory
+- These storage areas Locations are denoted by addresses, sometimes called pointers
+- Each allocation
+ - or in a limited number of /registers/ 
+
+In Fortran, C, C++, Java, C#, Python, etc we can say
+- count = count + 1
+
+Mathematics says that
+- ~count = count + 1= is false
+- there is no value of count such that count would equal count + 1!
+
+In Imperative Programming
+- ~count = count + 1~ means
+      - find the area of memory assigned to the variable ~count~
+      - access the data value stored there
+      - increment that value by 1
+      - overwrite that variable with the result
+
+This is such a common operation that many imperative languages have an abbreviation for it:
+#+begin_src c
+  count += 1
+#+end_src
+or in many imperative languages
+#+begin_src c
+  ++count
+#+end_src
+
+Functional computing takes the opposite

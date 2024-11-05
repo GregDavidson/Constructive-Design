@@ -2,41 +2,120 @@
 
 ** TL;DR
 
-*** Opportunities to create Better Software Systems
+This repository is about
 
-*** Constructive Criticism of Existing Software System Design
-
-*** Design Issues in Computing Hardware and Software/Hardware Systems
-
-*** Design Issues in Non-Computing Systems
+- Opportunities to create /Much Better Everything/
+- Constructive Criticism of Existing Designs
+- Identification of Fundamental Issues and Opportunities
+- Identification of Low Hanging Fruit to exploit
+- (mostly) Software System Design
+- (indirectly) the Power, Creativity and Joy of Design!
 
 ** The Importance of Design
 
 I look at the world through the lens of /Design/ rather than the lens of
 /Styling/. Of course, many people use the term /Design/ as a fancy word for
-/Styling/, as in /Hair Design/. What I mean by /Design/ is creation of structure
-which fulfills a purpose excellently, including being affordable and
-sustainable. Design has been a passion of mine as long as I can remember. I look
-at everything through the lens of design.
+/Styling/, as in /Hair Design/.
 
-Most (but not all) of the Design Notes in this Repository relate to Computing,
-and especially to fairly high-level Computing Abstractions. This is only natural
-because computing has fascinated me since childhood and has been my profession
-for most of my adult life.
+What I mean by /Design/ is the creative expression of structure which
+- excellently serves a purpose
+- is affordable and sustainable
+- can be evolved and improved over time
+
+Design has long been a passion of mine. I look at nearly everything through the
+lens of design.
+
+Most (but not all) of the Design Notes in this Repository relate to Computing.
+Computing has fascinated me since childhood and has been my profession for most
+of my adult life.
 
 Even modest computers have the ability to magnify results a billion-fold, so the
 quality of the design of computing systems is especially consequential. I've
 been following developments in computing since childhood and I noticed some
-recurring themes which have stifled good design
+recurring themes which have stifled good design and led to computer systems of
+limited quality and power.
 
-*** 20th Century Hardware Was Severely Limited
+** Fast Growth, Confusion and Bad Habits
 
-Common Computing Equipment was severely limited in capacity, especially memory
-capacity, throughout the 20th Century. These limitations didn't start clearing
-up with common computing equipment until the AMD64 architecture arrived in 1999.
-Up until then nearly all computer systems were limited to a 32-bit address
-space. The arrival of solid state disk drives and Gigabit (and better) Internet
-Connections has also opened up possibilities, but easing memory constraints has
+See [[file:Constructive-Criticism/computing-history-issues.org][Historical Baggage]] for details on how many bad habits emerged from the rapid
+and chaotic growth of programmable electronic digital computers.
+
+TL;dr:
+
+- Instruction set design doesn't matter, just wire up whatever you want!
+- Variables are just data stored at a particular memory location.
+- Any part of a program can modify any "variable" at any time.
+- Data is just bits which have no type (fixed meaning).
+- A pointer variable can either hold the location of a variable or a special
+  value called NULL which means it doesn't point to anything.
+
+Almost any operation in a program could fail
+- the program "should" check every operation for failure
+- the code checking operations for failure could fail too!
+- most code to check for possible errors is never put in or is wrong
+- when programs go wrong
+      - if you're lucky, they output an error message
+      - if you're lucky, they "crash"
+      - if you're unlucky
+            - they output invalid data
+            - which looks reasonable
+            - and is believed to be correct!
+
+Programs and databases are entirely separate things (really?)
+- Databases have
+      - integrity constraints
+      - transactional persistence
+- Programs ... don't!
+- Databases are designed for
+      - Smooth evolution to suit new purposes
+      - Simultaneous use by multiple users
+- Programs ... aren't!
+- Most database systems are specialized for only a few kinds of data.
+- Most programming systems let you do almost anything.
+- Database experts often have very little understanding of programming.
+- Most programmers have very little understanding of databases.
+
+An ideal programming system would elegantly combine
+- the best features of the best database systems
+- the best features of the best programming languages
+There seems to be no technical obstacle to creating such a system
+- many such systems have been proposed and look promising
+- no such system is generally available
+Would you like to create (or help create) such a system?
+
+Internet Servers and "personal" computers are entirely different things (really?)
+
+Servers (especially servers distributed in "the cloud")
+- Use reliable ECC (Error Corrected) memory?
+- Have reliable, high-speed low-cost access to the Internet?
+- Efficiently share processing resources and memory resources across tasks and clients?
+- Replicate and distribute  storage and computation for reliability?
+- Provide reliable, inexpensive, easy data backup?
+- Are administered by expert system administrators
+Yes, potentially, but
+- Check all such claims carefully!
+
+"Personal" Computers, including most computers used in offices
+- Are driven by the game industry
+- Are extraordinarily powerful in raw computing (and graphics) performance
+- Might not be very reliable, e.g. usually lack ECC memory
+
+It's possible to assemble a fairly inexpensive "Home-Office Server" with most of
+the desirable features of a Cloud Server and most of the desirable features of a
+desktop personal computer. Some System Administration skills may be needed to
+obtain the desired benefits of such a system.
+
+** Hardware Limitations Ease, Software Limitations Persist!
+
+By the end of the 20th century computer systems were
+- inexpensive
+- highly reliable (if using ECC memory)
+
+These limitations didn't start clearing up with common computing equipment until
+the AMD64 architecture arrived in 1999.
+
+The arrival of solid state disk drives and Gigabit (and better) Internet
+Connections have also opened up possibilities, but easing memory constraints has
 been a complete game changer.
 
 The best systems of the 20th Century provide many examples of extraordinary

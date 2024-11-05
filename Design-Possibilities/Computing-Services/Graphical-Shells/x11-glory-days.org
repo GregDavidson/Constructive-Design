@@ -1,0 +1,88 @@
+* The X Window System Glory Days
+
+
+** What is The X Window System
+
+[[https://en.wikipedia.org/wiki/X_Window_System][The X Window System]] is a very effective and powerful way to run graphical
+applications on modern computers where
+- applications can be locate locally or on any computer across any network
+- rendering of the graphics is done locally on the user's computer
+
+The designers of /The X Window System/ ask that
+- We either refer to /The X Window System/ by its full name
+- or by the simple abbreviation /X/.
+  
+** The X Window System's Current Situation
+
+The X Window System has been around for a long time
+- The latest /X Network Protocol/ revision was Version X11 in 1987!
+- Sometimes people use /X11/ to refer to /X/
+
+While today's X works well
+- Evolution of X has been neglected for decades!
+      - X is a big system with lots of features and components
+            - including a sophisticated extension mechanism
+      - X met everyone's needs so completely for so long!
+      - Major X components have been gradually lost due to neglect
+      - /Today's X is a shadow of its former glory!/
+- Recent effort has gone into replacing X11 with the [[https://en.wikipedia.org/wiki/Wayland_(protocol)][Wayland protocol]]
+      - Wayland has a much smaller vision than X had
+      - Arguments that /Wayland/ is an advance over /X/ are dubious
+            - X can be
+                  - Restored to its full former glory
+                  - Extended using its excellent extension mechanisms
+                  - Evolved along with its protocol
+
+** Awesome X Window System Features
+
+Awesome features of C in its glory days
+- Users could easily override application design
+      - Most X Applications consisted of reconfigurable widgets
+            - Users could easily change colors, layouts, text, etc.
+            - User Preferences could be saved in the user's X Resource Database
+                  - A simple textfile with pattern settings
+                  - Suitable for manual or automatic editing
+- Many features were provided by clients acting as servers
+      - Fonts were provided by /Font Servers/
+      - Color accuracy adjustments for were provided by /Color Servers/
+      - Window management was provided by a user selected Window Manager
+            - Dozens of window managers available for every taste
+      - Fonts were provided by /Font Servers/
+      - Any of these clients could run locally or remotely
+
+** Clients vs. Servers
+
+What's this confusion of
+- /Local Servers/
+- /Local and Remote Clients/
+- /Clients acting as Servers/
+- etc.?
+
+It turns out that /Client/ and /Server/ are =roles= which programs can play.
+
+A Server is any program which
+- provides some service for other programs
+- has a method for being contacted by clients
+      - e.g. an ip address, protocol and port number
+
+A program can provide services for its clients while receiving services from
+other programs.
+
+A common use of a Server Program is to manage a resource
+- A /Display/ resource consists of any and all graphical Input/Output devices
+      - Screens, Keyboard, Pointers, Touch devices, etc.
+- In X, the X Server owns and provides high-level access to the /Display/
+
+Since the /Display/ hardware is where the /User/ is
+- the /X Server/ is local
+
+X Clients can be local or remote
+- Clients connect to the X Server managing the User's Display
+      - Application clients interact with the User
+      - Service Clients make themselves available to the other clients
+
+Using /X/ helped many computer experts grasp these important distinctions!
+
+** Why X is traditionally very fast
+
+** Why X is now sometimes slow

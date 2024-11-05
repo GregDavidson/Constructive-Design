@@ -1,0 +1,75 @@
+* Noteworthy Designs
+
+These designs represent extraordinary ideas, insights and often breakthroughs.
+Many of them are lauded and few have been as influential as they should have
+been and may yet be.
+
+** List of Designs
+
+*** Computing Systems
+
+**** Dynabook
+- Designers :: Alan Kay
+
+**** Augment
+- Designers :: [[https://en.wikipedia.org/wiki/Douglas_Engelbart][Douglas Englebart]]
+[[https://en.wikipedia.org/wiki/The_Mother_of_All_Demos][The Mother of All Demos]]
+
+** Constraint-Based Interactive Graphics Design Systems
+
+*** SketchPad
+- Designers :: Ivan Sutherland
+
+*** ThingLab
+- Designers :: Alan Borning
+
+** Operating Systems
+
+*** MIT Trix Operating System
+
+** Artificial Intelligence
+
+*** Hearsay II
+
+*** Blackboard Systems
+
+*** DOODS & Probabilistic Logic Expert Systems
+
+** Computing Platforms
+
+*** Fifth Generation Language Project
+
+*** Object-Relational Database Systems
+
+
+*** BEAM Platform
+
+**** Erlang
+**** Elixer
+
+** Computer Languages
+
+**** Lisps
+
+Key Ideas
+- Symbolic Expressions as Universal Datatype
+- Semantics based on the Lambda Calculus
+
+**** [[https://en.wikipedia.org/wiki/Self_(programming_language)][Self]]
+- Designers :: David Ungar
+
+
+*** Curry
+
+*** APL Inspired
+
+Key Ideas
+- Multidimensional Arrays as Universal Datatype
+- Higher-Order 
+
+**** APL
+**** J
+**** K
+**** [[https://mlochbaum.github.io/BQN/][BQN]]
+https://news.ycombinator.com/item?id=33180842
+https://www.reddit.com/r/ProgrammingLanguages/comments/p830gs/bqn_finally_an_apl_for_your_flying_saucer/

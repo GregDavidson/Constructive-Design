@@ -1,0 +1,15 @@
+* Desirable Design Features of Hardware CPUs
+
+** Fast Procedure Calls
+** Tags assisting in
+- Generic Operations, Collections, Sources
+- Tags might help here
+** Support for Safe Lightweight Processes
+- Safely Runnable in Kernel Space
+** Space and Time Efficient Heavyweight Processes
+- Efficient to Migrate
+** Fast Network Packet Processing
+** Extensible Numeric Operations
+- Posits
+- Numeric Towers
+- Tags might help here

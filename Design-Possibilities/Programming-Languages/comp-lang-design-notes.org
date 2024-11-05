@@ -1,0 +1,64 @@
+* Computer Programming Language Design
+
+"Programs must be written for people to read, and only incidentally for machines to execute." - Hal Abelson
+
+Actually, also for other programs to read, understand, refactor, etc.!
+
+** Simplicity
+
+- reference Scheme Language quote on design
+
+Advancement should decrease complexity, not increase it.
+It's better to use a more general model and warn about
+weaknesss in the current implementation than to try to
+approximate the power of the more general model with
+complexity.  Even a stocastic evolution is too dangerous, as
+the contractions, refactors and radical redesigns too often
+get skipped and it gets out of control.  For longterm
+success one must be rigorous with every minor version and
+radical with every major version.
+
+*** Scheme is too complex
+
+The nuemrical tower is complex and non-minimal!
+
+Scheme (and other lisps) are always touting their
+flexibility, yet they often have major improvements over
+other dialects which somehow won't easily port to one
+another, e.g. the SCSH features, the elegant generalizations
+of OakLisp, the ELisp features required by Emacs, etc.
+Interesting innovation tends to create pits of semantic
+mismatch belying the supposed generality and flexibility of
+the family.
+
+*** Emacs is too complex
+
+Instead of "editing", cherry picking into a new View is all
+that you need!  Some parts of documents may be ordered and
+filtered views of monotonic relations giving an impression
+of non-monotonic local changes, but not really having such
+complexity.
+
+** Types and Contracts
+
+*** Typeclasses for "Shapes"
+
+Clojure "Shapes" are much nicer than traditional strong
+types for maps.  And they could be made strong lexical
+static types by associating them with typeclasses!
+
+*** Relational Operations
+
+(Named/Unnamed){Tuples/Records/Structs/Rows} and Collections
+thereof (Streams, Arrays, etc.) should allow manipulation by
+relational operators.  In particular, this means that
+subsets of Tuples should be as easy to extract as subsets of
+Collections with appropriate new types being inferred.
+
+** Programming with a Wicci
+
+The code lives in a Wicci.  One browses it using a web
+browser.  THe code is presented to maximize readability,
+using visual cues to show hierarchical structure, minimizing
+brackets.  Long names, descriptions and types are available
+through hovers.

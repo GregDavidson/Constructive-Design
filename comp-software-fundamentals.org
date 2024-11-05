@@ -1,0 +1,125 @@
+* Fundamental Software Design Principles
+
+** IDs, Names, Meta-Data
+
+Throughout computing there is a need to Associate, aka /Bind/
+- Identifiers, Names, Meta-Data, etc.
+- with Entities, i.e. Values, Objects, etc.
+What principles should be followed by systems accomplishing such?
+
+All of the associations described below, e.g. of IDs and Names
+- should be Monotonic
+      - i.e. not changeable once set in their environment
+- unless the Environment is Transactionally Versioned
+      - when a Transaction containing non-Monotonic changes is committed
+            - a new Environment is created
+                  - possibly sharing structure with other Versions for efficiency
+                  - as long as such sharing causes no observable semantic effects)
+- or unless the Environment is Transitory
+      - A disposable Composite Entity (or part of one)
+      - which has no direct effect on any other system
+      - but might be a source for operations on non-Transitory Composite Entities
+
+- Entities are sometimes Composite Entities
+- Components of Composite Entities might be (when semantically permitted)
+      - the target of Bindings in the same or different Environments
+
+*** /Binding Contexts/ aka /Environments/
+
+A /Environment/ associates (/Binds/) /IDs/ and possibly other /Associated
+Entities/ with /Target Entities/.
+ 
+/Environments/ should make clear
+- the Scope of the Bindings
+- the Lifetime of the Bindings
+
+/Environments/ may be part of /Hierarchical Environments/ aka /Namespaces/.
+
+*** IDs and Environments
+
+- An ID is associated with an Entity within an Environment
+- IDs should be unique within an associated Environment.
+- ID Bindings should never change within a Environment
+- IDs can refer to Environments within a /Parent Environment/
+- An /ID Path/ can uniquely reference an /Entity/ within a /Nested Environment/
+- Bindings, including /ID Paths/ should be Serializable when their Entities are
+
+- /Component ID Paths/ are paths through the Component Structure of Composite Entities
+- /Component ID Paths/ are distinguishable from /Environment ID Paths/
+
+If we do it right, this might be free and obvious, since
+- Environments are Entities
+- Parent Environments are Composite Entities
+- We just need to always have the ID-Entity indirection or lack of such clear
+
+If /ID Aliases/ (like IDs but not Unique) are allowed, they need to be
+distinguishable from IDs.
+
+*** Names
+
+Human-readable names should be
+- Unique within a Environment
+- Convenient and easy to comprehend for individual users and groups of users
+- Names are associated with IDs
+- Names should be supplied from a Naming Profile
+- Implementations should support multiple Naming Profiles
+- Naming profiles should be associated with
+      - Languages and Dialects
+      - Groups
+      - Individual Users
+      - Modes, i.e. single-symbol, iconic, short-word-or-compound, phrase
+            - Modes can be associated with
+                  - a default for a Environment
+                        - which might be an inherited Policy
+                  - a Group or Individual User
+      - All of these things can be factored into a non-cyclic graph
+            - Multiple Inheritance, Specificity, Preference selects Names
+- Names should be selected for the convenience of individual users
+      - Normally the most specific Name should be chosen based on
+            - an Individual User's preferred Profile and Mode
+      - Sometimes a User might prefer to align with a Group
+            - this is still for the User's convenience, in this case for easy
+              communication with that Group
+- Not all Names are available in a Text Format
+- Text Format Names should generally be available
+
+Names and Hierarchical Environment
+- A /Name Path/ can uniquely reference an /Entity/ within a /Nested Environment/
+- A User-Convenient syntax makes Name Paths
+      - Clearly Distinct from individual Names
+      - Easy and Intuitive to decompose into components
+- The Names within Name Paths
+
+- Names and Name Paths should Parsable from non-transitory presentations and
+  Serializable.
+
+If /Name and Namepath Aliases/ associated with /ID Aliases/ are allowed, they
+need to be distinguishable from /Names and Namepaths/ associated with IDs.
+
+*** General Meta-Data
+
+Meta-Data associated with Entities is a highly Open Issue!
+- Some loose principles may be useful
+- Everything in this section should be advisory
+
+Meta-Data can be part of an Entity or associated with it via an Environment.
+Meta-Data provided to Clients through an API should specify its provenance
+- the Entity itself
+- a specified Environment
+
+When presented to a User, Meta-Data should easily allow the User
+- to distinguish it as Meta-Data
+- to distinguish what Type of Meta-Data it is
+- to determine the Provenance of the Meta-Data
+
+Types of Meta-Data
+- Comments
+      - Entities referenced in Comments need to be properly Named
+- Navigable Tool Tips
+- Dynamic and Static Types and Kinds
+- (Here, a Kind is a Type of a Type)
+
+** File Systems  
+** Heavyweight Processes
+** Safe Lightweight Processes
+** Numbers

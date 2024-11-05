@@ -1,0 +1,122 @@
+* OrgMode and Alternative Markup Languages Rant
+
+** TL;dr
+
+Free tools are available to convert files among the major markup languages: you
+could choose any of them without your documents getting stuck in that format.
+
+However: Once you've gotten used to a particular markup language, it can be hard
+  to get used to a different one!
+
+You can use OrgMode with any text editor, but:
+- Only the Emacs programmable text editor supports all of OrgMode's features!
+      - Emacs is more powerful than any other text editor.
+      - OrgMode can be a great reason and path for learning Emacs!
+
+Do you need the power of OrgMode and/or Emacs?
+- Maybe not, and:
+- the more diverse and ambitious your computing interests are
+- the more creatively you use computers
+- the more advantage you'll get from these tools!
+
+TL;dr of the rant:
+- Powerful tools should be better known and more popular!
+- OrgMode should be fully supported by more tools!
+- These tools should not be so complicated!
+- These tools could be even more powerful while being less complicated!
+
+*Bottom Line:*
+- If you want to significantly increase your power with computers:
+      - [[https://github.com/GregDavidson/computing-magic/blob/main/Software-Tools/Emacs/emacs-readme.org][Learn Emacs and OrgMode]] as soon as possible!
+- If you want to create something better than Emacs and OrgMode
+      - Contact the author of this rant!
+
+See also: the [[file:emacs-rant.org][Emacs Rant]]
+
+** What's a Markup Language?
+
+[[https://orgmode.org]] and alternatives such as the more popular [[https://en.wikipedia.org/wiki/Markdown][Markdown]] provide a
+convention for marking-up simple text files with some special characters in
+order to
+1. Let those files look nicer
+       - in some ways similar to the look of a Word Processor document
+2. Give programs clues to be able to perform some magic
+       - convert the file to HTML or real World Processor formats
+       - format and manage embedded tables, diagrams, etc.
+       - and much, much more
+
+If this document is in a file ending in .org then it's a (very simple) example
+of OrgMode.
+
+If this document is in any other format, that's because it was automatically
+converted from OrgMode to the format you're experiencing.
+
+Take a few minutes to look over the OrgMode and/or Markdown websites to get a
+sense of what markup syntaxes look like!
+
+** OrgMode is the Most Powerful Markup Language - By Far!
+
+There are way too many features to describe here!
+- See [[https://orgmode.org/features.html][OrgMode Features]]
+- Read or watch some of the [[https://orgmode.org/worg/org-tutorials][Org Tutorials]]
+
+Even though you need Emacs to get /all/ off OrgMode's features
+- Many other apps and websites partially Support Orgmode
+      - including GitHub and GitLab!
+
+A great strategy if you use websites, etc. with partial OrgMode support
+- Use OrgMode with all of the features you like
+- The features are useful even if only for human readability
+- You can easily transfer those files to and from an Emacs environment
+- Git-based tools are designed to do just this!
+      - Use the git commands clone, push, pull
+      - Or use Emacs [[https://magit.vca][magit]]
+
+** MarkDown is More Popular, Less Powerful and Non-Standard!
+
+*** There's No Single Markdown
+
+When you write a MarkDown document, you have to ask yourself
+- Which [[https://en.wikipedia.org/wiki/Markdown#Variants][Markdown Variant]] do I need to use?
+
+There was an attempt to unify all of the Markdown variants into one standard:
+- [[https://spec.commonmark.org][CommonMark]]
+
+The result was that some variants attempted to be close to CommonMark
+- but with small differences
+and other variants ignored the CommonMark work and continued to diverge.
+
+Markdown dialects vary among each of
+- Bitbucket, Diaspora, GitHub, OpenStreetMap, Reddit, SourceForge, Stack
+  Exchange /and many more/!
+
+- [[https://github.github.com/gfm][GitHub Flavored Markdown]]
+- [[https://docs.gitlab.com/ee/user/markdown.html][GitLab Flavored Markdown]]
+- Other variants
+- etc. -- all similar but also slightly different
+
+*** If Markdown is weak and non-standard, why is it so popular?
+
+Markdown is promoted by some very popular organizations with their websites and
+user communities.
+
+Users start out with one community and its version of Markdown and won't notice
+any friction from dialect differences until and unless they play in some other
+community.
+
+Markdown doesn't have a lot of features, so coping with some occasional dialect
+issues is fairly easy.
+
+The organizations get the advantage of their community's tendency to be loyal to
+what they know.  Adhering to a standard would make them more mobile.
+
+When someone proposes using OrgMode instead
+- it's power and greater complexity are intimidating
+- learning it well will take time and effort
+
+** There are other Markup Languages
+
+None of them as as popular as Markdown or as powerful as OrgMode.
+
+If you'd like to create one which is better than OrgMode in all ways, contact
+the author of this document!

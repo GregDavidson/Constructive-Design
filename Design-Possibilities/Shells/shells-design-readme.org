@@ -1,0 +1,61 @@
+* Design Issues for Command Shells
+
+The design space of command shells is quite broad.
+
+** Desirable Criteria for a Command Shell
+
+*** Machine Efficient
+    
+Optional with today's hardware, yet good to avoid having to drop down to another
+language when some simple thing just happens to be computationally challenging.
+
+*** User Efficient
+
+The user should not need to type anything unnecessary.
+
+The code should be as compact as possible without sacrificing readability.
+
+- Portable :: There should be no need to do things differently on different
+  platforms.
+    
+*** Mnemonic and Readable
+
+It should be easy to remember the features.
+
+The meaning of the features and code should be as obvious as possible.
+
+The code should clearly document the method for solving the task.
+
+*** Powerful -- Easy tasks trivial, ambitious tasks straightforward
+
+- Robust :: The code should fail gracefully.
+  - Side-effects isolated in blocks?
+- Hackable :: The code is easily improved and built upon.
+
+*** Everything Scriptable
+- Readable
+
+** Traditional Unix Style Shells
+
+*** Bourne Shell
+*** dash
+*** ksh
+*** bash
+*** zsh
+*** fish
+
+** Unix-Inspired Re-Imagined Shells
+
+*** rc
+*** nu
+*** powershell
+ 
+** Different Kinds of Command Shells
+
+*** Emacs Shell -- written in emacs-lisp, runs within Emacs
+*** scsh -- the Scheme Shell
+*** psql -    
+
+** Graphical Shells
+    
+** The Environment Around Shells

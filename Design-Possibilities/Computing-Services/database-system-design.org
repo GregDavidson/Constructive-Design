@@ -1,0 +1,77 @@
+* Database System Design
+
+** A vocabulary for a Rational Database System
+
+The basic ideas:
+Factor out the characteristics of database values and entities.
+Remove unnecessary restrictions hampering simplicity and generality.
+Put in useful concepts from high-level programming languages.
+Put in useful concepts from related areas of mathematics.
+
+Fundamentally we have Entities which can be Values or Objects; Scalars or Collections; Persistent or Volatile; Constant, Monotonic or Fully Mutable; Typed and otherwise Constrained.
+
+Scalars are opaque to a RDBMS, they are a hunk of bytes
+which can move around operated on by functions.  PostgreSQL
+shows how to define Scalars and their associated operations
+along with properties which together allow them to hook into
+the storage and query systems as efficiently as the Scalar
+Primitives in less flexible DBMSs.
+
+Collections share a lot of similarities which could be the
+basis for a lot of powerful common operations.  
+
+ There are multiple kinds of Collections -
+Tables, Arrays, Databases (as a collection of Tables & other
+things), Streams (in some DBMSs), etc.  There are various
+typing and constraint systems which can operate over all of
+these things.
+
+
+*** Examples:
+
+A relation is an unordered set of rows which are ordered multisets of values.  Is there a way we can .
+
+  An array is an 
+A database row is a fixed-size ordered multiset where the elements have types corresponding to a same-sized vector of types.
+
+A database value could be a NULL, a scalar, 
+
+Names exist within environments.  Environments might be persistent and provide that persistence to the values they are associated with.
+
+A pure-value has no identity so is always constant.
+
+An object is a value with an identity, hence can be
+differentiated from equivalent objects and values and
+possibly monotonically or arbitrarily mutable.
+
+An array is an ordered (possibly Mutable or Monotonic, otherwise Immutable) RandomAccess SameTyped Multiset.
+
+A unicode text value could be cast from a scalar to an ordered (stream or array) of characters.
+
+*** Formalized Concepts:
+
+DBVal dynamic type: which of the Categories below it belongs to.
+
+DBValAttribute::Typed means that it has a Static Type as in modern HL Programming Languages.
+
+GroupTyped FixedSize Ordered means that there is a Type-Vector which corresponds 1-to-1 with the values.
+
+SameType means that all members of the Set or MultiSet share the same Type or GroupType.
+
+Attributes:
+DBValAttributes = {Typed|} {Constrained|} {Named {Persistent|}|}
+MultiAttributes = {{FixedSize {GroupTyped|}{SameType|}|} Ordered|} {RandomAccess|} {Mutable|Monotonic|}
+
+Categories:
+DBVal = {DBValAttributes|} (NULL | Scalar | Collection)
+Scalar = value or object defined like in PostgreSQL
+DBVal =  (
+	NULL	|	Scalar | {MultiAttributes} {set | multiset} of DBVal )
+DBObject = DBVal with an identity??
+Row = Typed FixedSize GroupTyped Ordered Multiset
+SQLRelation = Constrained Unordered Set of Row
+SQLTable = Named Persistent SQLRelation
+Relation = Untyped Unordered Set of DBVal
+Array = Untyped Ordered RandomAccess MultiSet of DBVal
+Table = Named Persistent Ordered RandomAccess {Other DBAttributes|}  {Other MultiAttributes|} 
+

@@ -1,0 +1,30 @@
+* Computing Platforms
+
+In computing, a Platform is something which you can build things on.
+
+A Platform Provides
+- Stable Semantics
+- Stable API
+
+An Interface to a Platform provides
+- A convenient Syntax
+- for accessing a /subset/ of the semantics of the Platform
+
+** Examples
+
+*** Git and the Linux Kernel:w
+
+The Linux Kernel is an extraordinarily successful Operating System Kernel,
+started by Linus Torvalds.
+
+[[https://en.wikipedia.org/wiki/Git][Git]] is a sophisticated tool for coordinating 
+- tracking changes in the files of complex projects
+- originally written by Linus Torvalds
+- originally for managing the files of the Linux Kernel Project
+
+Git is now used by thousands of for millions of diverse
+and associated Projects. Git is now used for managing the files of
+
+E.g. Linux Kernel & Git distinguish between
+- the Plumbing - the platform with its stable API and semantics
+- Porcelein - a comfortable user interface

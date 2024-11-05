@@ -1,0 +1,148 @@
+* Possible Evolutionary Trajectories of Posix Shells
+
+** Motivation
+
+The syntax and semantics of Posix Shells
+- sh, dash
+- ksh, bash, zsh
+are wired into the "DNA" of Posix systems
+- Unix, Linux, BSD, MacOS, etc.
+They are expected to understand
+- System Shell Scripts, e.g. =/etc/profile=, =/etc/profile.d/*=
+- Login shell scripts supplied by, e.g. =/etc/skel=
+To interoperate with
+- Session Mangers, Display Managers
+- etc.
+
+A number of arguably better shells have failed to catch on because of
+incompatibility with Posix shells.
+- es, scsh, emacs-shell, etc.
+- PowerShell
+- Even the modest =fish= is too different to be the default system shell
+
+How can we evolve the current Posix Shells to create drop-in replacements for
+the our current Posix Shells which are
+- more powerful
+- without much extra complexity
+- and sometimes actually simpler through more regularity and generality
+- or which simply have better extention mechanisms
+
+** Reimplement a Posix Shell on top of a more general language
+
+There are a number of projects which are almost this, but which deviate
+from the Posix Shell Standard a little bit or a lot
+
+Popular underlying languages for such projects
+- Lisps: Scheme (Guile, Racket, etc.), Clojure, Common Lisp
+- Python
+- Lua
+
+** Compatibly Evolve the Posix Shell Syntax and Semantics
+
+*** Namespaces or Modules
+
+*** Distinct Static and Dynamic Parameters (Variables)
+
+*** Easy conversions between delimited strings and arrays
+
+*** Shadowing /path/ variables with arrays
+   
+*** Add =lambda= and =apply=
+    
+*** Allow uniform block syntax everywhere
+Currently the shell has multiple syntaxes for blocks
+- general blocks: { COMMAND; ... COMMAND; }
+- if/else blocks: then/else COMMAND; ... COMMAND; fi
+- for/while blocks: do COMMAND; ... COMMAND; done
+- case "blocks": in COMMAND; ... COMMAND; esac
+
+This is
+- very cute
+- needs to remain for legacy code
+- is irregular and hard to generalize
+
+A natural evolution of the shell would be for general blocks to be usable
+everywhere as an alternative to the wordy syntax:
+
+#+begin_src bash
+  if test {
+    COMMAND...
+  } else {
+    COMMAND...
+  }
+  for x in list {
+    COMMAND...
+  }
+  # etc.
+#+end_src
+
+Again, the traditional wordy syntax would still be available, just not required.
+
+This would more than just (arguably nicer) syntactic sugar if any of the other
+proposals for generalizing blocks (for parallelization, privilege de-escalation,
+etc.) were to occur. It would also make it easier to create new built-in control
+constructs and/or to provide a way of writing new control constructs.
+
+Even just as syntactic sugar, this would assist shell programmers in having a
+better understanding of how the shell works, allowing them to more easily
+understand chains of logical operators, etc.
+
+*** Allow =fork= to reassign I/O assignments
+
+Creating a new terminal session by forking an existing one.
+
+We often have a shell running in a terminal and we want to create a new shell
+process in a new terminal (or tab) so that we can carry out a new task without
+disturbing the current context. It would be nice to have a copy of that current
+context as our starting place in the new shell process.
+
+This can almost be done now with a subshell placed in the background
+
+#+begin_src bash
+  ( CLEVER-COMMANDS-TO-DETACH-AND-ATTACH )&
+#+end_src
+
+and it would be nice if there were an easy way to invoke such which would make
+it easy to have the subshell attach to a new terminal.
+
+This could be done through an option on the current =disown= builtin.
+
+*** Allow =fork= to de-escalate privileges
+
+Parentheses already cause all the Posix shells to =fork= and run the enclosed
+commands in a "subshell" - a new process, but a continuation of the current process.
+
+In contrast, =su= creates a new process which can run under any user account
+(with options for non-default group, etc.), where the new process is executing
+one more more commands de-novo. When run as root, no authentication is required.
+
+I would like a feature in a shell running as root which creates a subshell as
+parentheses already do, which continues the execution of the forked shell
+process, but with the privileges of another account (with the applicable options
+of su).
+
+This would allow a root script to better conduct a complex task since it would
+be the conductor as well as playing all of the instruments!
+
+A possible syntax would be a generalization of the current syntax for block
+commands in {curly; braces;}:
+
+={[su USER ?OPTIONS?...] COMMANDS...;}=
+
+
+** Problem Areas We Want To Improve
+
+*** Bash Issues
+
+Metaprogramming in Bash is very difficult.
+
+The following doesn't work because =printf(1)= doesn't understand Posix-standard
+=%=/N/=$s= formats.
+#+begin_src bash
+# eval_format printf-format args
+# a substitute for applying a lambda expression
+eval_lambda() {
+    eval $(sprintf "$@")
+}
+# example: eval_format '[[ -f "%1\$s" ]] && [ -O "%1\$s" ]]' path-to-file
+#+end_src

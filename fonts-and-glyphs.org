@@ -1,0 +1,157 @@
+* Character Sets, Fonts and Glyphs Exposed!
+
+My intentions with this essay are to
+- clarify the essential issues
+- expose problems with [[https://en.wikipedia.org/wiki/Unicode][unicode]] and fonts
+- identify opportunities with Character Sets
+- identify opportunities with glyphs as reusable shapes
+
+** What Do We Want?
+
+Writing Given some text, nowadays usually unicode, we want to write it
+- on a screen
+      - typically in a specific place
+      - within specific boundaries
+- on paper?
+      - printing is still important?
+- occasionally to a terminal device?
+      - this is still possible!
+
+What might we want to do with text and its elements?
+
+Detect if some text is consistent with a specific language and dialect.
+- Important to avoid phishing scams, etc.
+
+Use specific glyphs outside of a textual context
+- Fonts are full of useful shapes for art, etc.
+
+Let a Symbol be
+- Either
+
+Easily and freely compose complex Symbols out of character components
+- More than just limited diacritics, superscripts, subscripts
+      - All reasonable attachment points
+      - Attachments can be of anything
+      - Attachments can be nested!
+
+Combine non-glyph graphical elements with text.
+- Reify graphical elements into simple symbols
+- Reify simple or composite symbols into symbols
+- Very common in art and mathematics
+- Generate arbitrary emojis
+
+
+** Initial Definitions
+
+Let's start with some definitions which we will soon take liberties with!
+- [[https://en.wikipedia.org/wiki/Character_(computing)][Character]] or [[https://en.wikipedia.org/wiki/Grapheme][Grapheme]] :: the smallest unit of a writing system, represented by
+  glyphs.
+- Character Set :: an enumerated set of characters which can be used in written
+  communication. one or more glyphs.
+- [[https://en.wikipedia.org/wiki/Glyph][glyph]] :: a graphical shape representing a character in a written language.
+- [[https://en.wikipedia.org/wiki/Font][Font]] :: a set of glyphs intended to represent a set of character. A font is
+  typically in a single concrete style, e.g. size and weight.
+- [[https://en.wikipedia.org/wiki/Typeface][Typeface]] :: A family of fonts with a consistent abstract design, realized
+  concretely by a collection of fonts for each variation of stylistic variations
+  such as size and weight.
+
+I'm going to use the word character as a synonym for the technical term grapheme.
+
+We can consider Fonts and Typefaces together as providing one or more sets of
+glyphs to represent a set of characters.  Note that in some languages multiple glyphs
+are required to represent the same character
+- In some languages a character uses a different glyph depending on its position
+  within a word.
+- A [[https://en.wikipedia.org/wiki/Ligature_(writing)][Ligature]] is a glyph which represents two or more adjacent characters.
+  - Sometimes ligatures are simply used to make text look better where the shape
+    of some glyphs interfere aesthetically when they're adjacent.
+  - In some written languages ligatures are more complex and are required.
+
+** Examples and Problems
+
+*** How Unicode Got This Way
+
+Unicode began as a naive attempt to create a numeric code for every character
+used by any current or historical human writing system. The original creators
+thought that 16-bit codes would suffice, allowing for 65536 distinct characters,
+including accented characters and the familiar and bizarre codepoints of 7-bit
+[[https://en.wikipedia.org/wiki/ASCII][ASCII]]. Later they broadened this to using 32-bit codes allowing for 4294967296
+codes. Most recently unicode has been reformulated to deal with [[https://en.wikipedia.org/wiki/Unicode_equivalence#Normalization][Combining
+Characters]] which appear as a sequence of characters but result in one complex
+character. If they had accepted this earlier it would have been possible to
+eliminate all of the special code points missing code points representing
+characters with diacritics, etc.
+
+The original 16-bit Unicode was adopted by many important languages and
+systems such as
+- Java, [[https://en.wikipedia.org/wiki/ECMAScript][JavaScript]], C#, Microsoft's Win32 APIs, etc.
+with the assumption that every character would have exactly 1 UTF-16 codepoint
+(16-bit number) baked in. When 16-bits were found to be insufficient, all of
+these systems had to be extended to allow multiple 16-bit codes to represent
+newer unicode characters.
+- And it's [[https://softwareengineering.stackexchange.com/questions/102205/should-utf-16-be-considered-harmful][a mess]]!
+
+Modern best practice is to use the 8-bit [[https://en.wikipedia.org/wiki/UTF-8][utf-8]] encoding for unicode.
+
+*** Character Set Problems
+
+Characters from Character Sets are often shared among
+- Adapted Character Sets:
+      - Many languages share the Latin Characters but with adaptations
+            - Characters with added diacritics: â, ä, á, é
+            - Modified characters: ç
+            - Added characters for missing sounds:
+                  - j, k, w added for many Latin-based languages
+                  - ß for German
+                  - Ð, ð, Þ, þ in Old English and Modern Icelandic
+- Historically Related character Sets
+      - [[https://en.wikipedia.org/wiki/Han_unification][Chinese Character Set Variations]]
+      - Cyrillic letters borrowed from Latin and Greek alphabets
+- etc.
+
+Unicode provides no way to
+- Use arbitrary [[https://en.wikipedia.org/wiki/Diacritic][diacritics]] with arbitrary characters
+      - As is common in mathematics and in art,
+      - because unicode doesn't know that diacritics exist!
+- Express relationships among Character Sets which obviously overlap
+
+Unicode makes it impossible to distinguish "letters" which are really different
+letters in languages sharing common roots
+- h in Germanic Languages vs. Romance Languages (and in Portuguese!)
+- [[https://en.wikipedia.org/wiki/Digraph_(orthography)][digraphs]] like ll, ch, sh, SS, etc.
+
+There's no principled way to extend unicode
+- For a symbol used in a particular document or other context.
+- This is particularly bad for representing mathematical text!
+
+*** Glyph Problems
+
+Unicode presents a closed set of glyphs despite humans creatively introducing
+new elements into their writing systems.
+- Emojis are an extreme example
+      - Too many emojis results in confusion
+      - Yet there are never enough for all needs
+      - Specific Emojis are subject to (often very local) fashion
+            - Assigned emoji codepoints glorify such ephemera
+
+Scientists, Mathematicians and graphic artists use an unbounded set of symbols
+including
+- traditional characters from any familiar language
+- invented glyph-like shapes not part of any human writing system
+- any diacritics applied freely to any elements
+- superscripts and subscripts before and after any element
+- creative graphical grouping notations
+
+** Solutions
+
+*** Workarounds
+
+**** Use Markup
+
+*** Future R&D Opportunities
+
+**** Declaratively Unify Characters & Non-Character Glyphs
+
+
+** Misc Resources
+

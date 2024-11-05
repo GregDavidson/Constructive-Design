@@ -34,32 +34,35 @@ potentially be followed up with corrective action.
 
 : .,$!awk '!/^- [^[].* Issue/{print}/^- [^[].* Issue/{sub(/^- /, "");printf("- [[file:\%s.org][\%s]]\n", tolower(gensub(/ /,"-","g",$0)), $0);}'
 
-Although these systems are all intended 
-
 ** Issues With Computer Systems & Tools
 
-- [[file: -issue.org][[[file:database-issue.org][Database Issue]]
-- [[file:postgresql-issue.org][PostgreSQL Issue
-- [[file:spreadsheet-issue.org][Spreadsheet Issue
-- [[file:world-processor-issue.org][Word Processor Issue
-- [file:markup-languages-issue.org][[[file:orgmode-and-alternatives-issue.org][orgmode-and-markup-languages-issue]]
-- [[file: -issue.org][[[file:emacs-issue.org][emacs-and-text-editing-issue]]
+- [[file:database-issues.org][Database Issues]]
+- [[file:postgresql-issues.org][PostgreSQL Issues]]
+- [[file:spreadsheet-issues.org][Spreadsheet Issues]]
+- [[file:world-processor-issues.org][Word Processor Issues]]
+- [[file:markup-languages-issues.org][Markup Languages Issues]]
 
 ** Computer Languages Issues
 
-- [[file: -issue.org][Lisp Issue
-- [[file: -issue.org][Scheme Issue
-- [[file: -issue.org][Racket Issue
+- [[file:ad-hoc-languages.org][Ad Hoc Computer Languages Issues]]
+- [[file:lisp-issues.org][Lisp Issues]]
+- [[file:scheme-issues.org][Scheme Issues]]
+- [[file:racket-issues.org][Racket Issues]]
 
 ** Computer User-Interface Issues
 
-- [[file: -issue.org][GUI Issue
-- [[file: -issue.org][Shell Issue
+- [[file:gui-issues.org][Graphic User Interface Issues]]
+- [[file:shell-issues.org][Command Shell Issues]]
 
 ** Fundamental Criticism
 
-These issues underlie the more visible flaws of the above "issues".
+These more fundamental issues underlie the more concrete flaws of the issues
+listed above.
 
-- [[file: -issue.org][[[file:files-vs-database-issue.org][Files vs Database Issue]]
-- [[file: -issue.org][[[file:monotonicity-issue.org][Monotonicity Issue]]
-- [[file: -issue.org][Augmentation of Intellect Issue
+- [[file:computer-languages-issues.org][Computer Languages Issues]]
+- [[file:operating-systems.org][Operating Systems Issues]]
+- [[file:files-vs-database-issues.org][]]Files vs. Database Issues]]
+- [[file:monotonicity-issues.org][file:monotonicity-issues.org][Monotonicity Issue]s]]
+- [[file:augmentation-of-intellect-issues.org][Augmentation of Intellect Issues]]
+- [[file:gofai-issues][Representational Artificial Intelligence Issues]]
+- [[file:network-ai-issues][Network Artificial Intelligence Issues]]

@@ -1,0 +1,14 @@
+* Design of Community Communication
+
+From a conversation with Stagger & Troble on 12:49 p.m., Friday, 6 March 2020
+
+(1) Have an ironny emoji that is not removable
+(2) When heuristics think something is false or misleading,
+offer the poster the option of attaching the irony emoji or a
+maybe-dubious emoji, the latter until its been reviewed
+(3) Sharing option that allows resharing only along friend links,
+one level at a time - no global exposure.
+(4)  Can attach unremovable irony or dubious emojis at any level which
+if frequent, can maybe lead to review of original and addition of such to all
+
+

@@ -1,0 +1,16 @@
+* Who Controls What We Run
+
+** The Models, as absolutes
+
+There are at least 4 different models which claim authority over our computing
+experience, options and possibilities.
+
+- User As God :: Any and all aspects of the execution of any software which is part of a given user's interface or delegated authority
+
+** The User As God Model
+
+** The Programmer As God Model
+
+** Institutions As God Model
+
+** Science and Mathematics As God Model

@@ -1,0 +1,151 @@
+* Computer Language Design
+
+** Knobs
+
+These knobs should be twiddleable on parts of programs.
+- Semantically equivalent to building a Racket Program from Modules
+      - Where modules are in different Racket Languages
+- Tools should hide any such complexity
+- Just select a part of a program and turn the knobs
+- Presentations need to show clear indications of such changes and their
+  boundaries
+
+*** Mutability
+
+**** Values vs. Objects
+
+- A value is data which cannot be changed once computed.
+- An object is data which can be modified, at least in part.
+      - Objects also have an identity which does /not/ change.
+- Wherever possible we should prefer values over objects.
+      - Most software "bugs" involve mutability
+- Wherever possible we should either
+      - Use a value immediately in a new operation which "consumes" it
+            - This is called "linear" or "affine" semantics
+      - Or we should bind it immutably to a symbol in some scope
+            - The symbol value does not change
+            - The symbol allows us to use the value multiple times
+
+**** Kinds of Bindings
+
+- Const
+      - a symbol has the same immutable value throughout its scope
+- Single Assignment
+      - a symbol is initially unbound, then gets bound exactly once
+      - Possibly with a deadline by which binding must take place
+            - E.g. after an initialization phase
+- Monotonic
+      - Filling in NULL fields
+      - Adding elements to collections
+      - Possibly ignoring ordering changes
+            - Presentation ordering
+            - Website CSS
+
+- Versioned Non-Monotonic
+
+Non-Monotonic changes create a new version of the collection / pool / database /
+etc.
+
+Structure sharing gives same performance as monotonic changes.
+
+- Mutable within transaction / phase / block / etc.
+
+*** Intentional Typing
+
+- Dimensions
+      - With unit adjustments
+
+- Of Description
+      - E.g. 3 liters of STP Sea Water taken from Location L at Time T with method M
+      - Description could
+            - reference a table row
+            - JSON-like object but with inheritance
+            - etc.
+
+*** Numeric Tower
+
+- Allow plugins
+  
+*** Symbols
+
+Unique identities within a Context
+
+Contexts
+- Scope
+- Enumeration Type
+- Instantiation of a Module
+- etc.
+
+Identifiers for symbols come from a user's profile.
+- Have to be as unique as the symbol
+- Simple escape for unusual spellings, e.g. $"..."
+- Multi-names as in Motif
+  
+*** Macros and Reserved words
+
+Each of these needs an enforced spelling convention or other syntactic marker.
+- Can't be confused with identifiers!
+
+*** Database for Source and other artifacts
+
+Repository is in an ORDBMS
+
+All dependencies managed perfectly and automatically.
+
+All builds reproducible and incremental
+
+All tooling acts on the repository.
+
+*** Tooling
+
+Browsing with a web browser
+- Folding and abbreviating
+      - User specifies how much to see and where
+- Gesture for mouseover-like extra info
+
+Refactoring tools  
+
+Logic-based synthesis and refactoring
+
+Anything can be done interactively, scripted or a combination
+
+Everything preserves tests and invariants or it doesn't commit.
+
+Wicci-like multiple views of everything at every level
+
+Transclusion
+
+** Syntax
+
+A matter of a user's preference.  Whatever they like!
+
+** Semantics
+
+Choose where we want
+- Linear Typing
+- Affine Typing
+- Garbage Collection
+- Resource Custodians
+- etc.
+
+Program generically, specialize as needed
+- Collections are logical
+      - Can add ordering or indexes as desired
+      - Automated systems can choose representations
+            - Based on static analysis and profiling
+      - Programmers, Administrators and Power Users can
+            - suggest or override
+      - Representation choices only affect performance
+      - E.g. S-Expressions do not imply linked-lists
+
+Easily Available Advanced Control
+- Logic-Based Constraint satisfaction
+- Delimited Continuations
+- ML, Probabilities, etc. for Heuristic Search
+      - Ordering of search
+            - May change order of emergence of solutions
+                  - When not an /Admissible Heuristic/
+            - Preserves all potential solutions
+            - Even if we may never get to some
+      - Pruning of search in Non-Deterministic Systems
+            - May lose solutions
