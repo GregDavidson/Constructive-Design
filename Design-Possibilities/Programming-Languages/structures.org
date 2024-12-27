@@ -1,0 +1,171 @@
+* Structure Types aka Records as Data Structures in High-Level Programming Languages
+
+** The R7RS "Small" Edition of Scheme has very limited data structures
+
+- Mutable Linked Lists
+- Mutable Fixed-Length Vectors
+- [[https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-1.html#TAG:__tex2page_toc_TAG:__tex2page_sec_5.5][Mutable Records]]
+	- A key feature of Records (Structures) is that each definition of a record type creates a separate type in the Scheme type-system.
+        - See [[https://standards.scheme.org/corrected-r7rs/r7rs-Z-H-5.html#TAG:__tex2page_sec_3.2][Disjointness of types]]
+    - The syntax is awkward and minimal.
+        - The R7RS Large Edition of Scheme may eventually fix this.
+
+** Racket expands on Scheme
+
+Racket is mostly a superset of Scheme
+
+Racket has
+- Immutable and Mutable Lists
+  - Immutable are preferred and have the simpler syntax
+- Mutable and Immutable Fixed-Length Vectors
+  - Mutable seem to be preferred - at least they have the simpler syntax
+- 4 similar but incompatible structure systems
+  - Similar to Scheme's Record syntax
+  - All but one of them creates distinct types
+
+Racket's Structure Types
+- "Regular Structures"
+      - (struct foo (field1 field2)) -- immutable
+      - defines functions
+            - foo? - type checker
+            - foo - constructor
+            - foo-field1, foo-field2 selectors
+      - (struct foo (field1 field2) #:mutable)
+            - defines additional procedures
+            - foo-set-field1!, foo-set-field2!
+- "Serializable Structures"
+- "Prefab Structures"
+- "Contract Structures" - a type construct on each field
+
+Each kind of structure has some unique features,
+and some of the keyword-features, e.g.
+- #:mutable, #:transparent, ...
+- are available in more than one of the kinds of structures but not all of them
+- and there's no regularity about that
+
+** What we want
+1. A simple and easy to understand structure syntax and semantics
+2. Able to macro-expand to lists, vectors or a particular dialects existing structure types
+
+*** Possible Structure Syntaxes
+
+- (typename-fieldname mystruct) -- very klunky
+- (mystruct 'fieldname) -- let structure objects be functions
+      - you'd have to quote the fieldname
+      - still more concise though
+      - Biggest problem: This can't be a macro so desired features #2 won't work.
+- (typename expression-yielding-a-structure fieldnames and other arguments)
+
+- Racket Syntax:   (foo-field1 mystruct)
+- Proposed Syntax: (foo mystruct field1)
+- Other cool things
+      - (foo mystruct field1 field2) -- returns both values
+- (def-struct foo (field1 field2))
+      - defines a macro foo
+      - the macro foo takes care of
+            - quoting any fieldnames
+            - translating the structure forms into their implementation
+                  - at compile time
+
+;; All scheme:
+(define (divmod x y) (values (div x y) (mod x y)))
+
+;; Some other languages:
+(define (divmod x y) (list (div x y) (mod x y)))
+- but the compiler sees the explicit list and doesn't really
+- create a list unless it's actually wanted
+- Functional languages usually use "tuples" with the same proviso
+
+** Better Lisp Macros
+
+- (some-symbol arguments ...)
+- If some-symbol is defined as a macro, this gets expanded at "compile time"
+- There's no way to tell by spection if a form beginning with a symbol is a function or a macro
+      - I consider this to be a major flaw in ALL LISPS!
+      - But not an issue for us right now
+
+In C++ and other languages with typed generics
+- typed generics are essentially macros
+- pattern match on the type signature of the arguments as well as the name (if there is a name)
+
+- Typed lisps, like Typed Racket, could do this - but don't (yet?).
+      - Maybe someday we'll help fix that!
+
+- If a typed lisp had macros which were activated by the type, then
+- (/an-expression-yielding-a-structure/ fieldname)
+      - this would work great!
+
+but back to reality!
+
+** Object-Oriented Programming
+
+*** Simula & C++
+
+From Simula and C++: Objects are just Structures with Class Methods and Class Data
+- In C++ the keywords class and struct are interchangeable
+      - If you say class, "private" is the default
+      - If you say struct, "public" is the default
+      - If you think about it, it's better to have public be the default
+            - List the things you can use FIRST, before the private: section
+            - Inheritance defaults to public inheritance which is a better default
+
+struct Person: Thing {
+  name() { return myname; }
+  // the other public things
+private:
+  string myname;
+}
+
+What most people do
+class Person: public Thing {
+public:
+name() { return myname; }
+  // the other public things
+private:
+  string myname;
+}
+
+Why don't they just use struct???
+
+They don't want someone who doesn't know C++
+to say they're doing it wrong!
+
+*** Flavors and Common Lisp
+
+(operator object arguments)
+-- the operator is a generic procedure which
+-- dispatches to the method associated with the object's class
+
+(draw some-shape canvas location)
+-- it doesn't matter if there's one shape class or many
+-- draw doesn't belong to the class, it despatches
+When you define a class
+- if the generic operator doesn't exist, it's defined
+- if it did exist, it's overloaded to also dispatch to methods of the new class
+
+some-same.draw(canvas, location)
+
+*** Racket OOP
+
+Racket uses the super-generic send
+
+(send some-shape draw arguments)
+
+*** My preferred way of doing
+
+Just as with structures, we can say
+
+(def-class foo (field1 (method1 parameters) ...) class-features)
+- this would define a macros foo
+- which rewrites any form using an oop style into functional style
+
+(foo a-foo-instance field1)
+(foo a-foo-instance method1 args)
+
+Similar to SEND, except
+- SEND doesn't tell either you or the compiler anything about what kind of type we've got here
+- Defining a new macro for each class tells YOU the reader and the compiler what you've got here and will signal an error if the instance isn't of that type.
+- And you can arrange for dynamic dispatch if you want, e.g. with
+(def-class foo (field1 (method1 parameters) ...) #:dyamic)
+- foo is now a generic type over multiple classes or non-class entities which
+- support the foo API
