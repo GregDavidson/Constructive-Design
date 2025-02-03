@@ -11,6 +11,17 @@ This repository is about
 - (mostly) Software System Design
 - (indirectly) the Power, Creativity and Joy of Design!
 
+** Inspirations
+lim
+- [[https://en.wikipedia.org/wiki/Victor_Papanek][Victor Papanek]]
+      - especially his 1971 /Design for the Real World: Human Ecology and Social Change/
+      - [[https://metropolismag.com/viewpoints/rereading-design-for-the-real-world/][2021 review of Design for the Real World]]
+- [[https://en.wikipedia.org/wiki/Buckminster_Fuller][Buckminster Fuller]]
+      - Very influential to me in my youth.
+      - [[https://en.wikipedia.org/wiki/Ephemeralization][Ephemeralization]] :: deeper understanding allows doing more with less
+      - [[https://en.wikipedia.org/wiki/Tensegrity][Tensegrity]]  :: tension over compression
+      - Changing the scale of things changes their nature
+
 ** The Importance of Design
 
 I look at the world through the lens of /Design/ rather than the lens of
@@ -24,6 +35,8 @@ What I mean by /Design/ is the creative expression of structure which
 
 Design has long been a passion of mine. I look at nearly everything through the
 lens of design.
+
+** Design in Computing
 
 Most (but not all) of the Design Notes in this Repository relate to Computing.
 Computing has fascinated me since childhood and has been my profession for most

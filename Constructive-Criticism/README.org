@@ -1,5 +1,17 @@
 * Constructive Criticism of Current Systems
 
+Design is the source of the quality of all of the artifacts in our lives,
+including goods, services and tools.
+
+Meta
+- distinguish design from styling early
+- replace the negative viewpoint  about "flawed design" with a viewpoint about
+      - the haphazard quality of what exists
+      - the awesome opportunity to make things better
+      - the usefulness of constructive criticism
+- Keep my criticism constructive
+      - also give plenty of examples of excellent design
+
 We live in a world filled with flawed design. The consequences of flawed design
 is that the quality (and length) of every one of our lives is significantly
 diminished.

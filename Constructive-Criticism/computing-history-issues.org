@@ -34,11 +34,11 @@ through rewiring.
 
 From the Victoria University of Manchester, England emerged
 - [[https://en.wikipedia.org/wiki/Manchester_Baby][Manchester Baby]] 1948 :: the first computer which could store its program in electronic memory.
-      - Considered a clumsy prototype.
+      - Considered a clumsy prototype, only 1 made.
 - [[https://en.wikipedia.org/wiki/Manchester_Mark_1][Manchester Mark 1]] 1949 :: the successor to the Manchester Baby.
-      - A better prototype.  Used for almost 2 years as a practical tool.
-- [[https://en.wikipedia.org/wiki/Ferranti_Mark_1][Manchester Farranti Mark 1]] :: the world's first commercially available
-  electronic general-purpose stored program digital computer.
+      - A better prototype. Used for almost 2 years, but only 1 made.
+- [[https://en.wikipedia.org/wiki/Ferranti_Mark_1][Manchester Farranti Mark 1]] :: first commercially available electronic
+  general-purpose stored program digital computer.
       - "the tidied up and commercialised version of the Manchester Mark I"
       - produced by British electrical engineering firm Ferranti Ltd.
 
