@@ -1,0 +1,130 @@
+* Relational Database Key Ideas
+
+** What's this document about?
+
+This document presents the key ideas underlying all Relational Databases.
+- There are very few key ideas.
+- They're very simple!
+- They build on each other in an elegant way.
+  
+** What might you get out of studying it?
+
+After understanding these key ideas it should be much easier to
+- Understand what to expect from any Relational Databases System
+- Learn SQL or an alternative Relational Query Language
+- Exploit Relational Databases
+      - From programs you write
+      - From a user shell where you can
+            - Ask questions (submit queries)
+            - Get answers back.
+            - And if you like you can add
+                  - New data.
+                  - New /kinds/ of data!
+
+*** What is a Database /Functionally/?
+
+What we mean by a database is
+- A program running on one or more computers which
+      - Stores data on behalf of
+            - Other programs
+            - Human Users
+      - Which makes sure that
+            - The data lasts as long as desired, in particular
+                  - Data isn't lost when any or all of
+                        - the database programs stop running
+                        - the machines running the databases are turned off.
+                        - parts of some machines are destroyed
+            - The data doesn't get corrupted (incorrectly changed)
+                  - When simultaneously accessed and perhaps changed by
+                        - Multiple programs and/or users
+                        - Using the database simultaneously
+            - Historical data stays available as desired
+                  - new data doesn't have to overwrite old data
+                  - queries can recover data from any valid era.
+
+** How does a Database 
+
+** How do Database Operations work /Physically/?
+
+*** TL;dr
+
+The Database covers up all of the complicated details in this section.
+- You can skim (or even skip) this section, but
+- it helps to have a sense of what's going on /physically/, i.e.
+- the Hardware and Software underlying the visible part of the system.
+
+*** The Usually Hidden Physical Details
+
+Computers have two fundamental kinds of memory
+- Fast volatile memory which is lost when a program is shut down
+      - Including when a machine is turned off
+      - Volatile memory requires power to retain the data it's storing.
+- Slower non-volatile memory which persists until it is explicitly overwritten.
+      - Around a million times slower!
+      - Around a thousand times cheaper.
+      - Doesn't need power to retain the data it's storing.
+
+Terminology: The Names of these Behind-the-Scenes things
+- Memory and Storage mean the same thing, where data is stored.
+- Data :: What Computers Work With -- Bits, Bytes, Words and All That!
+      - See our short and lovely [[https://gregdavidson.github.io/on-computing/what-computers-are][Computer Data Interactive Tutorial]]
+      - All the data is stored as sequences of bytes
+            - In brief transit during Input/Output operations
+                  - including while transiting comptuer networks
+            - In the Volatile Memory being used by a running program
+                  - this is called the program's /Image/
+            - On Non-Volatile storage devices
+                  - typically in the form of /Files/
+                  - which are part of /File Systems/
+                  - indexed by /Directory Files/ aka /Folders/
+- Computer System :: hardware and software working together
+      - hardware (Electronic, Magnetic, Optical, etc.) is physical!
+      - Software: The Computer Programs constituting the Operating System.
+- Code aka Operations aka Instructions :: things a computer can /do/
+      - Instructions are represented as Data
+      - Only some Data is Instructions, though!
+- Process :: A currently running Program stored as a /Process Image/
+- Process Image :: Data (including Code) in a separate Memory Area
+      - Process Images are normally isolated from one another
+      - Instructions in a Process Image can only directly access
+            - Data in the same Process Image
+- Computer Program :: Instructions and other Data designed to fulfill some purpose.
+      - Stored as a Non-Volatile Memory /Program Image/
+            - physically on, e.g. Magnetic or Flash devices.
+      - Loaded into a Volatile Memory /Process Image/ to run
+            - physically in, e.g. RAM (Electronic Random-Access Memory 
+      - Program instructions can directly access program data in the same /Process/
+      - Need Operating System assistance to access Non-Volatile Memory
+            - Or any "Input/Output" (I/O) aka Data Transfer operation
+- Operating Systems are the special programs which
+      - manage a Computer System's Resources for the benefit of
+            - the other programs running on that Computer System
+            - the human users
+      - start, monitor, schedule, suspend and stop all other programs
+      - consists of a Kernel and System Programs
+- Operating System Kernel :: Performs fundamental Operating System Operations
+      - perform all Input/Output operations
+            - Volatile Memory <--> Non-Volatile Memory
+            - A Program <--> a Human User (User-Interface I/O)
+            - One computer <--> another computrer (Network Data Transfer)
+- Computer Resources include
+      - CPU devices which carry out instructions
+      - Volatile Memory devices used by currently running Programs
+      - Non-Volatile Memory (Storage) Resources
+            - Which retain data even when the computer is turned off.
+      - Computer Network Devices
+            - Allows data to be copied to other computers
+      - User Interface Devices
+- System Programs :: Programs which provide services for other programs
+      - Includes Databases!!!
+      - Basically any program which isn't an Application Program
+      - Are often called Services or Server Processes
+      - Server Processes often use Services provided by other Server Processes
+            - In such a case the Server Process is being a Client Process
+            - Server and Client are actually roles rather than fixed identities
+- Application Program :: A program which Users explicitly Run and Use
+      - They generally have a User Interface
+      - Might be a command-style or graphical-style interface
+      - Are often called Client Processes
+      - Application Programs are rarely in a Client Role.
+
