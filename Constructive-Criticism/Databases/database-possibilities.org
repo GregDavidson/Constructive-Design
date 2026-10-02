@@ -1,0 +1,34 @@
+* Computer Database Possibilities
+
+** Why Relational Databases Rock
+
+** Great Database Systems
+
+- PostgreSQL
+- Gel, formerly EdgeDB
+
+** Possibilities for Great Databases
+
+- Databases replacing Filesystems
+- Revision Management Systems
+  - git, et al
+- dependency management systems
+  - RPM, dpkg & apt
+  - module-dependency management
+    - make, et al.
+    - guix, nix
+    - language-specific build tools
+    - tracking every interface
+      - module
+      - symbol binding to procedure or other value
+- Wicci System (or similar) replacing
+  - Wikis
+  - Office Suites
+    - Word Processing
+    - Spreassheets
+  - Information-oriented Web Pages
+  - Other Web Pages
+- Backends for all applications
+- Operating System Interface
+
+
