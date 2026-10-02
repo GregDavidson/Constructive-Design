@@ -1,0 +1,275 @@
+* Design Possibilities Capture List
+
+There are so many possibilities for Great Design!
+
+This is a semi-ordered list of design-related topics that may or may
+not yet be well-addressed.
+
+This document is currently focused on capturing design ideas.
+
+** Entity Categorization, Overlap, Blur!
+
+Many computational entities are hybrids with aspects of
+- Computer Languages
+- Databases
+- Operating Systems
+
+"Platforms" can apply to any of these
+- Since they are designed for us to build on
+
+"Tools" can apply to any of these and more!
+
+Where possibilities are listed here under one of these categories,
+consider how it might apply to entities in other categories and/or
+entities which are hybrids or which otherwise blur these categories!
+
+** Design Possibilities Documents To Come
+- Organize this List with Categories and Tags
+- Integrate this List with a Survey of Documents and Projects
+
+** Computer Languages and Platforms
+
+*** Desirable Features in Programming Languages
+
+**** Simplicity
+
+- No unnecessary built-in features to Language Core
+- User-Interface is via
+  - smart Browsers
+  - Browser/Editors
+  - Refactoring Command Tools
+  - Database query languages customized for this task
+    - e.g. like how Postgres allows such domain-specific customization
+- Tools can provide much of the user-view
+  - Suppress unwanted details
+    - Code Folding
+    - Suppress or show inferrable details
+      - detailed types, contracts, comments
+    - Short or Long aliases - in preferred human language(s)
+  - Algebraic vs. Parenthesized Polish (Lisp)
+  - Indentation / Color / Shading / Brackets
+
+Convenience Features belong to Tool Level
+- e.g. Scheme-Like Declarative Macros
+  - Tools can show code with or without them
+    - Change of viewpoint or refactor in either direction
+
+**** Types, Contracts, Meta-Programming
+
+All kinds of types and type-related features as in Haskell.
+
+Maybe linear and affine types?
+
+Type-level programming in (almost?) the same (reified) language!
+- Infinite tower, with sharable modules!
+
+Families of procedures
+- Allowing for
+  - abbreviated procedure interface definitions
+  - typed procedure references
+- Extensible, e.g.
+  - adding additional parameters
+
+Non-Liskovian extensions
+- https://en.wikipedia.org/wiki/Liskov_substitution_principle
+- Should be easy with refactoring tools
+  - e.g. to make an existing parameter optional
+
+**** Code Lives in Postgres-like Relational Database!
+
+- Not in Textfiles!
+- Not in arbitrarily mutable images!
+  - Smalltalk, many older Lisps, etc.
+- Postgres-like meaning
+  - extensible in the database itself
+  - See Database Possibilities Heading
+
+**** All Programming Paradigms Well Supported
+
+- First-Class Environments
+  - Constraint-Based Programming
+  - Meta-Programming
+
+- Tail-Call Optimization modulo Constructors
+  - Which kinds of Constructors?
+  - Maybe more than just Constructors?
+  - See # operator in Oz
+
+**** Database-Like Features
+
+- Declarative Relational Syntax & Semantics
+- Transactions
+- Persistence
+- Versioning analogous to Git et al to tackle mutability
+  - "Minor Versions" for Monotonic Updates
+  - "Major Versions" for Non-Monotonic Mutation
+- Possibility and type of Mutation lexically clear!
+
+**** Less Mutability
+
+- Immutability by Default
+- Mutability and Mutability Type Lexically Clear
+  - Syntactically marked in any view
+- Monotonic Mutability Lexically Clear (marked by Syntax)
+  - Restricted?
+  - Transactional?
+- Full Mutability
+  - Restricted, e.g. like Rust
+  - Transactional?
+  - Lexically Clear (marked by heavy syntax)
+
+*** Desirable Features in Lisp-Like Languages
+
+**** Leverage Keywords more
+
+- Macro Keyword Syntax: (define: x as: value)
+  - Macro names always keywords, since not evaluable!
+
+- Keyword Syntax: (proc from: x to: y with: z)
+  - would automatically create parameters: from, to, with
+  - as in Smalltalk
+
+- Keyword Aliases: (proc source:src:s x destination:dst:d y with:&: z)
+  - can use source: src: s: et al equivalently as keywords for arguments
+  - can use source, src, s et al are equivalent names for the same
+    parameter binding
+  - tools can
+    - warn about inconsistency
+    - help ensure consistency, especially in a single scope
+    - provide tool-tips
+  - Documentation could be tacked on, e.g.:
+    source:src:s:"orgmode document path"
+
+*** Database Possibilities
+
+Note that many things here might also apply to
+- Programming Language Design
+- Software Tools Design
+
+**** Full Modern Typing
+
+Sum and Product Types
+- enum types as in, e.g. Rust
+
+Records are just Named Tuples
+- Named vs. Structural Types?
+
+Arrays and Dictionaries are just Tables mapping a Key Type (Sparse or
+Dense) to an Image Type!
+- Multidimensional and Non-Rectangular Arrays?
+    
+Fields of Tuples can be anything
+- Scalar, Table, Database!
+
+Support for components of things
+- XML Fragments
+- Incomplete Types, Procedures, etc.
+- Database Subsets and Fragments
+- Edges of such can be reified into
+  - Logic-Variable-Like Parameters!
+
+A procedure is really an incomplete entity
+- it has to be instantiated with its parameters bound to be complete!
+- incomplete instantiation creates a new (curried) procedure
+- so similar with other incomplete entities!
+
+**** Restricted and Controlled Mutability
+
+Possibility of mutation and what kind lexically marked
+
+- Versioning analogous to Git et al to tackle mutability
+  - "Minor Versions" for Monotonic Updates
+  - "Major Versions" for Non-Monotonic Mutation
+- Possibility and type of Mutation lexically clear
+  - in Schema and in Query Syntax!
+- Kinds of Mutation
+  - single-assignment state-based mutation
+    - e.g. Parameters which are bound by end of an initialization phase.
+  - Monotonic Mutation
+    - Undefined fields get defined - once!
+    - New values added to sequences
+    - Generators (SET returning procedures) can now provide additional values
+      - maybe from an internal COALESCE!
+
+**** Database Questions
+
+- When and where can parts of Tables use storage locations as primary
+  keys?
+  - Uncommitted rows? "temporary keys"
+  - Rows differing in versions?
+    - Gaps in index numbers acceptable?
+
+** Structured Documents
+
+*** For Reference
+- [[https://www.w3.org/TR/html4/intro/sgmltut.html][SGML]]
+  - Highly Expressive
+  - Horribly Complex!
+  - imnsho :: can't really be fixed
+- [[https://www.w3.org/TR/xml/][XML]]
+  - imnsho :: could easily be made excellent!
+  - currently XML namespaces are an incomplete fiction!
+    - fiction :: not separately defined
+      - associated with URIs instead of URLs to specifications!
+      - separate DTDs needed for all combinations of namespaces used!
+    - incomplete :: don't qualify attributes
+- [[https://www.w3.org/TR/html4/][HTML4]]
+  - all the good and bad features of XML
+  - unnecessary added complexity
+    - e.g. special closure rules for certain elements
+- [[https://html.spec.whatwg.org/multipage/][HTML5]]
+    - all the problems with XML and HTML4
+    - disaster :: abandoned standardization entirely!
+    - It's a [[https://html.spec.whatwg.org/][Living Standard]] :-(
+      - i.e. no standard at all
+      - just whatever the major browser providers implement
+- [[https://orgmode.org/][OrgMode]]
+  - What if it were a syntactic shortcut for an evolved XML?
+
+*** XML, XHTML, HTML Evolved!
+
+**** Easy Pieces
+
+HTML and XHTML become XML documents with suitable namespaces!
+- Namespaces apply to attributes!
+- Classes can have attributes
+  - Instead of <tag classes="hide,boxed",hidestyle="ellipsis",hideto="sidebar",...>
+  - Use: <tag.hide[style=ellipsis,to=sidebar].boxed[...]>
+    - quotes optional unless value has special characters
+  - Like simple CSS Selector syntax!
+
+**** Simpler Element Syntax
+- Span elements could use unicode characters
+  - instead of <...> </...>
+  - specifiable inside or outside the document
+- Non-span elements could use line-oriented syntax
+  - e.g. Lines beginning with ! or ? or .
+    - How to group affected lines?
+
+**** Radical Ideas
+- Full spec of allowed features in namespace URL!
+  - Looseness can & must be specified too!
+- Close to programming-language typing model
+  - Available types specified in namespace URL definition
+- Tags could be replaced with Classes!
+- Documents could map to linked tuples in RDBMSs.
+  - and be a type in PostgreSQL!
+  - PostgreSQL could have types for all XML components!
+  
+**** Names for XML Evolved?
+
+- It would be nice if it were <= 3 characters
+- Concatenated "extensions" are nice for specializations!
+
+Ideas -- check for bad conflicts before publishing any of these!!
+- .x :: evolved xml
+- .h.x :: evolved html
+  - can be treated as xml
+- .xo :: evolved orgmode
+
+*** OrgMode
+
+- What if it were a syntactic shortcut for an evolved XML?
+- Allow mixing OrgMode notation with with Evolved XML notation!
+- What about SXML notation?
+  - A lot of the [bracket] notation in OrgMode is awkward!
