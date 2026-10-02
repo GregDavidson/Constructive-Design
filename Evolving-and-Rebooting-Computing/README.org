@@ -7,3 +7,4 @@ along with practical steps towards that end, whether it be towards evolving the
 existing offerings or creating better ones.
 
 - [[file:evolving-and-rebooting.org][Longer Exposition]]
+- [[file:earc-creative-examples.org][Computing and Creative Vision]]
