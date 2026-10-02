@@ -1,5 +1,7 @@
 * Lisp Design Without Compromise
 
+: Moved to On-Lisp/...
+
 ** Lisp Is A Family Not A Language
 
 Lisp is a large family of languages which share a few superficial

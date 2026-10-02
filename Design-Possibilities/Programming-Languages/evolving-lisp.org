@@ -1,5 +1,7 @@
 * Evolving and Rebooting Lisp
 
+: Moved to On-Lisp/...
+
 This document assumes that the reader is
 - fairly familiar with the design space of
       - computer programming languages in the Lisp family
