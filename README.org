@@ -12,7 +12,7 @@ This repository is about
 - (indirectly) the Power, Creativity and Joy of Design!
 
 ** Inspirations
-lim
+
 - [[https://en.wikipedia.org/wiki/Victor_Papanek][Victor Papanek]]
       - especially his 1971 /Design for the Real World: Human Ecology and Social Change/
       - [[https://metropolismag.com/viewpoints/rereading-design-for-the-real-world/][2021 review of Design for the Real World]]
@@ -180,3 +180,15 @@ armies of programmers were recruited - and hastily trained - to patch those old
 systems, rendering them even less comprehensible. And deploying this army of
 programmers to patch old code robbed the rest of our enterprises of essential
 resources to create new software to fulfill their missions.
+
+** TODO Table Of Contents
+
+The material in this repository needs to be reorganized!
+- Most of what is in it is NOT filed & indexed!
+- Let alone logically refactored!
+
+A few things for now:
+
+- [[file:Constructive-Criticism/README.org][Constructive-Criticism]]
+- [[file:Evolving-and-Rebooting-Computing/README.org][Evolving-and-Rebooting-Computing]]
+- [[file:friction.org][friction.org]] - an inbox for rants wanting to become possibilities!
