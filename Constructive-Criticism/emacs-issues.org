@@ -1,4 +1,4 @@
-* Emacs Rant
+* Emacs Criticism
 
 ** What's an Emacs?
 
@@ -27,7 +27,7 @@ Gnu/Emacs is a
 
 ** Text vs. Datbases as the Master Medium
 
--- Move this to the Files vs Database RANT!!!
+-- Move this to the Files vs Database Area!!!
 
 One of Alan Perlis' [[https://en.wikipedia.org/wiki/Epigrams_on_Programming][Epigrams]] says that
 - "It is better to have 100 functions operate on one data structure than 10
