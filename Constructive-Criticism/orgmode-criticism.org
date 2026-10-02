@@ -1,0 +1,160 @@
+#+title: Document Title
+
+Content of zeroth section for discussion below.
+
+* OrgMode Criticism
+
+- [[https://orgmode.org][OrgMode Website]]
+- [[https://orgmode.org/org.html][Full OrgMode Manual]]
+- [[https://orgmode.org/worg/org-syntax.html][Org-Syntax]]
+      - TODO Revise this doc in light of this
+
+** Oportunities
+
+OrgMode is very hackable!
+- All of the criticisms here can be addressed in ELisp!
+- Some of them can be addressed by other tools, e.g.
+      - Pre- and Post-Processing Scripts
+
+There is then the issue of popularizing any elisp changes
+- or ongoingly dealing with software rot!
+
+** Things I can't or don't know how to do
+
+*** Further Content after Sub-Section
+
+Can't have content after a section that is still within the surrounding section.
+- This is a design limitation of OrgMode.
+- Could be fixed with an end-section syntax
+
+#+begin_example
+  ** Section X Header
+  Some Section X Content
+  *** Section X+1 Header
+  Some Section X+1 Content
+  *** !END!
+  Further Section X Content
+Sub-Header
+#+end_example
+
+*** Unmarked list item or paragraph
+
+It would be nice to be able to have a new list item or even paragraph which
+appears without being set off with a line break.
+- Alas, /^:/ is already taken for /Fixed Width Areas/4.3.6. 
+
+*** Symbolic Expression Data
+
+It would be nice to be able to embed arbitrary Symbolic Expressions as data
+which could be easily accessed by the OrgMode functions.
+
+It would be nice if an S-Exp syntax were standardized for OrgMode documents and
+if that syntax always be used as an alternative (and more general) OrgMode
+markup.
+
+It would be nice if S-Exp syntax could be an alternative for the often bulky
+current OrgMode syntax.
+- #'Symbolic-Expression
+
+Perhaps other formats could be available as long as a translation function was
+available to translate them into S-Exps
+- #<>:XML-Fragment</>
+- #<TAG attrs...>:XML-Content</TAG>
+      - Maybe also allow Generalized-CSS-Selector syntax!
+- #(JSON:...#JSON), etc.
+- Suggesting # because of existing use of it.
+      - Should be changeable.
+
+*** Unicode Alternative Syntax
+
+It would be great to have Unicode alternatives for all of the OrgMode markup!
+- An initial selection unlikely to clash with regular content.
+- A way to escape the special meanings.
+- A way to change the bindings of any selected character.
+
+*** Link Syntax Abbreviations
+
+It would be nice to not have to repeat content in links.
+- and to be able to omit /file:/ when files exist
+
+#+begin_example
+  [[path/filename.ext]:f] - f -> filename
+  [[path/filename.ext]:F] - F -> filename.ext
+#+end_example
+
+*** Allow lists (& more?) to have header features
+
+- Expand/Contract on TAB
+      - KEYWORD PRIORITY COMMENT TITLE TAGS
+      - BULLET COUNTER-SET CHECK-BOX TAG CONTENTS
+
+More
+- Tables, Drawers, ???
+
+
+
+** OrgMode Exporting Issues
+
+- [[https://orgmode.org/org.html#Exporting][Exporting (OrgMode Manual)]]
+
+*** More general metadata
+
+Metadata seems to be largely specific to a particular export target.
+- E.g. Latex metadata
+
+A more generic form could be used for multiple export targets.
+
+See [[*Generic Classes & Attributes]] below!
+
+*** Syncronizing the top-level header with metadata.
+
+The zeroth section concept is flawed
+- It can't be expanded & contracted.
+- Multiple top (*) headers are awkward
+
+Possibility
+- allow expanding & contracting when clicking on any #FOO line in zeroth section.
+- allow TITLE field to act in all ways to header content
+      - e.g. for internal links
+
+Possibility: References to metavariables for content
+- e.g. Top (*) header could be ${TITLE}: ${SUBTITLE}
+- Other content could refer to ${AUTHOR}, ${DATA}, etc.
+
+Possibility: filling in some missing metadata from the content
+- TITLE from * header or header up to :
+- SUBTITLE from * header after a :
+- Even AUTHOR, DATE, etc. from text patterns in top or first secondary sections
+
+*** Generic Classes & Attributes
+
+It would be great to be able to associate generic Classes and Attributes with
+any part of OrgMode content.
+
+These would follow our Generalized-CSS-Selector (link??) format.
+
+On export to HTML or XML they'd be translated to standard TAG attributes.
+
+On export to other formats they could control analogous features.
+
+** Table Extened Format
+
+As in /psql/.
+
+** OrgMode for Git* Sites
+
+Politics & gifting of code w/o license restrictions.
+
+** OrgMode Questions
+
+Whatis the generic OrgMode syntax not using the special characters?
+-
+
+Canthe generic syntax always be used?
+-
+
+Canindividual special character triggers easily be changed or turned off?
+-
+
+Canthe generic syntax be made to Generalized-CSS-Selector-Format syntax inclusions?
+-
